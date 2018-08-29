@@ -16,7 +16,7 @@ const getPluginsWithShared = sharedDir => baseDir => {
   }
   const paths = baseDir.concat(sharedDir);
 
-  lint(paths);
+  lint(isWatching)(paths);
 
   // Order of plugins is important:
   // svelte needs to be before babel so that by the time
@@ -31,16 +31,16 @@ const getPluginsWithShared = sharedDir => baseDir => {
         script: ({ content }) => {
           setTimeout(() => lintText(content));
           return content;
-        }
-      }
+        },
+      },
     }),
 
     babel({
       include: ['**/*.js', '**/*.svelte'],
-      plugins: babelPlugins
+      plugins: babelPlugins,
     }),
 
-    inject(globals)
+    inject(globals),
   ];
 };
 
@@ -48,8 +48,8 @@ const pluginsWithDir = getPluginsWithShared('node_modules/fe/src');
 
 const rollupCommon = {
   treeshake: {
-    propertyReadSideEffects: false
-  }
+    propertyReadSideEffects: false,
+  },
 };
 
 if (isWatching) {
@@ -57,7 +57,7 @@ if (isWatching) {
     // https://github.com/rollup/rollup-watch/issues/22
     exclude: 'node_modules/**',
     chokidar: true,
-    clearScreen: false
+    clearScreen: false,
   };
 }
 
@@ -65,5 +65,5 @@ module.exports = {
   stylus,
   isWatching,
   rollupCommon,
-  pluginsWithDir
+  pluginsWithDir,
 };

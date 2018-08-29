@@ -29,13 +29,13 @@ module.exports = {
     'no-restricted-syntax': [
       2,
       // allows treeshake.propertyReadSideEffects = false
-      'Property[kind=/[gs]et/]',
-      'MethodDefinition[kind=/[gs]et/]',
+      'Property[kind=/^[gs]et$/]',
+      'MethodDefinition[kind=/^[gs]et$/]',
 
       'SpreadElement',
-      'Identifier[name=/Symbol|Proxy|Map/]',
+      'Identifier[name=/^(Symbol|Proxy|Map)$/]',
 
-      'FunctionExpression[generator=true]'
-    ]
-  }
+      'FunctionExpression[generator=true]',
+    ],
+  },
 };
