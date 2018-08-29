@@ -9,6 +9,10 @@ const globalInjects = globalContents
   .map(a => a.slice(13));
 
 let injects = {
+  // this is rollup option, not an inject
+  include: ['**/*.js', '**/*.svelte'],
+
+  // injects
   fetch: 'implicit/fetch',
   _: ['implicit/_', '*'],
   Promise: 'implicit/Promise',
@@ -17,7 +21,7 @@ let injects = {
   _Func: ['implicit/_Func', '*'],
   _Obj: ['implicit/_Obj', '*'],
   _El: ['implicit/_El', '*'],
-  _Doc: ['implicit/_Doc', '*']
+  _Doc: ['implicit/_Doc', '*'],
 };
 
 globalInjects.forEach(g => {
