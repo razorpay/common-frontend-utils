@@ -1,0 +1,55 @@
+{
+  "name": "fe",
+  "version": "1.0.0",
+  "main": "rollup.config.js",
+  "scripts": {
+    "start": "rollup -cw"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/razorpay/common-frontend-utils.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-transform-arrow-functions": "^7.0.0",
+    "@babel/plugin-transform-block-scoped-functions": "^7.0.0",
+    "@babel/plugin-transform-block-scoping": "^7.0.0",
+    "@babel/plugin-transform-computed-properties": "^7.0.0",
+    "@babel/plugin-transform-destructuring": "^7.0.0",
+    "@babel/plugin-transform-parameters": "^7.0.0",
+    "@babel/plugin-transform-shorthand-properties": "^7.0.0",
+    "@babel/plugin-transform-template-literals": "^7.0.0",
+    "autoprefixer-stylus": "^0.14.0",
+    "babel-eslint": "^9.0.0",
+    "chokidar": "^2.0.4",
+    "eslint": "^5.4.0",
+    "fast-async": "^7.0.6",
+    "glob": "^7.1.3",
+    "nodent-compiler": "^3.2.9",
+    "rollup": "^0.65.0",
+    "rollup-plugin-babel": "^4.0.2",
+    "rollup-plugin-includepaths": "^0.2.3",
+    "rollup-plugin-inject": "^2.2.0",
+    "rollup-plugin-svelte": "^4.2.1",
+    "stylus": "^0.54.5",
+    "svelte": "2.13.2",
+    "uglify-js": "^3.4.8",
+    "yargs-parser": "^10.1.0"
+  },
+  "devDependencies": {
+    "husky": "^1.0.0-rc.13",
+    "prettier": "^1.14.2",
+    "pretty-quick": "^1.6.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "bin": {
+    "lintOutput": "./scripts/lintOutput.js"
+  }
+}
