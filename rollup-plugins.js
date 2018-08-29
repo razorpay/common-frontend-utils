@@ -11,7 +11,10 @@ const { lint, lintText } = require('./scripts/eslint');
 const isWatching = argv.w || argv.watch;
 
 const getPluginsWithShared = sharedDir => baseDir => {
-  const paths = [sharedDir, baseDir];
+  if (!Array.isArray(baseDir)) {
+    baseDir = [baseDir];
+  }
+  const paths = baseDir.concat(sharedDir);
 
   lint(paths);
 
