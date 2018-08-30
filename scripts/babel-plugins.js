@@ -3,6 +3,7 @@ module.exports = [
   '@babel/transform-arrow-functions',
   '@babel/transform-block-scoped-functions',
   '@babel/transform-block-scoping',
+  ['@babel/transform-classes', { loose: true }],
   ['@babel/transform-computed-properties', { loose: true }],
   '@babel/transform-destructuring',
 
@@ -14,4 +15,4 @@ module.exports = [
   ['@babel/transform-template-literals', { loose: true }],
 
   ['@babel/proposal-pipeline-operator', { proposal: 'minimal' }],
-]
+];
