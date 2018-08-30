@@ -17,3 +17,7 @@ export const decodeURIComponent = global.decodeURIComponent;
 export const btoa = global.btoa;
 export const unescape = global.unescape;
 export const TypeError = global.TypeError;
+export const navigator = global.navigator;
+export const location = global.location;
+export const console = global.console;
+export const XMLHttpRequest = global.XMLHttpRequest;
