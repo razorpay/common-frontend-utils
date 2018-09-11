@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
 const globalContents = fs
-  .readFileSync(__dirname + '/../src/implicit/global.js')
+  .readFileSync(__dirname + '/../src/fe/implicit/global.js')
   .toString();
 
 const globalInjects = globalContents
@@ -13,19 +13,19 @@ let injects = {
   include: ['**/*.js', '**/*.svelte'],
 
   // injects
-  fetch: 'implicit/fetch',
-  _: ['implicit/_', '*'],
-  Promise: 'implicit/Promise',
-  _Arr: ['implicit/_Arr', '*'],
-  _Str: ['implicit/_Str', '*'],
-  _Func: ['implicit/_Func', '*'],
-  _Obj: ['implicit/_Obj', '*'],
-  _El: ['implicit/_El', '*'],
-  _Doc: ['implicit/_Doc', '*'],
+  fetch: 'fe/implicit/fetch',
+  _: ['fe/implicit/_', '*'],
+  Promise: 'fe/implicit/Promise',
+  _Arr: ['fe/implicit/_Arr', '*'],
+  _Str: ['fe/implicit/_Str', '*'],
+  _Func: ['fe/implicit/_Func', '*'],
+  _Obj: ['fe/implicit/_Obj', '*'],
+  _El: ['fe/implicit/_El', '*'],
+  _Doc: ['fe/implicit/_Doc', '*'],
 };
 
 globalInjects.forEach(g => {
-  injects[g] = ['implicit/global', g];
+  injects[g] = ['fe/implicit/global', g];
 });
 
 module.exports = injects;

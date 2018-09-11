@@ -140,7 +140,7 @@ Promise.prototype
         value => Promise.resolve(callback().then(() => value)),
         reason => Promise.resolve(callback().then(() => Promise.reject(reason)))
       );
-    }
+    },
   });
 
 Promise.all = function(args) {

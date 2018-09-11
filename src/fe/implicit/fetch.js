@@ -132,7 +132,7 @@ function post(opts) {
     opts.headers = {};
   }
   if (!opts.headers['Content-type']) {
-      opts.headers['Content-type'] = 'application/x-www-form-urlencoded';
+    opts.headers['Content-type'] = 'application/x-www-form-urlencoded';
   }
 
   return fetch(opts);
