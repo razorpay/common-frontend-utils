@@ -53,7 +53,7 @@ _Func.setPrototype(fetch, {
     if (type === 'ajax') {
       this.req.abort();
     } else if (type === 'jsonp') {
-      Razorpay[this.req] = _Func.noop;
+      global.Razorpay[this.req] = _Func.noop;
     } else {
       clearTimeout(this.req);
     }
@@ -164,10 +164,10 @@ function jsonp(options) {
       }
     };
 
-    let req = (Razorpay[callbackName] = function(data) {
+    let req = (global.Razorpay[callbackName] = function(data) {
       _Obj.deleteProp(data, 'http_status_code');
       cb(data);
-      _Obj.deleteProp(Razorpay, callbackName);
+      _Obj.deleteProp(global.Razorpay, callbackName);
     });
     this.setReq('jsonp', req);
 

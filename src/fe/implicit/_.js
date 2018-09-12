@@ -159,7 +159,7 @@ function hex2rgb(hex) {
 }
 
 export const getKeyFromEvent = e =>
-  is(e, Event) && (e.which || e.charCode || e.keyCode);
+  is(e, global.Event) && (e.which || e.charCode || e.keyCode);
 
 export const getCharFromEvent = e => {
   let which = getKeyFromEvent(e);
