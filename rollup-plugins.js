@@ -40,7 +40,7 @@ const getPlugins = ({ watch = isWatching, lint, src }) => {
     }),
 
     babel({
-      include: ['**/*.js', '**/*.svelte'],
+      extensions: ['.js', '.svelte'],
       plugins: babelPlugins,
     }),
 
