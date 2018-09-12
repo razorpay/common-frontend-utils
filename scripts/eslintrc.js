@@ -1,14 +1,20 @@
-const globals = require('./rollup-injects');
+let globals = require('./rollup-injects');
+const eslintRecommended = require('eslint/conf/eslint-recommended');
+
+delete globals.include;
+globals = ['window'].concat(Object.keys(globals));
+
+const blacklistVars = globals.map(g => `VariableDeclarator[id.name=${g}]`);
 
 // 0 - ignore
 // 1 - warn
 // 2 - error
 
 module.exports = {
+  baseConfig: eslintRecommended,
   useEslintrc: false,
-  extends: 'eslint:recommended',
   parser: 'babel-eslint',
-  globals: Object.keys(globals),
+  globals,
   rules: {
     // fixable by prettier
     indent: 0,
@@ -36,6 +42,8 @@ module.exports = {
       'Identifier[name=/^(Symbol|Proxy|Map)$/]',
 
       'FunctionExpression[generator=true]',
+
+      ...blacklistVars,
     ],
   },
 };
