@@ -8,7 +8,6 @@ module.exports = {
     'no-unused-vars': 0,
     'no-empty': 0,
     'no-console': 0,
-    'block-scoped-var': 2,
     'no-iterator': 2,
   },
   globals: ['window'],

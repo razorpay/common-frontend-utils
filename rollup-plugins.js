@@ -7,12 +7,13 @@ const stylus = require('./scripts/rollup-plugin-stylus');
 const svelte = require('rollup-plugin-svelte');
 const inject = require('rollup-plugin-inject');
 const eslint = require('./scripts/eslint');
+const isProd = require('./prod');
 
 const isWatching = argv.w || argv.watch;
 
 const commonFeDir = 'node_modules/fe/src';
 
-const getPlugins = ({ watch = isWatching, lint, src }) => {
+const getPlugins = ({ watch = isWatching, lint = true, src }) => {
   if (!Array.isArray(src)) {
     src = [src];
   }
@@ -32,11 +33,12 @@ const getPlugins = ({ watch = isWatching, lint, src }) => {
       extensions: '.svelte',
       preprocess: {
         style: ({ content }) => stylus.transform(content),
-        script: ({ content }) => {
+        script: ({ content, attrs, id }) => {
           setTimeout(() => eslint.lintText(content));
           return content;
         },
       },
+      dev: !isProd,
     }),
 
     babel({

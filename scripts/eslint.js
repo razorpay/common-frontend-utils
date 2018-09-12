@@ -32,18 +32,18 @@ const lint = isWatching => paths => {
   if (isWatching) {
     chokidar
       .watch(paths, {
-        ignoreInitial: true
+        ignoreInitial: true,
       })
       .on('add', lintPaths)
       .on('change', lintPaths);
   }
 };
 
-const lintText = text => lintLog(eslint.executeOnText(text));
+const lintText = (text, id) => lintLog(eslint.executeOnText(text, id));
 
 module.exports = {
   lint,
   lintLog,
   lintText,
-  lintCompat
+  lintCompat,
 };
