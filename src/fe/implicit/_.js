@@ -6,8 +6,7 @@ function logError() {
 export const curry2 = func =>
   function(arg1, arg2) {
     if (arguments.length < 2) {
-      return primArg =>
-        primArg === null ? null : func.call(null, primArg, arg1);
+      return primArg => func.call(null, primArg, arg1);
     }
     return func.call(null, arg1, arg2);
   };
@@ -15,8 +14,7 @@ export const curry2 = func =>
 export const curry3 = func =>
   function(arg1, arg2, arg3) {
     if (arguments.length < 3) {
-      return primArg =>
-        primArg === null ? null : func.call(null, primArg, arg1, arg2);
+      return primArg => func.call(null, primArg, arg1, arg2);
     }
     return func.call(null, arg1, arg2, arg3);
   };
@@ -169,4 +167,16 @@ export const getCharFromEvent = e => {
       String.fromCharCode(which).replace(/[^\x20-\x7E]/, '')) ||
     ''
   );
+};
+
+/**
+ * Gives you a list of query params
+ * @return {Object} URL query params converted into an object.
+ */
+export const getQueryParams = function(search = location.search) {
+  if (isString(search)) {
+    return search.slice(1) |> query2obj;
+  }
+
+  return {};
 };
