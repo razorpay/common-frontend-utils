@@ -168,3 +168,15 @@ export const getCharFromEvent = e => {
     ''
   );
 };
+
+/**
+ * Gives you a list of query params
+ * @return {Object} URL query params converted into an object.
+ */
+export const getQueryParams = function(search = location.search) {
+  if (isString(search)) {
+    return search.slice(1) |> query2obj;
+  }
+
+  return {};
+};
