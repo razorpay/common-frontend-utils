@@ -32,7 +32,7 @@ const getPlugins = ({ watch = isWatching, lint = true, src }) => {
     svelte({
       extensions: '.svelte',
       preprocess: {
-        style: ({ content }) => stylus.transform(content),
+        style: ({ content }) => stylus.stylusToCss(content),
         script: ({ content, attrs, id }) => {
           setTimeout(() => eslint.lintText(content));
           return content;
