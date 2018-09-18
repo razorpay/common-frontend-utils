@@ -4,29 +4,51 @@ const autoprefixer = require('autoprefixer-stylus');
 const stylus = require('stylus');
 
 function transform(content, id) {
-  if (!id || id.endsWith('.styl')) {
+  if (id.endsWith('.styl')) {
     return new Promise((resolve, reject) => {
-      var stylusOptions = {
-        filename: id,
-        compress: isProd
-      };
+      stylusToCss(content, id)
+        .then(_ => {
+          _.code = `export default ${JSON.stringify(_.code)};`;
 
-      if (isProd) {
-        stylusOptions.use = [ autoprefixer() ];
-      }
-
-      stylus.render(content, stylusOptions, (err, code) => {
-        if (err) { return reject(err) }
-        code = `export default ${JSON.stringify(code)};`;
-        resolve({ code, map: { mappings: '' } });
-      });
+          resolve(_);
+        })
+        .catch(reject);
     });
   }
 }
 
+/**
+ * Renders CSS from STYL.
+ */
+function stylusToCss (content, filename) {
+  return new Promise ((resolve, reject) => {
+    const stylusOptions = {
+      filename,
+      compress: isProd,
+    };
+
+    if (isProd) {
+      stylusOptions.use = [autoprefixer()];
+    }    
+
+    stylus.render(content, stylusOptions, (err, code) => {
+      if (err) {
+        return reject(err)
+      }
+      resolve({
+        code,
+        map: {
+          mappings: ''
+        }
+      });
+    });    
+  });
+}
+
 const plugin = {
   name: 'stylus',
-  transform
+  transform,
+  stylusToCss
 }
 
 module.exports = plugin;
