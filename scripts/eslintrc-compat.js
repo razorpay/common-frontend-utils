@@ -10,5 +10,5 @@ module.exports = {
     'no-console': 0,
     'no-iterator': 2,
   },
-  globals: ['window'],
+  globals: ['window', 'console'],
 };
