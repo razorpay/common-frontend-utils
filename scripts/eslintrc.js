@@ -2,7 +2,7 @@ let globals = require('./rollup-injects');
 const eslintRecommended = require('eslint/conf/eslint-recommended');
 
 delete globals.include;
-globals = ['window'].concat(Object.keys(globals));
+globals = ['window', 'console'].concat(Object.keys(globals));
 
 const blacklistVars = globals.map(g => `VariableDeclarator[id.name=${g}]`);
 

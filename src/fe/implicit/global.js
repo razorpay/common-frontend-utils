@@ -19,7 +19,6 @@ export const unescape = global.unescape;
 export const TypeError = global.TypeError;
 export const navigator = global.navigator;
 export const location = global.location;
-export const console = global.console;
 export const XMLHttpRequest = global.XMLHttpRequest;
 export const NodeList = global.NodeList;
 export const FormData = global.FormData;
