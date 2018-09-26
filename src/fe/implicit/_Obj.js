@@ -52,6 +52,10 @@ export const reduce = _.curry3((o, reducer, initialValue) =>
 export const stringify = JSON.stringify;
 
 export const parse = string => {
+  if (!string) {
+    return;
+  }
+
   try {
     return JSON.parse(string);
   } catch (e) {
