@@ -13,7 +13,7 @@ const isWatching = argv.w || argv.watch;
 
 const commonFeDir = 'node_modules/fe/src';
 
-const getPlugins = ({ watch = isWatching, lint = true, src }) => {
+const getPlugins = ({ watch = isWatching, lint = true, src, svelteCssPath }) => {
   if (!Array.isArray(src)) {
     src = [src];
   }
@@ -39,6 +39,11 @@ const getPlugins = ({ watch = isWatching, lint = true, src }) => {
         },
       },
       dev: !isProd,
+      css: css =>{
+        if (svelteCssPath) {
+          css.write(`${svelteCssPath}/svelte.styl`);
+        }
+      }
     }),
 
     babel({
