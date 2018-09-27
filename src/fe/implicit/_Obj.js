@@ -65,3 +65,17 @@ export const extend = _.curry2((o, source) => {
   loop(source, (v, k) => (o[k] = v));
   return o;
 });
+
+export const unflatten = (o, delimiter = '.') => {
+  let result = {};
+
+  loop(o, (val, key) => {
+    const keys = key.split(delimiter);
+
+    _Arr.reduce(keys, (r, e, j) => {
+      return r[e] || (r[e] = isNaN(Number(keys[j + 1])) ? (keys.length - 1 === j ? o[key] : {}) : [])
+    }, result);
+  });
+
+  return result;
+};
