@@ -79,3 +79,17 @@ export const unflatten = (o, delimiter = '.') => {
 
   return result;
 };
+
+export const flatten = (o, prefix = '') => {
+  const result = {};
+
+  loop(o, (val, key) => {
+    if (_.isObject(val)) {
+      extend(result, flatten(val, `${prefix}.${key}`));
+    } else {
+      result[`${prefix}.${key}`.replace(/^\./, '')] = val;
+    }
+  });
+
+  return result;
+};
