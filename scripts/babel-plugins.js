@@ -1,4 +1,6 @@
-module.exports = [
+const babel = require('rollup-plugin-babel');
+
+const plugins = [
   ['module:fast-async', { useRuntimeModule: false }],
   '@babel/transform-arrow-functions',
   '@babel/transform-block-scoped-functions',
@@ -16,3 +18,20 @@ module.exports = [
 
   ['@babel/proposal-pipeline-operator', { proposal: 'minimal' }],
 ];
+
+module.exports = babel({
+  extensions: ['.js', '.svelte'],
+  plugins,
+});
+
+const babelTransform = module.exports.transform;
+
+module.exports.transform = (code, id) => {
+  try {
+    return babelTransform(code, id);
+  } catch (e) {
+    e.stack = '';
+    e.message = '';
+    throw e;
+  }
+};
