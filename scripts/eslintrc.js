@@ -21,6 +21,7 @@ module.exports = {
     semi: 0,
     quotes: 0,
 
+    'no-debugger': 0, // allow debugger in source
     'no-empty': 0, // allow empty block, usually after catch(e){}
     'no-unused-vars': 0, // allow unused vars
     'no-console': 0, // allow console

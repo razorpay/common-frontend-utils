@@ -42,7 +42,7 @@ export const invoke = function(func) {
     if (_.isString(func)) {
       func = this[func];
     }
-    func.apply(this, arguments |> _Arr.sliceFrom(1));
+    return func.apply(this, arguments |> _Arr.sliceFrom(1));
   } catch (e) {
     _.logError(e);
   }
