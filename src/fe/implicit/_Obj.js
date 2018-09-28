@@ -66,26 +66,41 @@ export const extend = _.curry2((o, source) => {
   return o;
 });
 
-export const unflatten = (o, delimiter = '.') => {
+export const unflatten = o => {
+  const delimiter = '.';
   let result = {};
 
   loop(o, (val, key) => {
-    const keys = key.split(delimiter);
+    // Remove square brackets and replace them with delimiter.
+    key = key.replace(/\]\[/, delimiter).replace(/\[/g, delimiter).replace(/\]/g, '');
 
-    _Arr.reduce(
-      keys,
-      (r, e, j) => {
-        return (
-          r[e] ||
-          (r[e] = global.isNaN(Number(keys[j + 1]))
-            ? keys.length - 1 === j
-              ? o[key]
-              : {}
-            : [])
-        );
-      },
-      result
-    );
+    /**
+     * If delimeter exists, break the key down.
+     * Otherwise, set directly.
+     */
+    if (key.indexOf(delimiter)) {
+      const keys = key.split(delimiter);
+      let _r = result;
+
+      _Arr.loop(keys, (k, i) => {
+        /**
+         * For all keys except the last, create objects and set to _r.
+         * For the last key, set the value in _r.
+         */
+        if (i < keys.length - 1) {
+          if (!_r[k]) {
+            _r[k] = {};
+          }
+
+          _r = _r[k];
+        } else {
+          _r[k] = val;
+        }
+      });
+    } else {
+      result[key] = val;
+    }
+
   });
 
   return result;
@@ -96,6 +111,7 @@ export const flatten = (o, prefix = '') => {
 
   loop(o, (val, key) => {
     const flattenedKey = prefix ? `${prefix}.${key}` : key;
+
     if (_.isNonNullObject(val)) {
       extend(result, flatten(val, flattenedKey));
     } else {
