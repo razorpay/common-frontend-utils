@@ -72,34 +72,26 @@ export const unflatten = o => {
 
   loop(o, (val, key) => {
     // Remove square brackets and replace them with delimiter.
-    key = key.replace(/\]\[/, delimiter).replace(/\[/g, delimiter).replace(/\]/g, '');
+    key.replace(/\[([^[\]]+)\]/g, `${delimiter}$1`);
 
-    /**
-     * If delimeter exists, break the key down.
-     * Otherwise, set directly.
-     */
-    if (key.indexOf(delimiter)) {
-      const keys = key.split(delimiter);
-      let _r = result;
+    const keys = key.split(delimiter);
+    let _r = result;
 
-      _Arr.loop(keys, (k, i) => {
-        /**
-         * For all keys except the last, create objects and set to _r.
-         * For the last key, set the value in _r.
-         */
-        if (i < keys.length - 1) {
-          if (!_r[k]) {
-            _r[k] = {};
-          }
-
-          _r = _r[k];
-        } else {
-          _r[k] = val;
+    _Arr.loop(keys, (k, i) => {
+      /**
+       * For all keys except the last, create objects and set to _r.
+       * For the last key, set the value in _r.
+       */
+      if (i < keys.length - 1) {
+        if (!_r[k]) {
+          _r[k] = {};
         }
-      });
-    } else {
-      result[key] = val;
-    }
+
+        _r = _r[k];
+      } else {
+        _r[k] = val;
+      }
+    });
 
   });
 
