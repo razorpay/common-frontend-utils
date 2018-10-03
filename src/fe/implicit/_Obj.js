@@ -65,3 +65,51 @@ export const extend = _.curry2((o, source) => {
   loop(source, (v, k) => (o[k] = v));
   return o;
 });
+
+export const unflatten = o => {
+  const delimiter = '.';
+  let result = {};
+
+  loop(o, (val, key) => {
+    // Remove square brackets and replace them with delimiter.
+    key.replace(/\[([^[\]]+)\]/g, `${delimiter}$1`);
+
+    const keys = key.split(delimiter);
+    let _r = result;
+
+    _Arr.loop(keys, (k, i) => {
+      /**
+       * For all keys except the last, create objects and set to _r.
+       * For the last key, set the value in _r.
+       */
+      if (i < keys.length - 1) {
+        if (!_r[k]) {
+          _r[k] = {};
+        }
+
+        _r = _r[k];
+      } else {
+        _r[k] = val;
+      }
+    });
+
+  });
+
+  return result;
+};
+
+export const flatten = (o, prefix = '') => {
+  const result = {};
+
+  loop(o, (val, key) => {
+    const flattenedKey = prefix ? `${prefix}.${key}` : key;
+
+    if (_.isNonNullObject(val)) {
+      extend(result, flatten(val, flattenedKey));
+    } else {
+      result[flattenedKey] = val;
+    }
+  });
+
+  return result;
+};
