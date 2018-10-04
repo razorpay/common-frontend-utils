@@ -66,13 +66,15 @@ export const extend = _.curry2((o, source) => {
   return o;
 });
 
-export const unflatten = o => {
+export const unflatten = (o, removeSquareBrackets = true) => {
   const delimiter = '.';
   let result = {};
 
   loop(o, (val, key) => {
-    // Remove square brackets and replace them with delimiter.
-    key.replace(/\[([^[\]]+)\]/g, `${delimiter}$1`);
+    if (removeSquareBrackets) {
+      // Remove square brackets and replace them with delimiter.
+      key.replace(/\[([^[\]]+)\]/g, `${delimiter}$1`);
+    }
 
     const keys = key.split(delimiter);
     let _r = result;
