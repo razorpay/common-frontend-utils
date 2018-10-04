@@ -39,8 +39,8 @@ export const isBoolean = isType('boolean');
 export const isNumber = isType('number');
 export const isString = isType('string');
 export const isFunction = isType('function');
-export const isObject = isType('object');
 export const isArray = Array.isArray;
+export const isObject = o => !isArray(o) && isType(o, 'object');
 export const isElement = o => isNonNullObject(o) && o.nodeType === 1;
 export const isTruthy = o => o;
 
