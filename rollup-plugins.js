@@ -1,7 +1,6 @@
 const argv = require('yargs-parser')(process.argv.slice(2));
 const globals = require('./scripts/rollup-injects');
 const include = require('rollup-plugin-includepaths');
-const babel = require('rollup-plugin-babel');
 const babelPlugins = require('./scripts/babel-plugins');
 const stylus = require('./scripts/rollup-plugin-stylus');
 const svelte = require('rollup-plugin-svelte');
@@ -13,7 +12,12 @@ const isWatching = argv.w || argv.watch;
 
 const commonFeDir = 'node_modules/fe/src';
 
-const getPlugins = ({ watch = isWatching, lint = true, src, svelteCssPath }) => {
+const getPlugins = ({
+  watch = isWatching,
+  lint = true,
+  src,
+  svelteCssPath,
+}) => {
   if (!Array.isArray(src)) {
     src = [src];
   }
@@ -39,17 +43,14 @@ const getPlugins = ({ watch = isWatching, lint = true, src, svelteCssPath }) => 
         },
       },
       dev: !isProd,
-      css: css =>{
+      css: css => {
         if (svelteCssPath) {
           css.write(`${svelteCssPath}/svelte.styl`);
         }
-      }
+      },
     }),
 
-    babel({
-      extensions: ['.js', '.svelte'],
-      plugins: babelPlugins,
-    }),
+    babelPlugins,
 
     inject(globals),
   ];

@@ -4,7 +4,7 @@ const lintRules = require('./eslintrc');
 const CLIEngine = require('eslint').CLIEngine;
 
 const eslint = new CLIEngine(lintRules);
-const eslintFormatter = eslint.getFormatter('codeframe');
+const eslintFormatter = eslint.getFormatter('stylish');
 const lintCompat = new CLIEngine(require('./eslintrc-compat'));
 
 const lintPaths = paths => {

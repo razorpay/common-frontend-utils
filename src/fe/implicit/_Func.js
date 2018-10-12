@@ -37,6 +37,17 @@ export const bind =
   |> propToFunction
   |> _.curry2;
 
+export const invoke = function(func) {
+  try {
+    if (_.isString(func)) {
+      func = this[func];
+    }
+    return func.apply(this, arguments |> _Arr.sliceFrom(1));
+  } catch (e) {
+    _.logError(e);
+  }
+};
+
 export const debounce = (func, wait) => {
   var timerId, args, context, timerFn, result;
 

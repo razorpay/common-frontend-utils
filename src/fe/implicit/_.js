@@ -1,4 +1,4 @@
-function logError() {
+export function logError() {
   console.error.apply(console, arguments);
 }
 
