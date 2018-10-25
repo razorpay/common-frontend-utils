@@ -113,3 +113,19 @@ export const flatten = (o, prefix = '') => {
 
   return result;
 };
+
+/**
+ * Returns the value of a nested property safely,
+ * removing the need to sprinkle try-catch blocks in your code.
+ * 
+ * @param {Object} o
+ * @param {String} key
+ * 
+ * @return {Any}
+ */
+export const getValueSafely = _.curry2((o, key) => {
+  // Remove square brackets and inverted commas and replace them with dots.
+  key = key.replace(/\[[\'\"]?([^[\]\'\"]+)[\'\"]?\]/g, '.$1');
+  
+  return flatten(o)[key];
+});
