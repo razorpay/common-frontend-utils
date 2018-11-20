@@ -17,6 +17,8 @@ const plugins = [
   ['@babel/transform-template-literals', { loose: true }],
 
   ['@babel/proposal-pipeline-operator', { proposal: 'minimal' }],
+
+  'babel-plugin-transform-object-entries',
 ];
 
 module.exports = babel({
