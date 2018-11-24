@@ -35,7 +35,7 @@ export const findIndex = _.curry2((arr, iteratee) => {
 
 export const find = _.curry2((arr, iteratee) => {
   let index = findIndex(arr, iteratee);
-  if (index > 0) {
+  if (index >= 0) {
     return arr[index];
   }
 });
