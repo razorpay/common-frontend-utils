@@ -215,3 +215,19 @@ export const on = (event, callback, delegate, useCapture) => {
     return () => el.removeEventListener(event, attachedCallback, useCapture);
   };
 };
+
+/**
+ * Remove all the children of an element.
+ *
+ * @param {DOMNode} el
+ *
+ * @return {DOMNode}
+ */
+export const clearContents = el => {
+  while (el.hasChildNodes()) {
+    el.removeChild(firstChild(el));
+  }
+  el.innerHTML = '';
+
+  return el;
+};
