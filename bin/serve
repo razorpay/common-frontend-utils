@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+// example: serve folder --port 8000 --proxy /api=https://api.razorpay.com
+const http = require('http');
+const argv = require('../argv');
+const path = require('path');
+const proxyServer = require('http-proxy').createProxyServer();
+
+const root = path.resolve(argv._[0] || argv.root || '')
+const ecstatic = require('ecstatic')({ root });
+
+const getProxies = () => {
+  let proxies;
+  if (Array.isArray(argv.proxy)) {
+    proxies = argv.proxy;
+  } else if (argv.proxy) {
+    proxies = [argv.proxy];
+  } else {
+    proxies = [];
+  }
+  return proxies;
+}
+
+const getHandler = () => {
+  const proxies = getProxies().map(p => {
+    const split = p.split('=');
+    return [split[0], split[1]];
+  })
+  return (req, res) => {
+    const proxyTarget = proxies.find(p => req.url.startsWith(p[0]));
+    if (proxyTarget) {
+      const targetUrl = proxyTarget[1] + req.url.slice(proxyTarget[0].length);
+      proxyServer.web(req, res, {
+        target: targetUrl,
+        followRedirects: true,
+        ignorePath: true,
+        secure: false,
+        changeOrigin: true
+      },
+        e => console.error(e.toString()));
+    } else {
+      ecstatic(req, res);
+    }
+  }
+}
+
+http.createServer(getHandler()).listen(argv.port || 8000);
