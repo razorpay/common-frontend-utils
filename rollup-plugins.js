@@ -1,8 +1,7 @@
 const argv = require('yargs-parser')(process.argv.slice(2));
 const globals = require('./scripts/rollup-injects');
 const include = require('rollup-plugin-includepaths');
-const babelPluginsEs5 = require('./scripts/babel-plugins');
-const babelPluginsEs6 = require('./scripts/babel-plugins-es6');
+const babelPlugins = require('./scripts/babel-plugins');
 const stylus = require('./scripts/rollup-plugin-stylus');
 const svelte = require('rollup-plugin-svelte');
 const inject = require('rollup-plugin-inject');
@@ -18,7 +17,7 @@ const getPlugins = ({
   lint = true,
   src,
   svelteCssPath,
-  babelPlugins = babelPluginsEs5,
+  plugins = babelPlugins,
 }) => {
   if (!Array.isArray(src)) {
     src = [src];
@@ -52,14 +51,14 @@ const getPlugins = ({
       },
     }),
 
-    babelPlugins,
+    plugins,
 
     inject(globals),
   ];
 };
 
 const getPluginsEs6 = opts => {
-  opts.babelPlugins = babelPluginsEs6;
+  opts.plugins = babelPlugins.es6;
   return getPlugins(opts);
 };
 
