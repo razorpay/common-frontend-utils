@@ -57,6 +57,8 @@
     }
   },
   "bin": {
-    "lintOutput": "./scripts/lintOutput.js"
+    "lintOutput": "scripts/lintOutput.js",
+    "$": "bin/$",
+    "serve": "bin/serve"
   }
 }
