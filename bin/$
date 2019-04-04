@@ -1,0 +1,2 @@
+PATH="$INIT_CWD/node_modules/fe/node_modules/.bin:$PATH"\
+NODE_ENV="$INIT_CWD/node_modules/fe/node_modules:$NODE_ENV" $@

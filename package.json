@@ -12,36 +12,40 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
-    "@babel/plugin-transform-arrow-functions": "^7.0.0",
-    "@babel/plugin-transform-block-scoped-functions": "^7.0.0",
-    "@babel/plugin-transform-block-scoping": "^7.0.0",
-    "@babel/plugin-transform-classes": "^7.1.0",
-    "@babel/plugin-transform-computed-properties": "^7.0.0",
-    "@babel/plugin-transform-destructuring": "^7.0.0",
-    "@babel/plugin-transform-parameters": "^7.1.0",
-    "@babel/plugin-transform-shorthand-properties": "^7.0.0",
-    "@babel/plugin-transform-template-literals": "^7.0.0",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/plugin-transform-block-scoped-functions": "^7.2.0",
+    "@babel/plugin-transform-block-scoping": "^7.2.0",
+    "@babel/plugin-transform-classes": "^7.2.2",
+    "@babel/plugin-transform-computed-properties": "^7.2.0",
+    "@babel/plugin-transform-destructuring": "^7.3.2",
+    "@babel/plugin-transform-parameters": "^7.2.0",
+    "@babel/plugin-transform-shorthand-properties": "^7.2.0",
+    "@babel/plugin-transform-template-literals": "^7.2.0",
     "autoprefixer-stylus": "^0.14.0",
-    "babel-eslint": "^10.0.0",
-    "chokidar": "^2.0.4",
-    "eslint": "^5.6.0",
+    "babel-eslint": "^10.0.1",
+    "chokidar": "^2.1.0",
+    "ecstatic": "^3.3.0",
+    "eslint": "^5.13.0",
     "fast-async": "^7.0.6",
     "glob": "^7.1.3",
-    "nodent-compiler": "^3.2.10",
-    "rollup-plugin-babel": "^4.0.3",
+    "http-proxy": "^1.17.0",
+    "nodent-compiler": "^3.2.11",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-includepaths": "^0.2.3",
     "rollup-plugin-inject": "^2.2.0",
-    "rollup-plugin-svelte": "^4.3.2",
+    "rollup-plugin-svelte": "^5.0.1",
     "stylus": "^0.54.5",
-    "svelte": "2.13.5",
+    "svelte": "2.16.0",
     "uglify-js": "^3.4.9",
-    "yargs-parser": "^10.1.0"
+    "yargs-parser": "^13.0.0"
   },
   "devDependencies": {
-    "husky": "^1.0.1",
-    "prettier": "^1.14.3",
-    "pretty-quick": "^1.7.0"
+    "husky": "^1.3.1",
+    "prettier": "^1.16.4",
+    "pretty-quick": "^1.10.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0",
@@ -53,6 +57,8 @@
     }
   },
   "bin": {
-    "lintOutput": "./scripts/lintOutput.js"
+    "lintOutput": "scripts/lintOutput.js",
+    "$": "bin/$",
+    "serve": "bin/serve"
   }
 }

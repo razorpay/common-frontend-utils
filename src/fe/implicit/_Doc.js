@@ -44,6 +44,7 @@ export function submitForm(action, data, method, target) {
     if (target) {
       attr.target = target;
     }
+
     _El.create('form')
       |> _El.setAttributes(attr)
       |> _El.setContents(data |> obj2formhtml)
@@ -64,7 +65,11 @@ export function obj2formhtml(data, key) {
     });
     return str;
   }
-  return '<input type="hidden" name="' + key + '" value="' + data + '">';
+  var input = _El.create('input');
+  input.type = 'hidden';
+  input.value = data;
+  input.name = key;
+  return input.outerHTML;
 }
 
 export function form2obj(form) {
