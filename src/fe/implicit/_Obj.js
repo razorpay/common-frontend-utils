@@ -92,7 +92,6 @@ export const unflatten = o => {
         _r[k] = val;
       }
     });
-
   });
 
   return result;
@@ -112,4 +111,18 @@ export const flatten = (o, prefix = '') => {
   });
 
   return result;
+};
+
+export const entries = o => {
+  const list = [];
+
+  if (!_.isNonNullObject(o)) {
+    return list;
+  }
+
+  loop(o, (val, key) => {
+    list.push([key, val]);
+  });
+
+  return list;
 };
