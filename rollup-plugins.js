@@ -5,6 +5,7 @@ const babelPlugins = require('./scripts/babel-plugins');
 const stylus = require('./scripts/rollup-plugin-stylus');
 const svelte = require('rollup-plugin-svelte');
 const inject = require('rollup-plugin-inject');
+const replace = require('rollup-plugin-replace');
 const eslint = require('./scripts/eslint');
 const isProd = require('./prod');
 
@@ -31,6 +32,10 @@ const getPlugins = ({
   // svelte needs to be before babel so that by the time
   // babel is run, svelte has become JS
   return [
+    replace({
+      __BUILD_NUMBER__: process.env.BUILD_NUMBER || null,
+    }),
+
     include({ paths }),
 
     svelte({
