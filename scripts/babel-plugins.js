@@ -2,6 +2,7 @@ const babel = require('rollup-plugin-babel');
 
 const plugins = [
   ['module:fast-async', { useRuntimeModule: false }],
+  ['@babel/plugin-proposal-class-properties', { loose: true }],
   '@babel/transform-arrow-functions',
   '@babel/transform-block-scoped-functions',
   '@babel/transform-block-scoping',
