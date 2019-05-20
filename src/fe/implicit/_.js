@@ -124,7 +124,7 @@ export function query2obj(string) {
   var obj = {};
   string.split(/=|&/).forEach((param, index, array) => {
     if (index % 2) {
-      obj[array[index - 1]] = param;
+      obj[array[index - 1]] = decodeURIComponent(param);
     }
   });
   return obj;
