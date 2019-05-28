@@ -102,22 +102,50 @@ export function throwMessage(message) {
 
 export const isBase64Image = src => /data:image\/[^;]+;base64/.test(src);
 
-export function obj2query(obj) {
-  // Sanity Check
+/**
+ * Makes a flattened object that can be used
+ * to generate query strings.
+ *
+ * Turns { foo: ['a', 'b'] } into { 'foo[0]': 'a', 'foo[1]': 'b' }
+ *
+ * @param {Object} obj The source object
+ * @param {String} prefix An optional prefix
+ *
+ * @return {Object}
+ */
+export function makeQueryObject(obj, prefix) {
+  const query = {};
+
   if (!isNonNullObject(obj)) {
-    return '';
+    return query;
   }
 
-  const objKeys = Object.keys(obj);
-  const serializedArray = Array(lengthOf(objKeys));
+  const noPrefix = typeof prefix === 'undefined' || prefix === null;
 
-  objKeys.forEach(
-    (objKey, index) =>
-      (serializedArray[index] =
-        encodeURIComponent(objKey) + '=' + encodeURIComponent(obj[objKey]))
-  );
+  Object.keys(obj).forEach(key => {
+    const value = obj[key];
+    const _prefix = noPrefix ? key : `${prefix}[${key}]`;
 
-  return serializedArray.join('&');
+    if (typeof value === 'object') {
+      const _query = makeQueryObject(value, _prefix);
+
+      Object.keys(_query).forEach(subkey => {
+        query[subkey] = _query[subkey];
+      });
+    } else {
+      query[_prefix] = value;
+    }
+  });
+
+  return query;
+}
+
+export function obj2query(obj) {
+  const query = makeQueryObject(obj);
+
+  return Object.keys(query)
+    .map(key => `${key}=${query[key]}`)
+    .join('&');
 }
 
 export function query2obj(string) {
