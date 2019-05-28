@@ -124,21 +124,16 @@ export function makeQueryObject(obj, prefix) {
 
   Object.keys(obj).forEach(key => {
     const value = obj[key];
+    const _prefix = noPrefix ? key : `${prefix}[${key}]`;
 
     if (typeof value === 'object') {
-      let _prefix = noPrefix ? key : `${prefix}[${key}]`;
-
       const _query = makeQueryObject(value, _prefix);
 
       Object.keys(_query).forEach(subkey => {
         query[subkey] = _query[subkey];
       });
     } else {
-      if (noPrefix) {
-        query[key] = value;
-      } else {
-        query[`${prefix}[${key}]`] = value;
-      }
+      query[_prefix] = value;
     }
   });
 
