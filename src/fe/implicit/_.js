@@ -144,7 +144,7 @@ export function obj2query(obj) {
   const query = makeQueryObject(obj);
 
   return Object.keys(query)
-    .map(key => `${key}=${query[key]}`)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`)
     .join('&');
 }
 
