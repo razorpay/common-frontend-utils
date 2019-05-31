@@ -1,6 +1,7 @@
 const rejectFn = e => console.warn('Promise error:', e);
 const isPromise = p => _.is(p, Promise);
 
+/** @class */
 function Promise(fn) {
   if (!isPromise(this)) throw 'new Promise';
 
