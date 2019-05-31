@@ -4,7 +4,7 @@ import * as _ from './_';
  * Tells whether argument passed is similar to an array.
  * @param {Any} x
  *
- * @return {Boolean}
+ * @returns {Boolean}
  */
 export const isSimilar = x => _.isNumber(_.lengthOf(x));
 
@@ -18,7 +18,7 @@ const protoSlice = proto.slice;
  * @param {Array} array
  * @param {Function} iteratee
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const loop = _.curry2((array, iteratee) => {
   array && proto.forEach.call(array, iteratee);
@@ -41,9 +41,9 @@ const arrayCall = func => _.curry2((arr, arg) => proto[func].call(arr, arg));
  * @param {Function} fn
  *  @param {Any} item
  *
- *  @return {Boolean}
+ *  @returns {Boolean}
  *
- * @return {Boolean}
+ * @returns {Boolean}
  */
 export const any = arrayCall('some');
 
@@ -55,9 +55,9 @@ export const any = arrayCall('some');
  * @param {Function} fn
  *  @param {Any} item
  *
- *  @return {Boolean}
+ *  @returns {Boolean}
  *
- * @return {Boolean}
+ * @returns {Boolean}
  */
 export const every = arrayCall('every');
 
@@ -68,9 +68,9 @@ export const every = arrayCall('every');
  * @param {Function} mapper
  *  @param {Any} item
  *
- *  @return {Any} item
+ *  @returns {Any} item
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const map = arrayCall('map');
 
@@ -82,9 +82,9 @@ export const map = arrayCall('map');
  * @param {Function} filterer
  *  @param {Any} item
  *
- *  @return {Boolean}
+ *  @returns {Boolean}
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const filter = arrayCall('filter');
 
@@ -93,7 +93,7 @@ export const filter = arrayCall('filter');
  * @param {Array} array
  * @param {Any} item
  *
- * @return {Number}
+ * @returns {Number}
  */
 export const indexOf = arrayCall('indexOf');
 
@@ -102,7 +102,7 @@ export const indexOf = arrayCall('indexOf');
  * @param {Array} array
  * @param {String} delimeter
  *
- * @return {String}
+ * @returns {String}
  */
 export const join = arrayCall('join');
 
@@ -113,9 +113,9 @@ export const join = arrayCall('join');
  *  @param {Any} first
  *  @param {Any} second
  *
- *  @return {Number} 1 if a > b, -1 if b > a, 0 if a == b
+ *  @returns {Number} 1 if a > b, -1 if b > a, 0 if a == b
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const sort = arrayCall('sort');
 
@@ -124,7 +124,7 @@ export const sort = arrayCall('sort');
  * @param {Array} array
  * @param {Any} member
  *
- * @return {Boolean}
+ * @returns {Boolean}
  */
 export const contains = _.curry2(
   (array, member) => indexOf(array, member) >= 0
@@ -136,9 +136,9 @@ export const contains = _.curry2(
  * @param {Array} arr
  * @param {Function} iteratee
  *  @param {Any} item
- *  @return {Boolean}
+ *  @returns {Boolean}
  *
- * @return {Number}
+ * @returns {Number}
  */
 export const findIndex = _.curry2((arr, iteratee) => {
   let arrayLen = _.lengthOf(arr);
@@ -156,9 +156,9 @@ export const findIndex = _.curry2((arr, iteratee) => {
  * @param {Array} arr
  * @param {Function} iteratee
  *  @param {Any} item
- *  @return {Boolean}
+ *  @returns {Boolean}
  *
- * @return {Any}
+ * @returns {Any}
  */
 export const find = _.curry2((arr, iteratee) => {
   let index = findIndex(arr, iteratee);
@@ -172,7 +172,7 @@ export const find = _.curry2((arr, iteratee) => {
  * @param {Array} array
  * @param {Any} member
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const prepend = _.curry2((array, member) => {
   const newArray = Array(_.lengthOf(array) + 1);
@@ -186,7 +186,7 @@ export const prepend = _.curry2((array, member) => {
  * @param {Array} array
  * @param {Any} member
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const append = _.curry2((array, member) => {
   const arrayLen = _.lengthOf(array);
@@ -203,7 +203,7 @@ export const append = _.curry2((array, member) => {
  * @param {Array} array
  * @param {Any} member
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const remove = _.curry2((array, member) => {
   let memberIndex = indexOf(array, member);
@@ -221,7 +221,7 @@ export const remove = _.curry2((array, member) => {
  * Returns the first item of the array.
  * @param {Array} array
  *
- * @return {Any}
+ * @returns {Any}
  */
 export const first = array => array[0];
 
@@ -229,7 +229,7 @@ export const first = array => array[0];
  * Returns the last item of the array.
  * @param {Array} array
  *
- * @return {Any}
+ * @returns {Any}
  */
 export const last = array => array[_.lengthOf(array) - 1];
 
@@ -239,7 +239,7 @@ export const last = array => array[_.lengthOf(array) - 1];
  * @param {Number} from Initial index, included in the result
  * @param {Number} to Last index, not included in the result
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const slice = _.curry3((array, from, to) =>
   protoSlice.call(array, from, to)
@@ -252,7 +252,7 @@ export const slice = _.curry3((array, from, to) =>
  * @param {Array} array
  * @param {Number} from Initial index, included in the result
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const sliceFrom = _.curry2((array, from) =>
   protoSlice.call(array, from)
@@ -265,10 +265,10 @@ export const sliceFrom = _.curry2((array, from) =>
  *  @param {Any} accumulator Returned value so far
  *  @param {Any} currentValue Element of `array`
  *
- *  @return {Any}
+ *  @returns {Any}
  * @param {Any} initialValue
  *
- * @return {Any}
+ * @returns {Any}
  */
 export const reduce = _.curry3((array, reducer, initialValue) =>
   proto.reduce.call(array, reducer, initialValue)
@@ -280,7 +280,7 @@ export const reduce = _.curry3((array, reducer, initialValue) =>
  * @param {Array} arr1
  * @param {Array} arr2
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const merge = _.curry2((arr1, arr2) => {
   const arr2Len = _.lengthOf(arr2);
@@ -296,7 +296,7 @@ export const merge = _.curry2((arr1, arr2) => {
  * @param {Array} arr1
  * @param {Array} arr2
  *
- * @return {Array}
+ * @returns {Array}
  */
 export const mergeWith = _.curry2((arr1, arr2) => {
   return merge(arr2, arr1);
