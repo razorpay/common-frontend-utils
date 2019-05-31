@@ -4,7 +4,8 @@
   "main": "rollup.config.js",
   "scripts": {
     "start": "rollup -cw",
-    "test": "mocha --require @babel/register \"tests/**/*.js\""
+    "test": "mocha --require @babel/register \"tests/**/*.js\"",
+    "lint-documentation": "documentation lint src --shallow"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "documentation": "^11.0.0",
     "husky": "^1.3.1",
     "mocha": "^6.1.4",
     "prettier": "^1.16.4",
