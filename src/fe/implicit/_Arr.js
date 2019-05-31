@@ -4,7 +4,7 @@ import * as _ from './_';
  * Tells whether argument passed is similar to an array.
  * @param {Any} x
  *
- * @returns {Boolean}
+ * @returns {boolean}
  */
 export const isSimilar = x => _.isNumber(_.lengthOf(x));
 
@@ -41,9 +41,9 @@ const arrayCall = func => _.curry2((arr, arg) => proto[func].call(arr, arg));
  * @param {Function} fn
  *  @param {Any} item
  *
- *  @returns {Boolean}
+ *  @returns {boolean}
  *
- * @returns {Boolean}
+ * @returns {boolean}
  */
 export const any = arrayCall('some');
 
@@ -55,9 +55,9 @@ export const any = arrayCall('some');
  * @param {Function} fn
  *  @param {Any} item
  *
- *  @returns {Boolean}
+ *  @returns {boolean}
  *
- * @returns {Boolean}
+ * @returns {boolean}
  */
 export const every = arrayCall('every');
 
@@ -82,7 +82,7 @@ export const map = arrayCall('map');
  * @param {Function} filterer
  *  @param {Any} item
  *
- *  @returns {Boolean}
+ *  @returns {boolean}
  *
  * @returns {Array}
  */
@@ -93,16 +93,16 @@ export const filter = arrayCall('filter');
  * @param {Array} array
  * @param {Any} item
  *
- * @returns {Number}
+ * @returns {number}
  */
 export const indexOf = arrayCall('indexOf');
 
 /**
  * Returns a string by joining the elements of tha array.
  * @param {Array} array
- * @param {String} delimeter
+ * @param {string} delimeter
  *
- * @returns {String}
+ * @returns {string}
  */
 export const join = arrayCall('join');
 
@@ -113,7 +113,7 @@ export const join = arrayCall('join');
  *  @param {Any} first
  *  @param {Any} second
  *
- *  @returns {Number} 1 if a > b, -1 if b > a, 0 if a == b
+ *  @returns {number} 1 if a > b, -1 if b > a, 0 if a == b
  *
  * @returns {Array}
  */
@@ -124,7 +124,7 @@ export const sort = arrayCall('sort');
  * @param {Array} array
  * @param {Any} member
  *
- * @returns {Boolean}
+ * @returns {boolean}
  */
 export const contains = _.curry2(
   (array, member) => indexOf(array, member) >= 0
@@ -136,9 +136,9 @@ export const contains = _.curry2(
  * @param {Array} arr
  * @param {Function} iteratee
  *  @param {Any} item
- *  @returns {Boolean}
+ *  @returns {boolean}
  *
- * @returns {Number}
+ * @returns {number}
  */
 export const findIndex = _.curry2((arr, iteratee) => {
   let arrayLen = _.lengthOf(arr);
@@ -156,7 +156,7 @@ export const findIndex = _.curry2((arr, iteratee) => {
  * @param {Array} arr
  * @param {Function} iteratee
  *  @param {Any} item
- *  @returns {Boolean}
+ *  @returns {boolean}
  *
  * @returns {Any}
  */
@@ -236,8 +236,8 @@ export const last = array => array[_.lengthOf(array) - 1];
 /**
  * Returns a subarray from the array.
  * @param {Array} array
- * @param {Number} from Initial index, included in the result
- * @param {Number} to Last index, not included in the result
+ * @param {number} from Initial index, included in the result
+ * @param {number} to Last index, not included in the result
  *
  * @returns {Array}
  */
@@ -250,7 +250,7 @@ export const slice = _.curry3((array, from, to) =>
  * starting from the provided index,
  * till the end of the array
  * @param {Array} array
- * @param {Number} from Initial index, included in the result
+ * @param {number} from Initial index, included in the result
  *
  * @returns {Array}
  */
