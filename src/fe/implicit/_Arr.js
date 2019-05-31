@@ -2,7 +2,7 @@ import * as _ from './_';
 
 /**
  * Tells whether argument passed is similar to an array.
- * @param {Any} x
+ * @param {*} x
  *
  * @returns {boolean}
  */
@@ -38,10 +38,7 @@ const arrayCall = func => _.curry2((arr, arg) => proto[func].call(arr, arg));
  * for at least one element of `array`.
  * Array.prototype.some
  * @param {Array} array
- * @param {Function} fn
- *  @param {Any} item
- *
- *  @returns {boolean}
+ * @param {function (item: *): boolean} fn
  *
  * @returns {boolean}
  */
@@ -52,10 +49,7 @@ export const any = arrayCall('some');
  * for every element of `array`.
  * Array.prototype.every
  * @param {Array} array
- * @param {Function} fn
- *  @param {Any} item
- *
- *  @returns {boolean}
+ * @param {function (item: *): boolean} fn
  *
  * @returns {boolean}
  */
@@ -65,10 +59,7 @@ export const every = arrayCall('every');
  * Returns a new function by mapping every
  * element of the array into a new element.
  * @param {Array} array
- * @param {Function} mapper
- *  @param {Any} item
- *
- *  @returns {Any} item
+ * @param {function (item: *): *} mapper
  *
  * @returns {Array}
  */
@@ -79,10 +70,7 @@ export const map = arrayCall('map');
  * from the orignal array that pass
  * the filter.
  * @param {Array} array
- * @param {Function} filterer
- *  @param {Any} item
- *
- *  @returns {boolean}
+ * @param {function (item: *): boolean} filterer
  *
  * @returns {Array}
  */
@@ -91,7 +79,7 @@ export const filter = arrayCall('filter');
 /**
  * Returns the index of the item in the array.
  * @param {Array} array
- * @param {Any} item
+ * @param {*} item
  *
  * @returns {number}
  */
@@ -109,11 +97,7 @@ export const join = arrayCall('join');
 /**
  * Returns a sorted array while sorting the array in place too.
  * @param {Array} array
- * @param {Function} sorter
- *  @param {Any} first
- *  @param {Any} second
- *
- *  @returns {number} 1 if a > b, -1 if b > a, 0 if a == b
+ * @param {function (first: *, second: *): number} sorter Returns 1 if a > b, -1 if b > a, 0 if a == b
  *
  * @returns {Array}
  */
@@ -134,7 +118,7 @@ export const contains = _.curry2(
  * Returns the index of the first item in an array
  * for which iteratee evaluates to true.
  * @param {Array} arr
- * @param {Function} iteratee
+ * @param {function (item: *): boolean} iteratee
  *  @param {Any} item
  *  @returns {boolean}
  *
@@ -154,9 +138,7 @@ export const findIndex = _.curry2((arr, iteratee) => {
  * Returns the first item in an array
  * for which iteratee evaluates to true.
  * @param {Array} arr
- * @param {Function} iteratee
- *  @param {Any} item
- *  @returns {boolean}
+ * @param {function (item: *): boolean} iteratee
  *
  * @returns {Any}
  */
@@ -261,11 +243,7 @@ export const sliceFrom = _.curry2((array, from) =>
 /**
  * Array.prototype.reduce
  * @param {Array} array
- * @param {Function} reducer
- *  @param {Any} accumulator Returned value so far
- *  @param {Any} currentValue Element of `array`
- *
- *  @returns {Any}
+ * @param {function (accumulator: *, currentValue: *): *} reducer
  * @param {Any} initialValue
  *
  * @returns {Any}
