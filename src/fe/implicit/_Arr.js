@@ -32,13 +32,100 @@ export const loop = _.curry2((array, iteratee) => {
 export const callAll = array => loop(array, a => a());
 
 const arrayCall = func => _.curry2((arr, arg) => proto[func].call(arr, arg));
+
+/**
+ * Says whether `fn` evaluates to true
+ * for at least one element of `array`.
+ * Array.prototype.some
+ * @param {Array} array
+ * @param {Function} fn
+ *  @param {Any} item
+ *
+ *  @return {Boolean}
+ *
+ * @return {Boolean}
+ */
 export const any = arrayCall('some');
+
+/**
+ * Says whether `fn` evaluates to true
+ * for every element of `array`.
+ * Array.prototype.every
+ * @param {Array} array
+ * @param {Function} fn
+ *  @param {Any} item
+ *
+ *  @return {Boolean}
+ *
+ * @return {Boolean}
+ */
 export const every = arrayCall('every');
+
+/**
+ * Returns a new function by mapping every
+ * element of the array into a new element.
+ * @param {Array} array
+ * @param {Function} mapper
+ *  @param {Any} item
+ *
+ *  @return {Any} item
+ *
+ * @return {Array}
+ */
 export const map = arrayCall('map');
+
+/**
+ * Returns a new array consisting of elements
+ * from the orignal array that pass
+ * the filter.
+ * @param {Array} array
+ * @param {Function} filterer
+ *  @param {Any} item
+ *
+ *  @return {Boolean}
+ *
+ * @return {Array}
+ */
 export const filter = arrayCall('filter');
+
+/**
+ * Returns the index of the item in the array.
+ * @param {Array} array
+ * @param {Any} item
+ *
+ * @return {Number}
+ */
 export const indexOf = arrayCall('indexOf');
+
+/**
+ * Returns a string by joining the elements of tha array.
+ * @param {Array} array
+ * @param {String} delimeter
+ *
+ * @return {String}
+ */
 export const join = arrayCall('join');
+
+/**
+ * Returns a sorted array while sorting the array in place too.
+ * @param {Array} array
+ * @param {Function} sorter
+ *  @param {Any} first
+ *  @param {Any} second
+ *
+ *  @return {Number} 1 if a > b, -1 if b > a, 0 if a == b
+ *
+ * @return {Array}
+ */
 export const sort = arrayCall('sort');
+
+/**
+ * Tells whether or not an array contains the given member.
+ * @param {Array} array
+ * @param {Any} member
+ *
+ * @return {Boolean}
+ */
 export const contains = _.curry2(
   (array, member) => indexOf(array, member) >= 0
 );
@@ -130,24 +217,87 @@ export const remove = _.curry2((array, member) => {
   }
 });
 
+/**
+ * Returns the first item of the array.
+ * @param {Array} array
+ *
+ * @return {Any}
+ */
 export const first = array => array[0];
+
+/**
+ * Returns the last item of the array.
+ * @param {Array} array
+ *
+ * @return {Any}
+ */
 export const last = array => array[_.lengthOf(array) - 1];
 
+/**
+ * Returns a subarray from the array.
+ * @param {Array} array
+ * @param {Number} from Initial index, included in the result
+ * @param {Number} to Last index, not included in the result
+ *
+ * @return {Array}
+ */
 export const slice = _.curry3((array, from, to) =>
   protoSlice.call(array, from, to)
 );
+
+/**
+ * Returns a subarray from the array
+ * starting from the provided index,
+ * till the end of the array
+ * @param {Array} array
+ * @param {Number} from Initial index, included in the result
+ *
+ * @return {Array}
+ */
 export const sliceFrom = _.curry2((array, from) =>
   protoSlice.call(array, from)
 );
 
+/**
+ * Array.prototype.reduce
+ * @param {Array} array
+ * @param {Function} reducer
+ *  @param {Any} accumulator Returned value so far
+ *  @param {Any} currentValue Element of `array`
+ *
+ *  @return {Any}
+ * @param {Any} initialValue
+ *
+ * @return {Any}
+ */
 export const reduce = _.curry3((array, reducer, initialValue) =>
   proto.reduce.call(array, reducer, initialValue)
 );
 
+/**
+ * Merges array1 into array2.
+ * Result: [...array2, ...array2]
+ * @param {Array} arr1
+ * @param {Array} arr2
+ *
+ * @return {Array}
+ */
 export const merge = _.curry2((arr1, arr2) => {
   const arr2Len = _.lengthOf(arr2);
   var combinedArray = Array(arr2Len + _.lengthOf(arr1));
   loop(arr2, (member, index) => (combinedArray[index] = member));
   loop(arr1, (member, index) => (combinedArray[index + arr2Len] = member));
   return combinedArray;
+});
+
+/**
+ * Merges array1 with array2.
+ * Result: [...array1, ...array2]
+ * @param {Array} arr1
+ * @param {Array} arr2
+ *
+ * @return {Array}
+ */
+export const mergeWith = _.curry2((arr1, arr2) => {
+  return merge(arr2, arr1);
 });
