@@ -1,16 +1,37 @@
+import * as _ from './_';
+
+/**
+ * Returns whatever is passed to it,
+ * without doing anything at all.
+ * @param {*} _
+ *
+ * @returns {*} _
+ */
 export const noop = _ => _;
 
 const funcProto = _.prototypeOf(Function);
 
+/**
+ * Adds prototypes to the given constructor.
+ * @param {Function} constructor Constructor
+ * @param {Object} proto Prototype object
+ *
+ * @return {Function} constructor
+ */
 export const setPrototype = (constructor, proto) => {
   proto.constructor = constructor;
   constructor.prototype = proto;
   return constructor;
 };
 
-// facilitate this.func, if func is passed as string
-// getMethod('close', window) → window.close
-const propToFunction = func =>
+/**
+ * Facilitate this.func, if func is passed as string
+ * Example: getMethod('close', window) → window.close
+ * @param {*} func
+ *
+ * @return {function(prop: string, context: Object): *}
+ */
+export const propToFunction = func =>
   function(prop, context) {
     let args = arguments;
     if (_.isString(prop)) {
