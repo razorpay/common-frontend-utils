@@ -33,18 +33,31 @@ export const isEmpty = o => !keys(o).length;
 export const hasProp = _.curry2((o, prop) => prop in o);
 
 /**
- * Check if the object has a property
+ * Check if the object has its own property
  * @param {object} o
  * @param {string} prop
  *
- * @returns {boolean} Returns true or false if the object has the given property
+ * @returns {boolean} Returns true or false if the object has the given as own property
  */
 export const hasOwnProp = _.curry2((o, prop) => o && o.hasOwnProperty(prop));
 
-// remaining
+/**
+ * Check if the object has own property and return the value of that property
+ * @param {object} o
+ * @param {string} prop
+ *
+ * @returns {*} Returns the value of the own property in the object
+ */
 export const getOwnProp = _.curry2((o, prop) => hasOwnProp(o, prop) && o[prop]);
 
-// remaining
+/**
+ * Set the property of the given object with the given value
+ * @param {*} subject
+ * @param {object} o
+ * @param {string} k
+ *
+ * @returns {*} Returns the updated object
+ */
 export const setPropOf = _.curry3((subject, o, key) => {
   o[key] = subject;
   return subject;
@@ -162,7 +175,12 @@ export const extend = _.curry2((o, source) => {
   return o;
 });
 
-// remaining
+/**
+ * Unflattens the object by turning delimiters into nested object structure
+ * @param {object} o
+ *
+ * @returns {object} Returns unflattened object
+ */
 export const unflatten = o => {
   const delimiter = '.';
   let result = {};
@@ -194,7 +212,12 @@ export const unflatten = o => {
   return result;
 };
 
-// remaining
+/**
+ * Flattens the object by turning nested object into object with delimitters in the keys
+ * @param {object} o
+ *
+ * @returns {object} Returns flattened object
+ */
 export const flatten = (o, prefix = '') => {
   const result = {};
 
@@ -211,7 +234,12 @@ export const flatten = (o, prefix = '') => {
   return result;
 };
 
-// remaining
+/**
+ * Returns an array with subarrays consisting of key and value pairs
+ * @param {object} o
+ *
+ * @returns {array} Returns array with key,value pair's array of arrays
+ */
 export const entries = o => {
   const list = [];
 
