@@ -12,7 +12,7 @@ const protoSlice = proto.slice;
 export const pad = str => ' ' + str + ' ';
 
 /**
- * Pass a string and add padding to its ends
+ * Checks if a string contains a substring
  * @param  {string} str
  * @param  {string} substr The substring to check if it exists in the main string
  *
@@ -44,8 +44,8 @@ export const sliceFrom = _.curry2((str, from) => protoSlice.call(str, from));
 /**
  * Check if a string starts with a given string
  * @param  {string} str
- * @param  {string} substr The substring to check if its starting for the given string
+ * @param  {string} substr The substring to check if it comes in starting of the given string
  *
- * @returns {boolean} Return True or False if str starts with substring given.
+ * @returns {boolean} Return True or False if string starts with substring given.
  */
 export const startsWith = _.curry2((str, substr) => str.indexOf(substr) === 0);

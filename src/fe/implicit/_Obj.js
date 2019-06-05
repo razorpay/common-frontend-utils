@@ -1,20 +1,76 @@
+/**
+ * Get keys of an object in an array.
+ * @param {object} o
+ *
+ * @returns {array} Array of keys
+ */
 export const keys = o => Object.keys(o || {});
+
+/**
+ * Create a new object using an object and the given props.
+ * @param {object} obj
+ * @param {object} props
+ *
+ * @returns {object} New object
+ */
 export const create = (obj, props) => Object.create(obj, props);
+
+/**
+ * Check if the object has any key value pairs or is empty
+ * @param {object} o
+ *
+ * @returns {boolean} Returns true or false if the object was empty or not
+ */
 export const isEmpty = o => !keys(o).length;
+
+/**
+ * Check if the object has a property
+ * @param {object} o
+ * @param {string} prop
+ *
+ * @returns {boolean} Returns true or false if the object has the given property
+ */
 export const hasProp = _.curry2((o, prop) => prop in o);
+
+/**
+ * Check if the object has a property
+ * @param {object} o
+ * @param {string} prop
+ *
+ * @returns {boolean} Returns true or false if the object has the given property
+ */
 export const hasOwnProp = _.curry2((o, prop) => o && o.hasOwnProperty(prop));
+
+// remaining
 export const getOwnProp = _.curry2((o, prop) => hasOwnProp(o, prop) && o[prop]);
 
+// remaining
 export const setPropOf = _.curry3((subject, o, key) => {
   o[key] = subject;
   return subject;
 });
 
+/**
+ * Set property of an object with the given key value pair
+ * @param {object} o
+ * @param {string} key
+ * @param {*} value
+ *
+ * @returns {object} Returns updated object
+ */
 export const setProp = _.curry3((o, key, value) => {
   o[key] = value;
   return o;
 });
 
+/**
+ * Set property of an object with the given key value pair only if the value is truthy
+ * @param {object} o
+ * @param {string} key
+ * @param {*} value
+ *
+ * @returns {object} Returns updated object
+ */
 export const setTruthyProp = _.curry3((o, key, value) => {
   if (value) {
     o[key] = value;
@@ -22,17 +78,31 @@ export const setTruthyProp = _.curry3((o, key, value) => {
   return o;
 });
 
+/**
+ * Delete a property/key of the given object
+ * @param {object} o
+ * @param {string} key
+ *
+ * @returns {object} Returns updated object
+ */
 export const deleteProp = _.curry2((o, key) => {
   delete o[key];
   return o;
 });
 
+// remaining
 export const loop = _.curry2((o, iteratee) => {
   _Arr.loop(keys(o), key => iteratee(o[key], key, o));
   return o;
 });
 
-// {a: 2, b: 3} → map(x => 2*x) → {a: 4, b: 6}
+/**
+ * Map the properties of the object to the given condition recieved from the return value of the callback function
+ * @param {object} o
+ * @param {string} key
+ *
+ * @returns {object} Returns updated object
+ */
 export const map = _.curry2((o, iteratee) =>
   _Arr.reduce(
     keys(o),
@@ -40,7 +110,9 @@ export const map = _.curry2((o, iteratee) =>
     {}
   )
 );
+// {a: 2, b: 3} → map(x => 2*x) → {a: 4, b: 6}
 
+// remaining
 export const reduce = _.curry3((o, reducer, initialValue) =>
   _Arr.reduce(
     keys(o),
@@ -49,8 +121,20 @@ export const reduce = _.curry3((o, reducer, initialValue) =>
   )
 );
 
+/**
+ * Stringify an object
+ * @param {object} o
+ *
+ * @returns {string} Returns stringified object
+ */
 export const stringify = JSON.stringify;
 
+/**
+ * Parse a string into JSON
+ * @param {string} string
+ *
+ * @returns {string} Returns parse object
+ */
 export const parse = string => {
   try {
     return JSON.parse(string);
@@ -59,13 +143,26 @@ export const parse = string => {
   }
 };
 
+/**
+ * Clone an object from the previous object
+ * @param {object} string
+ *
+ * @returns {object} Returns a cloned object
+ */
 export const clone = o => parse(stringify(o));
 
+/**
+ * Extend an object with the properties from the given object
+ * @param {string} string
+ *
+ * @returns {string} Returns extended object
+ */
 export const extend = _.curry2((o, source) => {
   loop(source, (v, k) => (o[k] = v));
   return o;
 });
 
+// remaining
 export const unflatten = o => {
   const delimiter = '.';
   let result = {};
@@ -97,6 +194,7 @@ export const unflatten = o => {
   return result;
 };
 
+// remaining
 export const flatten = (o, prefix = '') => {
   const result = {};
 
@@ -113,6 +211,7 @@ export const flatten = (o, prefix = '') => {
   return result;
 };
 
+// remaining
 export const entries = o => {
   const list = [];
 
