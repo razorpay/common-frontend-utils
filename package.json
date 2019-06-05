@@ -6,7 +6,8 @@
     "build-coverage": "nyc --require @babel/register --reporter=html --reporter=text npm run test",
     "coverage": "nyc --require @babel/register npm run test",
     "start": "rollup -cw",
-    "test": "mocha --require @babel/register \"tests/**/*.js\""
+    "test": "mocha --require @babel/register \"tests/**/*.js\"",
+    "play:implicit": "rollup -cw --config play/implicit/play.implicit.config.js"
   },
   "repository": {
     "type": "git",
