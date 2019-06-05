@@ -35,3 +35,5 @@ module.exports.transform = (code, id) => {
     throw e;
   }
 };
+
+module.exports.plugins = plugins;
