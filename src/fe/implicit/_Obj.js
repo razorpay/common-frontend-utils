@@ -1,3 +1,5 @@
+import * as _ from './_';
+import * as _Arr from './_Arr';
 /**
  * Get keys of an object in an array.
  * @param {object} o
