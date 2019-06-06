@@ -1,5 +1,6 @@
 import { assert } from 'chai';
 import * as _Obj from '../src/fe/implicit/_Obj';
+import { deepEqual } from 'assert';
 
 const {
   isTrue,
@@ -18,7 +19,7 @@ describe('_Obj', () => {
       };
       const keys = _Obj.keys(obj);
       const isCorrect = keys[0] == 'a' && keys[1] == 'b';
-      isTrue(isCorrect);
+      isTrue(isCorrect && Array.isArray(keys));
     });
   });
 
@@ -29,7 +30,6 @@ describe('_Obj', () => {
         b: 2,
       };
       const newObj = _Obj.create(obj);
-      // console.log(newObj, 'new')
       isTrue(_Obj.isEmpty(newObj));
     });
   });
@@ -103,6 +103,23 @@ describe('_Obj', () => {
       const obj = { a: 1, b: 1 };
       const mappedObj = _Obj.map(obj, k => k * 3);
       isTrue(mappedObj.a == 3 && mappedObj.b == 3);
+    });
+  });
+
+  describe('reduce', () => {
+    const reducer = (accumulator, currentValue) => {
+      return accumulator + currentValue;
+    };
+    it('Check if it correctly reduces the object and returns a value', () => {
+      const obj = { a: 1, b: 1 };
+      const reduced = _Obj.reduce(obj, reducer, 3);
+      isTrue(reduced === 5);
+    });
+
+    it('Check if it correctly reduces the blank object and returns a value', () => {
+      const obj = {};
+      const reduced = _Obj.reduce(obj, reducer, 3);
+      isTrue(reduced === 3);
     });
   });
 
@@ -199,12 +216,7 @@ describe('_Obj', () => {
     it('Check if it correctly gets entries of the object', () => {
       const obj = { a: 1, b: 2 };
       const entries = _Obj.entries(obj);
-      isTrue(
-        entries[0][0] == 'a' &&
-          entries[0][1] == 1 &&
-          entries[1][0] == 'b' &&
-          entries[1][1] == 2
-      );
+      deepEqual(entries, [['a', 1], ['b', 2]]);
     });
   });
 });
