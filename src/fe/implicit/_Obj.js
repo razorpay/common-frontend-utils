@@ -4,7 +4,7 @@ import * as _Arr from './_Arr';
  * Get keys of an object in an array.
  * @param {Object} o
  *
- * @returns {Array} Array of keys
+ * @returns {Array}
  */
 export const keys = o => Object.keys(o || {});
 
@@ -13,7 +13,7 @@ export const keys = o => Object.keys(o || {});
  * @param {Object} obj
  * @param {Object} props
  *
- * @returns {Object} New object
+ * @returns {Object}
  */
 export const create = (obj, props) => Object.create(obj, props);
 
@@ -21,7 +21,7 @@ export const create = (obj, props) => Object.create(obj, props);
  * Check if the object has any key value pairs or is empty
  * @param {Object} o
  *
- * @returns {boolean} Returns true or false if the object was empty or not
+ * @returns {boolean}
  */
 export const isEmpty = o => !keys(o).length;
 
@@ -30,7 +30,7 @@ export const isEmpty = o => !keys(o).length;
  * @param {Object} o
  * @param {string} prop
  *
- * @returns {boolean} Returns true or false if the object has the given property
+ * @returns {boolean}
  */
 export const hasProp = _.curry2((o, prop) => prop in o);
 
@@ -39,7 +39,7 @@ export const hasProp = _.curry2((o, prop) => prop in o);
  * @param {Object} o
  * @param {string} prop
  *
- * @returns {boolean} Returns true or false if the object has the given as own property
+ * @returns {boolean}
  */
 export const hasOwnProp = _.curry2((o, prop) => o && o.hasOwnProperty(prop));
 
@@ -48,7 +48,7 @@ export const hasOwnProp = _.curry2((o, prop) => o && o.hasOwnProperty(prop));
  * @param {Object} o
  * @param {string} prop
  *
- * @returns {*} Returns the value of the own property in the object
+ * @returns {*}
  */
 export const getOwnProp = _.curry2((o, prop) => hasOwnProp(o, prop) && o[prop]);
 
@@ -58,7 +58,7 @@ export const getOwnProp = _.curry2((o, prop) => hasOwnProp(o, prop) && o[prop]);
  * @param {Object} o
  * @param {string} k
  *
- * @returns {*} Returns the updated object
+ * @returns {*}
  */
 export const setPropOf = _.curry3((subject, o, key) => {
   o[key] = subject;
@@ -71,7 +71,7 @@ export const setPropOf = _.curry3((subject, o, key) => {
  * @param {string} key
  * @param {*} value
  *
- * @returns {Object} Returns updated object
+ * @returns {Object}
  */
 export const setProp = _.curry3((o, key, value) => {
   o[key] = value;
@@ -84,7 +84,7 @@ export const setProp = _.curry3((o, key, value) => {
  * @param {string} key
  * @param {*} value
  *
- * @returns {Object} Returns updated object
+ * @returns {Object}
  */
 export const setTruthyProp = _.curry3((o, key, value) => {
   if (value) {
@@ -98,7 +98,7 @@ export const setTruthyProp = _.curry3((o, key, value) => {
  * @param {Object} o
  * @param {string} key
  *
- * @returns {Object} Returns updated object
+ * @returns {Object}
  */
 export const deleteProp = _.curry2((o, key) => {
   delete o[key];
@@ -116,7 +116,7 @@ export const loop = _.curry2((o, iteratee) => {
  * @param {Object} o
  * @param {string} key
  *
- * @returns {Object} Returns updated object
+ * @returns {Object}
  */
 export const map = _.curry2((o, iteratee) =>
   _Arr.reduce(
@@ -128,12 +128,12 @@ export const map = _.curry2((o, iteratee) =>
 // {a: 2, b: 3} → map(x => 2*x) → {a: 4, b: 6}
 
 /**
- * Loops on the object and works as a reducer function on its keys and values
+ * Loops on the object and apply a reducer function on it
  * @param {Object} o
  * @param {function} reducer
  * @param {*} initialValue
  *
- * @returns {*} Returns updated object
+ * @returns {*}
  */
 export const reduce = _.curry3((o, reducer, initialValue) =>
   _Arr.reduce(
@@ -147,7 +147,7 @@ export const reduce = _.curry3((o, reducer, initialValue) =>
  * Stringify an object
  * @param {Object} o
  *
- * @returns {string} Returns stringified object
+ * @returns {string}
  */
 export const stringify = JSON.stringify;
 
@@ -155,7 +155,7 @@ export const stringify = JSON.stringify;
  * Parse a string into JSON
  * @param {string} string
  *
- * @returns {string} Returns parse object
+ * @returns {string}
  */
 export const parse = string => {
   try {
@@ -169,7 +169,7 @@ export const parse = string => {
  * Clone an object from the previous object
  * @param {Obect} o
  *
- * @returns {Object} Returns a cloned object
+ * @returns {Object}
  */
 export const clone = o => parse(stringify(o));
 
@@ -177,7 +177,7 @@ export const clone = o => parse(stringify(o));
  * Extend an object with the properties from the given object
  * @param {string} string
  *
- * @returns {string} Returns extended object
+ * @returns {string}
  */
 export const extend = _.curry2((o, source) => {
   loop(source, (v, k) => (o[k] = v));
@@ -188,7 +188,7 @@ export const extend = _.curry2((o, source) => {
  * Unflattens the object by turning delimiters into nested object structure
  * @param {Object} o
  *
- * @returns {Object} Returns unflattened object
+ * @returns {Object}
  */
 export const unflatten = o => {
   const delimiter = '.';
@@ -225,7 +225,7 @@ export const unflatten = o => {
  * Flattens the object by turning nested object into object with delimitters in the keys
  * @param {Object} o
  *
- * @returns {Object} Returns flattened object
+ * @returns {Object}
  */
 export const flatten = (o, prefix = '') => {
   const result = {};
@@ -247,7 +247,7 @@ export const flatten = (o, prefix = '') => {
  * Returns an array with subarrays consisting of key and value pairs
  * @param {Object} o
  *
- * @returns {Array} Returns array with key,value pair's array of arrays
+ * @returns {Array}
  */
 export const entries = o => {
   const list = [];
