@@ -5,6 +5,7 @@
   "scripts": {
     "build-coverage": "nyc --require @babel/register --reporter=html --reporter=text npm run test",
     "coverage": "nyc --require @babel/register npm run test",
+    "document": "node document.js",
     "lint-documentation": "documentation lint src --shallow",
     "start": "rollup -cw",
     "test": "mocha --require @babel/register \"tests/**/*.js\"",
