@@ -40,12 +40,12 @@ Documentation can be found in the [docs](docs) directory.
 
 # Contents
 
-### Binaries (`bin`)
+### Binaries ([`bin`](bin))
 
 - `$` - Injects the scope of this repository into the consuming repository
 - `serve` - Reverse proxy, simplified. Usage: `serve folder --port 8000 --proxy /api=https://api.razorpay.com`
 
-### Implicit Modules (`src/fe/implicit`)
+### Implicit Modules ([`src/fe/implicit`](src/fe/implicit))
 
 - `_` - General utils
 - `_Str` - String utils
@@ -58,7 +58,7 @@ Documentation can be found in the [docs](docs) directory.
 - `fetch` - AJAX util
 - `Promise` - Promise polyfill
 
-### Scripts (`scripts`)
+### Scripts ([`scripts`](scripts))
 
 - `babel-plugins` - List and config of babel plugins
 - `eslint` - ESLint helpers and config
