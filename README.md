@@ -6,7 +6,7 @@
 
 ## Documentation
 
-Documentation can be found in the [docs](https://github.com/razorpay/common-frontend-utils/tree/master/docs) directory.
+Documentation can be found in the [docs](docs) directory.
 
 ## Things used in/from this repo
 
