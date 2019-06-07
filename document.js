@@ -1,8 +1,8 @@
 const glob = require('glob');
 const documentation = require('documentation');
 const fs = require('fs');
-const mkdirp = require('mkdirp');
 const path = require('path');
+const child_process = require('child_process');
 
 const DIRS = {
   src: 'src',
@@ -22,7 +22,7 @@ const sourceFiles = glob.sync(`${DIRS.src}/**/*.js`);
  */
 function mkdirForFilePath(filePath) {
   const dirPath = path.dirname(filePath);
-  mkdirp.sync(dirPath);
+  child_process.execSync(`mkdir -p ${dirPath}`);
 }
 
 /**
