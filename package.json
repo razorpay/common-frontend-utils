@@ -46,7 +46,7 @@
     "rollup-plugin-inject": "^2.2.0",
     "rollup-plugin-svelte": "^5.0.1",
     "stylus": "^0.54.5",
-    "svelte": "2.16.0",
+    "svelte": "3.5.1",
     "uglify-js": "^3.4.9",
     "yargs-parser": "^13.0.0"
   },
