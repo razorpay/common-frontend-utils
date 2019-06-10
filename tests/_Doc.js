@@ -86,11 +86,11 @@ describe('_Doc', function() {
     const body = _El.create('body');
     const div = _El.create('div');
     div.setAttribute('class', 'red');
-    body.appendChild(div);
+    document.body.appendChild(div);
+
     // remaining
     it('Resolve an element from string', function() {
       const el = _Doc.resolveElement('div');
-      console.log(el, 'e222l');
     });
 
     it('Resolve an element from element', function() {
