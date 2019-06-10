@@ -191,7 +191,7 @@ describe('_Obj', () => {
       deepEqual(obj, obj2);
     });
 
-    it('Check if it correctly clones an object and has nor reference to previous object', () => {
+    it('Check if it correctly clones an object and has no reference to previous object', () => {
       const obj = { a: 1 };
       const obj2 = _Obj.clone(obj);
       isTrue(obj !== obj2);
