@@ -44,7 +44,6 @@ describe('_Obj', () => {
       const more_food = Object.create(food, {
         vegetable: { value: 'celery' },
       });
-
       isTrue(more_food.fruit === 'apple');
     });
   });
@@ -122,7 +121,7 @@ describe('_Obj', () => {
 
     it('Check if it does not delete any other property on the object', () => {
       const obj = { a: 1, b: 1 };
-      var test = _Obj.deleteProp(obj, 'b');
+      _Obj.deleteProp(obj, 'b');
       equal(obj.a, 1);
     });
   });
@@ -157,6 +156,18 @@ describe('_Obj', () => {
       const obj = _Obj.parse(_Obj.stringify({ a: 1 }));
       const expected = { a: 1 };
       deepEqual(obj, expected);
+    });
+
+    it('Check if it throws an exception on circular object', () => {
+      let isError = false;
+      try {
+        const test = { a: 1 };
+        test.b = test;
+        const obj = _Obj.parse(_Obj.stringify(test));
+      } catch (er) {
+        isError = true;
+      }
+      isTrue(isError);
     });
   });
 
