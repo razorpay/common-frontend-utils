@@ -12,39 +12,37 @@ const {
 } = assert;
 
 describe('_Doc', function() {
-  // describe('resolveUrl', () => {
-  //     it('Check if it resolves the url', function() {
-  //         const url=_Doc.resolveUrl('test');
-  //         equal(url,'test')
-  //     });
-  // })
-
-  // describe('redirectUrl', () => {
-  //     it('Check if it redirects to the target url', function() {
-  //         const url=_Doc.redirect('google.com');
-  //         equal(url,'google.com')
-  //     });
-  // })
-
   describe('obj2formhtml', () => {
-    it('Check if it converts object to form HTML', function() {
+    it('Check if it converts an object to HTML form if key is not passed', function() {
       const obj = {
-        testattr: 'Test1',
+        test: 'Test1',
       };
       const html = _Doc.obj2formhtml(obj);
-      equal(html, '<input type="hidden" value="Test1" name="testattr">');
+      const expected = '<input type="hidden" value="Test1" name="test">';
+      equal(html, expected);
+    });
+
+    it('Check if it converts an object to HTML form if key is passed', function() {
+      const obj = {
+        test: 'Test1',
+      };
+      const html = _Doc.obj2formhtml(obj, 'test');
+      const expected = '<input type="hidden" value="Test1" name="test[test]">';
+      equal(html, expected);
     });
 
     it('Check if it returns empty string on empty object', function() {
       const obj = {};
       const html = _Doc.obj2formhtml(obj);
-      equal(html, '');
+      const expected = '';
+      equal(html, expected);
     });
 
     it('Check if it gives value attribute as empty on passing null', function() {
       const obj = null;
       const html = _Doc.obj2formhtml(obj);
-      isTrue(html.includes('value=""'));
+      const expected = 'value=""';
+      isTrue(html.includes(expected));
     });
   });
 
@@ -59,7 +57,7 @@ describe('_Doc', function() {
       deep(obj, { test: 'test-value' });
     });
 
-    it('Check if it throws exception on giving null object', function() {
+    it('Check if it throws exception on passing null object', function() {
       let isError = false;
       try {
         const obj = _Doc.form2obj(null);
@@ -71,7 +69,7 @@ describe('_Doc', function() {
   });
 
   describe('preventEvent', () => {
-    it('Check if it prevents event from firing', function(done) {
+    it('Check if it prevents default event from firing', function(done) {
       const anchor = _El.create('a');
       anchor.setAttribute('href', '#link');
       anchor.addEventListener('click', e => {
@@ -89,6 +87,7 @@ describe('_Doc', function() {
 
     it('Resolve an element from string', function() {
       const el = _Doc.resolveElement('div');
+      isTrue(el === div);
     });
 
     it('Resolve an element from element', function() {

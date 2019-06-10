@@ -14,14 +14,15 @@ export const querySelectorAll = _Func.bind('querySelectorAll', document);
 export const getElementById = _Func.bind('getElementById', document);
 export const getComputedStyle = _Func.bind('getComputedStyle', global);
 export const EventConstructor = global.Event;
-export const isEvent = x => _.is(x, EventConstructor);
 import * as _El from './_El';
 import * as _Obj from './_Obj';
 var link;
 
+export const isEvent = x => _.is(x, EventConstructor);
+
 /**
  * Resolves given string to an element.
- * @param {string} el
+ * @param {*} el
  *
  * @returns {Object}
  */
@@ -41,7 +42,7 @@ export function resolveUrl(relativeUrl) {
 
 /**
  * Redirect page to the target url.
- * @param {*} relativeUrl
+ * @param {Object} data
  *
  * @returns {void}
  */
