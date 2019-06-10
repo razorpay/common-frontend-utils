@@ -36,23 +36,16 @@ describe('_Obj', () => {
         b: 2,
       };
       const newObj = _Obj.create(obj);
-      // console.log(newObj,'newobj')
       isTrue(_Obj.isEmpty(newObj));
     });
 
-    // remaining
     it('Check if it creates new object with props as argument', () => {
-      const prototypeObject = {
-        getVal: function() {
-          return this.a;
-        },
-      };
-      const obj = _Obj.create(prototypeObject, {
-        a: 1,
-        b: 1,
+      const food = { fruit: 'apple' };
+      const more_food = Object.create(food, {
+        vegetable: { value: 'celery' },
       });
-      console.log(obj, 'obj');
-      isTrue(obj.prototype.getVal);
+
+      isTrue(more_food.fruit === 'apple');
     });
   });
 
