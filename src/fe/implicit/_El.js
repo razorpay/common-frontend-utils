@@ -1,6 +1,20 @@
 export const ElementConstructor = global.Element;
 import * as _ from './_';
+
+/**
+ * Creates an element using a tag name.
+ * @param {string} tagName
+ *
+ * @returns {Object}
+ */
 export const create = tagName => document.createElement(tagName || 'div');
+
+/**
+ * Gets the parent element of the given element.
+ * @param {Object} element
+ *
+ * @returns {Object}
+ */
 export const parent = element => element.parentNode;
 
 const element1 = _.validateArgs(_.isElement);
@@ -9,6 +23,12 @@ const elementString = _.validateArgs(_.isElement, _.isString);
 const attrValidator = _.validateArgs(_.isElement, _.isString, () => true);
 const elementObject = _.validateArgs(_.isElement, _.isNonNullObject);
 
+/**
+ * Replace the target node by the given node.
+ * @param {Object} element
+ *
+ * @returns {Object}
+ */
 export const replace =
   ((newNode, targetNode) => {
     parent(targetNode).replaceChild(newNode, targetNode);
@@ -17,6 +37,13 @@ export const replace =
   |> element2
   |> _.curry2;
 
+/**
+ * Appends a child node to the parent node.
+ * @param {Object} childNode
+ * @param {Object} parentNode
+ *
+ * @returns {Object}
+ */
 export const appendTo =
   ((childNode, parentNode) => {
     // returns child
@@ -25,6 +52,13 @@ export const appendTo =
   |> element2
   |> _.curry2;
 
+/**
+ * Appends a node to the given node.
+ * @param {Object} parentNode
+ * @param {Object} childNode
+ *
+ * @returns {Object}
+ */
 export const append =
   ((parentNode, childNode) => {
     childNode |> appendTo(parentNode);
@@ -33,6 +67,13 @@ export const append =
   |> element2
   |> _.curry2;
 
+/**
+ * Prepends a node to another node.
+ * @param {Object} childNode
+ * @param {Object} parentNode
+ *
+ * @returns {Object}
+ */
 export const prependTo =
   ((childNode, parentNode) => {
     let firstChild = parentNode.firstElementChild;
@@ -46,6 +87,13 @@ export const prependTo =
   |> element2
   |> _.curry2;
 
+/**
+ * Prepends a node to another node.
+ * @param {Object} parentNode
+ * @param {Object} childNode
+ *
+ * @returns {Object}
+ */
 export const prepend =
   ((parentNode, childNode) => {
     childNode |> prependTo(parentNode);
@@ -54,6 +102,13 @@ export const prepend =
   |> element2
   |> _.curry2;
 
+/**
+ * Prepends a node to another node.
+ * @param {Object} parentNode
+ * @param {Object} childNode
+ *
+ * @returns {Object}
+ */
 export const detach =
   (childNode => {
     var parentNode = parent(childNode);

@@ -15,16 +15,36 @@ export const getElementById = _Func.bind('getElementById', document);
 export const getComputedStyle = _Func.bind('getComputedStyle', global);
 export const EventConstructor = global.Event;
 export const isEvent = x => _.is(x, EventConstructor);
-export const resolveElement = el => (_.isString(el) ? querySelector(el) : el);
 import * as _El from './_El';
+import * as _Obj from './_Obj';
 var link;
-// remaining
+
+/**
+ * Resolves given string to an element.
+ * @param {string} el
+ *
+ * @returns {Object}
+ */
+export const resolveElement = el => (_.isString(el) ? querySelector(el) : el);
+
+/**
+ * Resolve relative url to an absolute url.
+ * @param {string} relativeUrl
+ *
+ * @returns {string}
+ */
 export function resolveUrl(relativeUrl) {
   link = _El.create('a');
   link.href = relativeUrl;
   return link.href;
 }
 
+/**
+ * Redirect page to the target url.
+ * @param {*} relativeUrl
+ *
+ * @returns {void}
+ */
 export function redirect(data) {
   if (!data.target && global !== global.parent) {
     return global.Razorpay.sendMessage({
@@ -35,6 +55,15 @@ export function redirect(data) {
   submitForm(data.url, data.content, data.method, data.target);
 }
 
+/**
+ * Submit a form to a url using the given method
+ * @param {string} action
+ * @param {Object} data
+ * @param {string} method
+ * @param {string} target
+ *
+ * @returns {void}
+ */
 export function submitForm(action, data, method, target) {
   if (method && method.toLowerCase() === 'get') {
     action = _.appendParamsToUrl(action, data);
@@ -58,6 +87,13 @@ export function submitForm(action, data, method, target) {
   }
 }
 
+/**
+ * Convert JSON object to HTML form elements
+ * @param {Object} data
+ * @param {string} key
+ *
+ * @returns {string}
+ */
 export function obj2formhtml(data, key) {
   if (_.isNonNullObject(data)) {
     var str = '';
@@ -76,6 +112,12 @@ export function obj2formhtml(data, key) {
   return input.outerHTML;
 }
 
+/**
+ * Convert HTML form to JSON Object.
+ * @param {Object} form
+ *
+ * @returns {Object}
+ */
 export function form2obj(form) {
   return _Arr.reduce(
     form.querySelectorAll('[name]'),
@@ -87,6 +129,12 @@ export function form2obj(form) {
   );
 }
 
+/**
+ * Prevents default event from firing
+ * @param {Object} e
+ *
+ * @returns {*}
+ */
 export function preventEvent(e) {
   if (isEvent(e)) {
     e.preventDefault();
@@ -95,12 +143,25 @@ export function preventEvent(e) {
   return false;
 }
 
+/**
+ * Smoothely scroll to given point
+ * @param {number} y
+ *
+ * @returns {void}
+ */
 export function smoothScrollTo(y) {
   smoothScrollBy(y - pageYOffset);
 }
 
 var scrollTimeout;
 const π = Math.PI;
+
+/**
+ * Smoothely scroll by given point
+ * @param {number} y
+ *
+ * @returns {void}
+ */
 export function smoothScrollBy(y) {
   if (!global.requestAnimationFrame) {
     return scrollBy(0, y);

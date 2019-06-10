@@ -21,6 +21,7 @@ describe('_Obj', () => {
       const expected = ['a', 'b'];
       deepEqual(keys, expected);
     });
+
     it('Get keys of a blank object', () => {
       const obj = {};
       const keys = _Obj.keys(obj);
