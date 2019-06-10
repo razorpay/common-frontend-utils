@@ -1,5 +1,5 @@
 export const ElementConstructor = global.Element;
-
+import * as _ from './_';
 export const create = tagName => document.createElement(tagName || 'div');
 export const parent = element => element.parentNode;
 

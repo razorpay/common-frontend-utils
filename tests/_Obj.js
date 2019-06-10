@@ -18,19 +18,41 @@ describe('_Obj', () => {
         b: 2,
       };
       const keys = _Obj.keys(obj);
-      const isCorrect = keys[0] == 'a' && keys[1] == 'b';
-      isTrue(isCorrect && Array.isArray(keys));
+      const expected = ['a', 'b'];
+      deepEqual(keys, expected);
+    });
+    it('Get keys of a blank object', () => {
+      const obj = {};
+      const keys = _Obj.keys(obj);
+      const expected = [];
+      deepEqual(keys, expected);
     });
   });
 
   describe('create', () => {
-    it('Check if it creates new object', () => {
+    it('Check if it creates new object with no props as argument', () => {
       const obj = {
         a: 1,
         b: 2,
       };
       const newObj = _Obj.create(obj);
+      // console.log(newObj,'newobj')
       isTrue(_Obj.isEmpty(newObj));
+    });
+
+    // remaining
+    it('Check if it creates new object with props as argument', () => {
+      const prototypeObject = {
+        getVal: function() {
+          return this.a;
+        },
+      };
+      const obj = _Obj.create(prototypeObject, {
+        a: 1,
+        b: 1,
+      });
+      console.log(obj, 'obj');
+      isTrue(obj.prototype.getVal);
     });
   });
 
@@ -54,39 +76,47 @@ describe('_Obj', () => {
       const hasProp = _Obj.hasProp(obj, 'a');
       isTrue(hasProp);
     });
+    it('Check if it says false if no property found', () => {
+      const obj = { a: 1 };
+      const hasProp = _Obj.hasProp(obj, 'b');
+      isFalse(hasProp);
+    });
   });
 
   describe('setProp', () => {
     it('Check if it sets the property on the object', () => {
       const obj = { a: 1 };
       _Obj.setProp(obj, 'b', 2);
-      isTrue(obj.b == 2);
+      const expected = { a: 1, b: 2 };
+      deepEqual(obj, expected);
     });
   });
 
   describe('loop', () => {
-    it('Check if it loops properly on the object', () => {
+    it('Check if it loops on the object', () => {
       const obj = { a: 1, b: 1, c: 4 };
       const arr = [];
       _Obj.loop(obj, k => {
         arr.push(k);
       });
-      const isLoopWorking = arr[0] == 1 && arr[1] == 1 && arr[2] == 4;
-      isTrue(isLoopWorking);
+      const expected = [1, 1, 4];
+      deepEqual(expected, arr);
     });
   });
 
   describe('setTruthyProp', () => {
     it('Check if it sets the truthy property on the object', () => {
       const obj = { a: 1 };
-      _Obj.setProp(obj, 'b', 2);
-      isTrue(obj.b == 2);
+      _Obj.setTruthyProp(obj, 'b', 2);
+      const expected = { a: 1, b: 2 };
+      deepEqual(expected, obj);
     });
 
     it('Check if it does not set untruthy property on the object', () => {
       const obj = { a: 1 };
-      _Obj.setProp(obj, 'b', false);
-      isFalse(obj.b);
+      _Obj.setTruthyProp(obj, 'b', 0);
+      const expected = { a: 1 };
+      deepEqual(expected, obj);
     });
   });
 
@@ -94,7 +124,13 @@ describe('_Obj', () => {
     it('Check if it deleted a property on the object', () => {
       const obj = { a: 1, b: 1 };
       _Obj.deleteProp(obj, 'b');
-      isTrue(obj.b === undefined);
+      equal(typeof obj.b, 'undefined');
+    });
+
+    it('Check if it does not delete any other property on the object', () => {
+      const obj = { a: 1, b: 1 };
+      var test = _Obj.deleteProp(obj, 'b');
+      equal(obj.a, 1);
     });
   });
 
@@ -102,7 +138,7 @@ describe('_Obj', () => {
     it('Check if it correctly maps the object and returns an object', () => {
       const obj = { a: 1, b: 1 };
       const mappedObj = _Obj.map(obj, k => k * 3);
-      isTrue(mappedObj.a == 3 && mappedObj.b == 3);
+      deepEqual(mappedObj, { a: 3, b: 3 });
     });
   });
 
@@ -126,30 +162,47 @@ describe('_Obj', () => {
   describe('stringify', () => {
     it('Check if it correctly stringifies an object', () => {
       const obj = _Obj.parse(_Obj.stringify({ a: 1 }));
-      isTrue(obj.a == 1);
+      const expected = { a: 1 };
+      deepEqual(obj, expected);
     });
   });
 
   describe('parse', () => {
-    it('Check if it correctly parses an stringified object', () => {
+    it('Check if it correctly parses a stringified object', () => {
       const obj = _Obj.parse(_Obj.stringify({ a: 1 }));
-      isTrue(obj.a == 1);
+      const expected = { a: 1 };
+      deepEqual(obj, expected);
+    });
+
+    it('Check if it throws error for invalid JSON', () => {
+      let isError = false;
+      const obj = _Obj.parse(undefined);
+      equal(typeof obj, 'undefined');
     });
   });
 
   describe('clone', () => {
-    it('Check if it correctly clones a stringified object', () => {
+    it('Check if it correctly clones an object', () => {
       const obj = { a: 1 };
       const obj2 = _Obj.clone(obj);
-      isTrue(obj !== obj2 && obj.a == obj2.a);
+      deepEqual(obj, obj2);
+      isTrue(obj !== obj2);
+    });
+
+    it('Check if it throws error if passed invalid json', () => {
+      const obj = undefined;
+      const isError = false;
+      const obj2 = _Obj.clone(obj);
+      equal(typeof obj2, 'undefined');
     });
   });
 
   describe('extend', () => {
     it('Check if it correctly extends an object', () => {
       const obj = { a: 1 };
+      const expected = { a: 1, b: 1 };
       const obj2 = _Obj.extend(obj, { b: 1 });
-      isTrue(obj2.a == 1 && obj2.b == 1);
+      deepEqual(obj2, expected);
     });
   });
 
@@ -171,7 +224,8 @@ describe('_Obj', () => {
     it('Check if it gets its own prop', () => {
       const obj = { a: 1 };
       const ownProp = _Obj.getOwnProp(obj, 'a');
-      isTrue(ownProp === 1);
+      const expected = 1;
+      isTrue(ownProp === expected);
     });
 
     it('Check if it correctly checks it does not have own prop', () => {
@@ -184,14 +238,14 @@ describe('_Obj', () => {
   describe('hasProp', () => {
     it('Check if it correctly checks it has prop', () => {
       const obj = { a: 1 };
-      const hasOwnProp = _Obj.hasOwnProp(obj, 'a');
-      isTrue(hasOwnProp);
+      const hasProp = _Obj.hasProp(obj, 'a');
+      isTrue(hasProp);
     });
 
     it('Check if it correctly checks it does not have prop', () => {
       const obj = { a: 1 };
-      const hasOwnProp = _Obj.hasOwnProp(obj, 'b');
-      isFalse(hasOwnProp);
+      const hasProp = _Obj.hasProp(obj, 'b');
+      isFalse(hasProp);
     });
   });
 
@@ -199,8 +253,9 @@ describe('_Obj', () => {
     it('Check if it correctly sets the prop', () => {
       const obj = { a: 1 };
       const obj2 = { b: 1 };
+      const expected = { b: 1, c: { a: 1 } };
       _Obj.setPropOf(obj, obj2, 'c');
-      isTrue(obj2.c.a === 1);
+      deepEqual(obj2, expected);
     });
   });
 
@@ -208,7 +263,17 @@ describe('_Obj', () => {
     it('Check if it correctly flattens an object', () => {
       const obj = { a: { b: 1 } };
       const obj2 = _Obj.flatten(obj);
-      isTrue(obj2['a.b'] == 1);
+      const expected = { 'a.b': 1 };
+      deepEqual(obj2, expected);
+    });
+  });
+
+  describe('unflattens', () => {
+    it('Check if it correctly unflattens an object', () => {
+      const obj = { 'a.b': 1 };
+      const obj2 = _Obj.unflatten(obj);
+      const expected = { a: { b: 1 } };
+      deepEqual(obj2, expected);
     });
   });
 
@@ -217,6 +282,12 @@ describe('_Obj', () => {
       const obj = { a: 1, b: 2 };
       const entries = _Obj.entries(obj);
       deepEqual(entries, [['a', 1], ['b', 2]]);
+    });
+
+    it('Check if it correctly gets entries of a blank object', () => {
+      const obj = null;
+      const entries = _Obj.entries(obj);
+      deepEqual(entries, []);
     });
   });
 });

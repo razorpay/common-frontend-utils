@@ -4,10 +4,10 @@ const proto = _.prototypeOf(String);
 const protoSlice = proto.slice;
 
 /**
- * Pass a string and add padding to its ends
- * @param  {string} str
+ * Adds padding to a string's ends
+ * @param {string} str
  *
- * @returns {string} Padded string returned
+ * @returns {string}
  */
 export const pad = str => ' ' + str + ' ';
 
@@ -26,7 +26,7 @@ export const contains = _.curry2((str, substr) => str.indexOf(substr) !== -1);
  * @param  {number} from The index from where to start slicing
  * @param  {number} to The index till where to end slicing
  *
- * @returns {number} Sliced string
+ * @returns {string}
  */
 export const slice = _.curry3((str, from, to) =>
   protoSlice.call(str, from, to)
@@ -37,7 +37,7 @@ export const slice = _.curry3((str, from, to) =>
  * @param  {string} str
  * @param  {number} from The index from where to start slicing
  *
- * @returns {string} Sliced string
+ * @returns {string}
  */
 export const sliceFrom = _.curry2((str, from) => protoSlice.call(str, from));
 
@@ -46,6 +46,6 @@ export const sliceFrom = _.curry2((str, from) => protoSlice.call(str, from));
  * @param  {string} str
  * @param  {string} substr The substring to check if it comes in starting of the given string
  *
- * @returns {boolean} Return True or False if string starts with substring given.
+ * @returns {boolean}
  */
 export const startsWith = _.curry2((str, substr) => str.indexOf(substr) === 0);

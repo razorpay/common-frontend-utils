@@ -13,7 +13,7 @@ describe('_Str', () => {
   describe('pad', () => {
     it('Check padding on both sides', () => {
       const arr = _Str.pad('test').split('');
-      const hasPadding = arr[0] == ' ' && arr[arr.length - 1] == ' ';
+      const hasPadding = arr[0] === ' ' && arr[arr.length - 1] === ' ';
       isTrue(hasPadding);
     });
   });
@@ -35,12 +35,20 @@ describe('_Str', () => {
   });
 
   describe('slice', () => {
-    it('Check if a string is sliced for given indexes', () => {
+    it('Check if a string is sliced for correct indexes', () => {
       const str = 'hello testing';
       const from = 2;
       const to = 5;
       const sliced = _Str.slice(str, from, to);
       equal(sliced, 'llo');
+    });
+
+    it('Check if a string is sliced from negative index to index more than the string length', () => {
+      const str = 'hello testing';
+      const from = -2;
+      const to = 30;
+      const sliced = _Str.slice(str, from, to);
+      equal(sliced, 'ng');
     });
   });
 
@@ -51,6 +59,12 @@ describe('_Str', () => {
       const sliced = _Str.sliceFrom(str, from);
       equal(sliced, 'llo testing');
     });
+    it('Check if a string is sliced from a given negative index', () => {
+      const str = 'hello testing';
+      const from = -5;
+      const sliced = _Str.sliceFrom(str, from);
+      equal(sliced, 'sting');
+    });
   });
 
   describe('startsWith', () => {
@@ -58,6 +72,12 @@ describe('_Str', () => {
       const str = 'hello testing';
       const isStarting = _Str.startsWith(str, 'hello');
       isTrue(isStarting);
+    });
+
+    it('Check if a string does not start with a given substring', () => {
+      const str = 'hello testing';
+      const isStarting = _Str.startsWith(str, 'test');
+      isFalse(isStarting);
     });
   });
 });

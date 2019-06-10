@@ -56,7 +56,7 @@ export const getOwnProp = _.curry2((o, prop) => hasOwnProp(o, prop) && o[prop]);
  * Set the property of the given object with the given value
  * @param {*} subject
  * @param {Object} o
- * @param {string} k
+ * @param {string} key
  *
  * @returns {*}
  */
@@ -105,19 +105,28 @@ export const deleteProp = _.curry2((o, key) => {
   return o;
 });
 
-// remaining
+/**
+ * Loops through the object
+ * @param {Object} o
+ * @param {function (value: *, key: string, o: Object): void}
+ *
+ * @returns {Object}
+ */
 export const loop = _.curry2((o, iteratee) => {
   _Arr.loop(keys(o), key => iteratee(o[key], key, o));
   return o;
 });
 
 /**
- * Map the properties of the object to the given condition recieved from the return value of the callback function
+ * Loops through the object and maps new value according to the iteratee function
  * @param {Object} o
- * @param {string} key
+ * @param {function (value: *, key: string, o: Object): void}
+ * @example
+ * {a: 2, b: 3} → map(x => 2*x) → {a: 4, b: 6}
  *
  * @returns {Object}
  */
+
 export const map = _.curry2((o, iteratee) =>
   _Arr.reduce(
     keys(o),
@@ -125,12 +134,11 @@ export const map = _.curry2((o, iteratee) =>
     {}
   )
 );
-// {a: 2, b: 3} → map(x => 2*x) → {a: 4, b: 6}
 
 /**
- * Loops on the object and apply a reducer function on it
+ * Loops through the object and apply a reducer function on it
  * @param {Object} o
- * @param {function} reducer
+ * @param {function (accumulator:*,value: *, key: string, o: Object): void} reducer
  * @param {*} initialValue
  *
  * @returns {*}
@@ -145,6 +153,7 @@ export const reduce = _.curry3((o, reducer, initialValue) =>
 
 /**
  * Stringify an object
+ * @throws exception when a circular reference is found.
  * @param {Object} o
  *
  * @returns {string}
@@ -153,9 +162,10 @@ export const stringify = JSON.stringify;
 
 /**
  * Parse a string into JSON
+ * @throws Will throw an exception if the string to parse is not valid JSON.
  * @param {string} string
  *
- * @returns {string}
+ * @returns {Object}
  */
 export const parse = string => {
   try {
@@ -168,6 +178,7 @@ export const parse = string => {
 /**
  * Clone an object from the previous object
  * @param {Obect} o
+ * @throws Will throw an exception if the object to clone is not valid JSON.
  *
  * @returns {Object}
  */
@@ -175,9 +186,10 @@ export const clone = o => parse(stringify(o));
 
 /**
  * Extend an object with the properties from the given object
- * @param {string} string
+ * @param {Object} o
+ * @param {Object} source
  *
- * @returns {string}
+ * @returns {Object}
  */
 export const extend = _.curry2((o, source) => {
   loop(source, (v, k) => (o[k] = v));
@@ -224,12 +236,12 @@ export const unflatten = o => {
 /**
  * Flattens the object by turning nested object into object with delimitters in the keys
  * @param {Object} o
+ * @param {string} prefix [prefix='']
  *
  * @returns {Object}
  */
 export const flatten = (o, prefix = '') => {
   const result = {};
-
   loop(o, (val, key) => {
     const flattenedKey = prefix ? `${prefix}.${key}` : key;
 
@@ -239,7 +251,6 @@ export const flatten = (o, prefix = '') => {
       result[flattenedKey] = val;
     }
   });
-
   return result;
 };
 

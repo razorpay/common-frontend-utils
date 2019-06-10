@@ -1,3 +1,6 @@
+import * as _Func from './_Func';
+import * as _ from './_';
+import * as _Arr from './_Arr';
 export const documentElement = document.documentElement;
 export const body = document.body;
 export const innerWidth = global.innerWidth;
@@ -13,8 +16,9 @@ export const getComputedStyle = _Func.bind('getComputedStyle', global);
 export const EventConstructor = global.Event;
 export const isEvent = x => _.is(x, EventConstructor);
 export const resolveElement = el => (_.isString(el) ? querySelector(el) : el);
-
+import * as _El from './_El';
 var link;
+// remaining
 export function resolveUrl(relativeUrl) {
   link = _El.create('a');
   link.href = relativeUrl;
