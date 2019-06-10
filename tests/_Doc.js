@@ -83,19 +83,17 @@ describe('_Doc', function() {
   });
 
   describe('resolveElement', () => {
-    const body = _El.create('body');
     const div = _El.create('div');
     div.setAttribute('class', 'red');
     document.body.appendChild(div);
 
-    // remaining
     it('Resolve an element from string', function() {
       const el = _Doc.resolveElement('div');
     });
 
     it('Resolve an element from element', function() {
       const el = _Doc.resolveElement(div);
-      equal(typeof el, 'object');
+      isTrue(el === div);
     });
   });
 });
