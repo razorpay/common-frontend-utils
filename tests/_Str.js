@@ -40,7 +40,8 @@ describe('_Str', () => {
       const from = 2;
       const to = 5;
       const sliced = _Str.slice(str, from, to);
-      equal(sliced, 'llo');
+      const expected = 'llo';
+      equal(sliced, expected);
     });
 
     it('Check if a string is sliced from negative index to index more than the string length', () => {
@@ -48,7 +49,8 @@ describe('_Str', () => {
       const from = -2;
       const to = 30;
       const sliced = _Str.slice(str, from, to);
-      equal(sliced, 'ng');
+      const expected = 'ng';
+      equal(sliced, expected);
     });
   });
 
@@ -57,13 +59,15 @@ describe('_Str', () => {
       const str = 'hello testing';
       const from = 2;
       const sliced = _Str.sliceFrom(str, from);
-      equal(sliced, 'llo testing');
+      const expected = 'llo testing';
+      equal(sliced, expected);
     });
     it('Check if a string is sliced from a given negative index', () => {
       const str = 'hello testing';
       const from = -5;
       const sliced = _Str.sliceFrom(str, from);
-      equal(sliced, 'sting');
+      const expected = 'sting';
+      equal(sliced, expected);
     });
   });
 
