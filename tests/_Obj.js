@@ -168,7 +168,6 @@ describe('_Obj', () => {
     });
 
     it('Check if it throws error for invalid JSON', () => {
-      let isError = false;
       const obj = _Obj.parse(undefined);
       equal(typeof obj, 'undefined');
     });
@@ -179,12 +178,16 @@ describe('_Obj', () => {
       const obj = { a: 1 };
       const obj2 = _Obj.clone(obj);
       deepEqual(obj, obj2);
+    });
+
+    it('Check if it correctly clones an object and has nor reference to previous object', () => {
+      const obj = { a: 1 };
+      const obj2 = _Obj.clone(obj);
       isTrue(obj !== obj2);
     });
 
     it('Check if it throws error if passed invalid json', () => {
       const obj = undefined;
-      const isError = false;
       const obj2 = _Obj.clone(obj);
       equal(typeof obj2, 'undefined');
     });
