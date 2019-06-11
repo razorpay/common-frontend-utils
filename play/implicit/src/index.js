@@ -8,5 +8,3 @@ const EXPOSED_MODULES = {
 Object.keys(EXPOSED_MODULES).forEach(key => {
   global[key] = EXPOSED_MODULES[key];
 });
-
-console.log(_Doc);

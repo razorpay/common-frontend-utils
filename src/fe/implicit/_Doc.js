@@ -22,9 +22,9 @@ export const isEvent = x => _.is(x, EventConstructor);
 
 /**
  * Resolves given string to an element.
- * @param {*} el
+ * @param {string|Element} el
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const resolveElement = el => (_.isString(el) ? querySelector(el) : el);
 
@@ -43,8 +43,6 @@ export function resolveUrl(relativeUrl) {
 /**
  * Redirect page to the target url.
  * @param {Object} data
- *
- * @returns {void}
  */
 export function redirect(data) {
   if (!data.target && global !== global.parent) {
@@ -62,8 +60,6 @@ export function redirect(data) {
  * @param {Object} data
  * @param {string} method
  * @param {string} target
- *
- * @returns {void}
  */
 export function submitForm(action, data, method, target) {
   if (method && method.toLowerCase() === 'get') {
@@ -89,7 +85,7 @@ export function submitForm(action, data, method, target) {
 }
 
 /**
- * Convert JSON object to HTML form elements
+ * Convert JSON object to HTML form html
  * @param {Object} data
  * @param {string} key
  *
@@ -115,7 +111,7 @@ export function obj2formhtml(data, key) {
 
 /**
  * Convert HTML form to JSON Object.
- * @param {Object} form
+ * @param {Element} form
  *
  * @returns {Object}
  */
@@ -132,9 +128,7 @@ export function form2obj(form) {
 
 /**
  * Prevents default event from firing
- * @param {Object} e
- *
- * @returns {*}
+ * @param {Event} e
  */
 export function preventEvent(e) {
   if (isEvent(e)) {
@@ -145,10 +139,8 @@ export function preventEvent(e) {
 }
 
 /**
- * Smoothely scroll to given point
+ * Smoothly scroll to given point
  * @param {number} y
- *
- * @returns {void}
  */
 export function smoothScrollTo(y) {
   smoothScrollBy(y - pageYOffset);
@@ -158,10 +150,8 @@ var scrollTimeout;
 const π = Math.PI;
 
 /**
- * Smoothely scroll by given point
+ * Smoothly scroll by given point
  * @param {number} y
- *
- * @returns {void}
  */
 export function smoothScrollBy(y) {
   if (!global.requestAnimationFrame) {

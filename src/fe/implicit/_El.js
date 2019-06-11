@@ -7,15 +7,15 @@ import * as _Obj from './_Obj';
  * Creates an element using a tag name.
  * @param {string} tagName
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const create = tagName => document.createElement(tagName || 'div');
 
 /**
  * Gets the parent element of the given element.
- * @param {Object} element
+ * @param {Element} element
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const parent = element => element.parentNode;
 
@@ -27,10 +27,15 @@ const elementObject = _.validateArgs(_.isElement, _.isNonNullObject);
 
 /**
  * Replace the target node by the given node.
+<<<<<<< HEAD
  * @param {Object} newNode
  * @param {Object} targetNode
+=======
+ * @param {Element} newNode
+ * @param {Element} targetNode
+>>>>>>> a5f57d4aa05509214390ce08bf672258628d7094
  *
- * @returns {Object}
+ * @returns {Element} newNode
  */
 export const replace =
   ((newNode, targetNode) => {
@@ -42,10 +47,10 @@ export const replace =
 
 /**
  * Appends a child node to the parent node.
- * @param {Object} childNode
- * @param {Object} parentNode
+ * @param {Element} childNode
+ * @param {Element} parentNode
  *
- * @returns {Object}
+ * @returns {Element} parentNode
  */
 export const appendTo =
   ((childNode, parentNode) => {
@@ -57,10 +62,10 @@ export const appendTo =
 
 /**
  * Appends a node to the given node.
- * @param {Object} parentNode
- * @param {Object} childNode
+ * @param {Element} parentNode
+ * @param {Element} childNode
  *
- * @returns {Object}
+ * @returns {Element} parentNode
  */
 export const append =
   ((parentNode, childNode) => {
@@ -72,10 +77,10 @@ export const append =
 
 /**
  * Prepends a node to another node.
- * @param {Object} childNode
- * @param {Object} parentNode
+ * @param {Element} childNode
+ * @param {Element} parentNode
  *
- * @returns {Object}
+ * @returns {Element} childNode
  */
 export const prependTo =
   ((childNode, parentNode) => {
@@ -92,10 +97,10 @@ export const prependTo =
 
 /**
  * Prepends a node to another node.
- * @param {Object} parentNode
- * @param {Object} childNode
+ * @param {Element} parentNode
+ * @param {Element} childNode
  *
- * @returns {Object}
+ * @returns {Element} parentNode
  */
 export const prepend =
   ((parentNode, childNode) => {
@@ -106,10 +111,15 @@ export const prepend =
   |> _.curry2;
 
 /**
+<<<<<<< HEAD
  * Detaches a node.
  * @param {Object} childNode
+=======
+ * Removes the node from DOM.
+ * @param {Element} childNode
+>>>>>>> a5f57d4aa05509214390ce08bf672258628d7094
  *
- * @returns {Object}
+ * @returns {Element} childNode
  */
 export const detach =
   (childNode => {
