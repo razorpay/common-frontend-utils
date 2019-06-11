@@ -7,7 +7,7 @@
     "coverage": "nyc --require @babel/register npm run test",
     "lint-documentation": "documentation lint src --shallow",
     "start": "rollup -cw",
-    "test": "mocha --require @babel/register \"tests/**/*.js\" -r jsdom-global/register",
+    "test": "mocha --require @babel/register --require jsdom-global/register \"tests/**/*.js\"",
     "play:implicit": "rollup -cw --config play/implicit/play.implicit.config.js"
   },
   "repository": {
