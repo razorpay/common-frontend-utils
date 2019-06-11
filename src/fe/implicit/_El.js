@@ -27,13 +27,8 @@ const elementObject = _.validateArgs(_.isElement, _.isNonNullObject);
 
 /**
  * Replace the target node by the given node.
-<<<<<<< HEAD
- * @param {Object} newNode
- * @param {Object} targetNode
-=======
  * @param {Element} newNode
  * @param {Element} targetNode
->>>>>>> a5f57d4aa05509214390ce08bf672258628d7094
  *
  * @returns {Element} newNode
  */
@@ -111,13 +106,8 @@ export const prepend =
   |> _.curry2;
 
 /**
-<<<<<<< HEAD
- * Detaches a node.
- * @param {Object} childNode
-=======
  * Removes the node from DOM.
  * @param {Element} childNode
->>>>>>> a5f57d4aa05509214390ce08bf672258628d7094
  *
  * @returns {Element} childNode
  */
