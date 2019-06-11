@@ -1,5 +1,3 @@
-var jsdom = require('jsdom');
-var expect = require('chai').expect;
 import * as _Doc from '../src/fe/implicit/_Doc';
 import * as _El from '../src/fe/implicit/_El';
 import { assert } from 'chai';
