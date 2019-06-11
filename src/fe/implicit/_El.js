@@ -1,5 +1,7 @@
 export const ElementConstructor = global.Element;
 import * as _ from './_';
+import * as _Str from './_Str';
+import * as _Obj from './_Obj';
 
 /**
  * Creates an element using a tag name.
@@ -25,7 +27,8 @@ const elementObject = _.validateArgs(_.isElement, _.isNonNullObject);
 
 /**
  * Replace the target node by the given node.
- * @param {Object} element
+ * @param {Object} newNode
+ * @param {Object} targetNode
  *
  * @returns {Object}
  */
@@ -103,8 +106,7 @@ export const prepend =
   |> _.curry2;
 
 /**
- * Prepends a node to another node.
- * @param {Object} parentNode
+ * Detaches a node.
  * @param {Object} childNode
  *
  * @returns {Object}
@@ -128,12 +130,25 @@ export const moveCaret =
   |> _.validateArgs(_.isElement, _.isNumber)
   |> _.curry2;
 
+/**
+ * Call submit method on the given element.
+ * @param {Object} el
+ *
+ * @returns {Object}
+ */
 export const submit =
   (el => {
     el.submit();
     return el;
   }) |> element1;
 
+/**
+ * Checks if the given element has the given class.
+ * @param {Object} el
+ * @param {string} className
+ *
+ * @returns {boolean}
+ */
 export const hasClass =
   ((el, className) => {
     return _Str.contains(_Str.pad(el.className), _Str.pad(className));
@@ -141,6 +156,13 @@ export const hasClass =
   |> elementString
   |> _.curry2;
 
+/**
+ * Adds a class to the given element.
+ * @param {Object} el
+ * @param {string} className
+ *
+ * @returns {Object}
+ */
 export const addClass =
   ((el, className) => {
     if (!el.className) {
@@ -153,6 +175,13 @@ export const addClass =
   |> elementString
   |> _.curry2;
 
+/**
+ * Removes a class from the given element.
+ * @param {Object} el
+ * @param {string} className
+ *
+ * @returns {Object}
+ */
 export const removeClass =
   ((el, className) => {
     className = (' ' + el.className + ' ')
@@ -167,9 +196,24 @@ export const removeClass =
   |> elementString
   |> _.curry2;
 
+/**
+ * Gets attribute of the given element.
+ * @param {Object} el
+ * @param {string} attr
+ *
+ * @returns {string}
+ */
 export const getAttribute =
   ((el, attr) => el.getAttribute(attr)) |> elementString |> _.curry2;
 
+/**
+ * Sets attribute of the given element.
+ * @param {Object} el
+ * @param {string} attr
+ * @param {string} value
+ *
+ * @returns {Object}
+ */
 export const setAttribute =
   ((el, attr, value) => {
     el.setAttribute(attr, value);
@@ -178,6 +222,14 @@ export const setAttribute =
   |> attrValidator
   |> _.curry3;
 
+/**
+ * Sets style of the given element.
+ * @param {Object} el
+ * @param {string} cssProp
+ * @param {string} value
+ *
+ * @returns {Object}
+ */
 export const setStyle =
   ((el, cssProp, value) => {
     el.style[cssProp] = value;
@@ -186,6 +238,13 @@ export const setStyle =
   |> attrValidator
   |> _.curry3;
 
+/**
+ * Sets multiple attibutes of the given element.
+ * @param {Object} el
+ * @param {Object} attributes
+ *
+ * @returns {Object}
+ */
 export const setAttributes =
   ((el, attributes) => {
     attributes |> _Obj.loop((val, key) => el |> setAttribute(key, val));
@@ -194,6 +253,13 @@ export const setAttributes =
   |> elementObject
   |> _.curry2;
 
+/**
+ * Sets multiple styles of the given element.
+ * @param {Object} el
+ * @param {Object} styles
+ *
+ * @returns {Object}
+ */
 export const setStyles =
   ((el, styles) => {
     styles |> _Obj.loop((val, key) => el |> setStyle(key, val));
@@ -202,6 +268,13 @@ export const setStyles =
   |> elementObject
   |> _.curry2;
 
+/**
+ * Sets contents of the given element.
+ * @param {Object} el
+ * @param {string} html
+ *
+ * @returns {Object}
+ */
 export const setContents =
   ((el, html) => {
     el.innerHTML = html;
@@ -210,6 +283,13 @@ export const setContents =
   |> elementString
   |> _.curry2;
 
+/**
+ * Sets the display style of the given element.
+ * @param {Object} el
+ * @param {string} value
+ *
+ * @returns {Object}
+ */
 export const setDisplay =
   ((el, value) => el |> setStyle('display', value))
   |> elementString
@@ -220,7 +300,21 @@ export const displayBlock = setDisplay('block');
 export const displayInlineBlock = setDisplay('inline-block');
 export const offsetWidth = _.prop('offsetWidth');
 export const offsetHeight = _.prop('offsetHeight');
+
+/**
+ * Gets the size of an element and its position relative to the viewport
+ * @param {Object} el
+ *
+ * @returns {Object}
+ */
 export const bbox = (el => el.getBoundingClientRect()) |> element1;
+
+/**
+ * Gets the first Child of the given element.
+ * @param {Object} el
+ *
+ * @returns {Object}
+ */
 export const firstChild = (el => el.firstChild) |> element1;
 
 /* https://developer.mozilla.org/en/docs/Web/API/Element/matches */
@@ -233,6 +327,13 @@ var matchesSelector =
   elementProto.msMatchesSelector ||
   elementProto.oMatchesSelector;
 
+/**
+ * Checks if the given element and the selector matches.
+ * @param {Object} el
+ * @param {string} selector
+ *
+ * @returns {Object}
+ */
 export const matches =
   ((el, selector) => {
     return matchesSelector.call(el, selector);
