@@ -19,6 +19,12 @@ export const getComputedStyle = _Func.bind('getComputedStyle', global);
 export const EventConstructor = global.Event;
 var link;
 
+/**
+ * Says whether or not the passed argument is an Event
+ * @param {*} x
+ *
+ * @returns {Boolean}
+ */
 export const isEvent = x => _.is(x, EventConstructor);
 
 /**
@@ -86,7 +92,7 @@ export function submitForm(action, data, method, target) {
 }
 
 /**
- * Convert JSON object to HTML form html
+ * Convert JSON object to HTML input html
  * @param {Object} data
  * @param {string} key
  *

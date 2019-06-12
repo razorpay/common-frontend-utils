@@ -33,6 +33,22 @@ describe('_Doc', function() {
     });
   });
 
+  describe('resolveElement', () => {
+    const div = _El.create('div');
+    div.setAttribute('class', 'red');
+    document.body.appendChild(div);
+
+    it('Resolve an element from string', function() {
+      const el = _Doc.resolveElement('div');
+      isTrue(el === div);
+    });
+
+    it('Resolve an element from element', function() {
+      const el = _Doc.resolveElement(div);
+      isTrue(el === div);
+    });
+  });
+
   describe('obj2formhtml', () => {
     it('Check if it converts an object to HTML form if key is not passed', function() {
       const obj = {
@@ -77,16 +93,6 @@ describe('_Doc', function() {
       const obj = _Doc.form2obj(form);
       deep(obj, { test: 'test-value' });
     });
-
-    it('Check if it throws exception on passing null object', function() {
-      let isError = false;
-      try {
-        const obj = _Doc.form2obj(null);
-      } catch (er) {
-        isError = true;
-      }
-      isTrue(isError);
-    });
   });
 
   describe('preventEvent', () => {
@@ -95,25 +101,11 @@ describe('_Doc', function() {
       anchor.setAttribute('href', '#link');
       anchor.addEventListener('click', e => {
         _Doc.preventEvent(e);
+
+        isTrue(e.defaultPrevented);
         done();
       });
       anchor.click();
-    });
-  });
-
-  describe('resolveElement', () => {
-    const div = _El.create('div');
-    div.setAttribute('class', 'red');
-    document.body.appendChild(div);
-
-    it('Resolve an element from string', function() {
-      const el = _Doc.resolveElement('div');
-      isTrue(el === div);
-    });
-
-    it('Resolve an element from element', function() {
-      const el = _Doc.resolveElement(div);
-      isTrue(el === div);
     });
   });
 });
