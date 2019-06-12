@@ -34,6 +34,13 @@ export function validateArgs(...validators) {
     };
 }
 
+/**
+ * Checks the type of the given argument using typeof operators
+ * @param {*} x
+ * @param {string} type
+ *
+ * @returns {boolean}
+ */
 export const isType = ((x, type) => typeof x === type) |> curry2;
 export const isBoolean = isType('boolean');
 export const isNumber = isType('number');
@@ -41,10 +48,37 @@ export const isString = isType('string');
 export const isFunction = isType('function');
 export const isObject = isType('object');
 export const isArray = Array.isArray;
+
+/**
+ * Checks if the given argument is a node or not
+ * @param {Object} o
+ *
+ * @returns {boolean}
+ */
 export const isElement = o => isNonNullObject(o) && o.nodeType === 1;
+
+/**
+ * Checks if the given argument truthy or not
+ * @param {Object} o
+ *
+ * @returns {boolean}
+ */
 export const isTruthy = o => o;
 
+/**
+ * Checks if the given argument is not a null object
+ * @param {Object} o
+ *
+ * @returns {boolean}
+ */
 export const isNonNullObject = o => o !== null && isObject(o);
+
+/**
+ * Checks if the given argument(object) is empty or not
+ * @param {Object} x
+ *
+ * @returns {boolean}
+ */
 export const isEmptyObject = x => !lengthOf(Object.keys(x));
 
 // create getProperty function based on keys
@@ -53,7 +87,22 @@ export const prop = curry2((obj, key) => obj && obj[key]);
 export const lengthOf = prop('length');
 export const prototypeOf = prop('prototype');
 
+/**
+ * Checks if the constructor of first argument is same as second argument
+ * @param {function} x
+ * @param {number} y
+ *
+ * @returns {boolean}
+ */
 export const isExact = curry2((x, y) => x && x.constructor === y);
+
+/**
+ * Checks if the first argument is an instance of 2nd argument class
+ * @param {function} x
+ * @param {number} y
+ *
+ * @returns {boolean}
+ */
 export const is = curry2((x, y) => x instanceof y);
 
 export const pixelUnit = 'px';
@@ -62,24 +111,42 @@ export const now = Date.now;
 export const random = Math.random;
 export const floor = Math.floor;
 
-// function utils
+/**
+ * Calls a function after a set time as the given delay
+ * @param {function} func
+ * @param {number} delay
+ *
+ * @returns {function}
+ */
 export const timeout = (func, delay) => {
   var timerId = setTimeout(func, delay || 0);
   return () => clearTimeout(timerId);
 };
 
+/**
+ * Calls a function at a set interval of time and returns a function to clear the interval.
+ * @param {function} func
+ * @param {number} delay
+ *
+ * @returns {function}
+ */
 export const interval = (func, delay) => {
   var timerId = setInterval(func, delay || 0);
   return () => clearInterval(timerId);
 };
 
-// returns a function which tells elapsed time at that point
-// on each subsequent invocation
 export const timer = x => {
   var then = now();
   return x => now() - then;
 };
 
+/**
+ * Throws error with message consisting of description and field.
+ * @param {string} description
+ * @param {string} field
+ *
+ * @returns {Object}
+ */
 export function rawError(description, field) {
   var errorObj = {
     description: String(description),
@@ -92,14 +159,33 @@ export function rawError(description, field) {
   return errorObj;
 }
 
+/**
+ * Throws error with message consisting of description and field.
+ * @param {string} description
+ * @param {string} field
+ *
+ * @returns {Object}
+ */
 export function rzpError(description, field) {
   return { error: rawError(description, field) };
 }
 
+/**
+ * Throws error with message as given in the argument
+ * @param {string} message
+ *
+ * @returns {Object}
+ */
 export function throwMessage(message) {
   throw new Error(message);
 }
 
+/**
+ * Checks if the given argument is Base64 Image or not
+ * @param {string} src
+ *
+ * @returns {boolean}
+ */
 export const isBase64Image = src => /data:image\/[^;]+;base64/.test(src);
 
 /**
@@ -140,6 +226,12 @@ export function makeQueryObject(obj, prefix) {
   return query;
 }
 
+/**
+ * Returns url with query params added to the url from the object
+ * @param {Object} obj
+ *
+ * @returns {string}
+ */
 export function obj2query(obj) {
   const query = makeQueryObject(obj);
 
@@ -148,6 +240,13 @@ export function obj2query(obj) {
     .join('&');
 }
 
+/**
+ * Returns url with query params added to the url
+ * @param {string} url
+ * @param {Object} params
+ *
+ * @returns {string}
+ */
 export function query2obj(string) {
   var obj = {};
   string.split(/=|&/).forEach((param, index, array) => {
@@ -158,6 +257,13 @@ export function query2obj(string) {
   return obj;
 }
 
+/**
+ * Returns rgba value for hex color code
+ * @param {string} url
+ * @param {Object} params
+ *
+ * @returns {string}
+ */
 export function appendParamsToUrl(url, params) {
   if (isNonNullObject(params)) {
     params = obj2query(params);
@@ -169,7 +275,12 @@ export function appendParamsToUrl(url, params) {
   return url;
 }
 
-//Return rgba value for hex color code
+/**
+ * Returns rgba value for hex color code
+ * @param {string} hex
+ *
+ * @returns {Object}
+ */
 function hex2rgb(hex) {
   var colors = hex
     .slice(1)
