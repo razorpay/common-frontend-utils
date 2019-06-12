@@ -132,7 +132,7 @@ export const moveCaret =
 
 /**
  * Call submit method on the given element.
- * @param {Object} el
+ * @param {Element} el
  *
  * @returns {Object}
  */
@@ -198,7 +198,7 @@ export const removeClass =
 
 /**
  * Gets attribute of the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} attr
  *
  * @returns {string}
@@ -208,7 +208,7 @@ export const getAttribute =
 
 /**
  * Sets attribute of the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} attr
  * @param {string} value
  *
@@ -224,7 +224,7 @@ export const setAttribute =
 
 /**
  * Sets style of the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} cssProp
  * @param {string} value
  *
@@ -240,7 +240,7 @@ export const setStyle =
 
 /**
  * Sets multiple attibutes of the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {Object} attributes
  *
  * @returns {Object}
@@ -255,7 +255,7 @@ export const setAttributes =
 
 /**
  * Sets multiple styles of the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {Object} styles
  *
  * @returns {Object}
@@ -270,7 +270,7 @@ export const setStyles =
 
 /**
  * Sets contents of the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} html
  *
  * @returns {Object}
@@ -285,7 +285,7 @@ export const setContents =
 
 /**
  * Sets the display style of the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} value
  *
  * @returns {Object}
@@ -303,7 +303,7 @@ export const offsetHeight = _.prop('offsetHeight');
 
 /**
  * Gets the size of an element and its position relative to the viewport
- * @param {Object} el
+ * @param {Element} el
  *
  * @returns {Object}
  */
@@ -311,7 +311,7 @@ export const bbox = (el => el.getBoundingClientRect()) |> element1;
 
 /**
  * Gets the first Child of the given element.
- * @param {Object} el
+ * @param {Element} el
  *
  * @returns {Object}
  */
@@ -329,7 +329,7 @@ var matchesSelector =
 
 /**
  * Checks if the given element and the selector matches.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} selector
  *
  * @returns {Object}

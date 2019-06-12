@@ -1,4 +1,3 @@
-var expect = require('chai').expect;
 import * as _El from '../src/fe/implicit/_El';
 import { assert } from 'chai';
 const {
@@ -47,8 +46,28 @@ describe('_EL', function() {
     });
   });
 
+  describe('appendTo', () => {
+    const div = _El.create('div');
+    const a = _El.create('a');
+    it('Check if it appends a child node to parent node', function() {
+      _El.appendTo(a, div);
+      const expected = 'A';
+      equal(div.childNodes[0].nodeName, expected);
+    });
+  });
+
+  describe('append', () => {
+    const div = _El.create('div');
+    const a = _El.create('a');
+    it('Check if it appends a child node to a parent node', function() {
+      _El.append(div, a);
+      const expected = 'A';
+      equal(div.childNodes[0].nodeName, expected);
+    });
+  });
+
   describe('prependTo', () => {
-    it('Check if it prepends a node to before the child node of a parent with one child', function() {
+    it('Check if it prepends a node before the child node of a parent with one child', function() {
       const div = _El.create('div');
       const img = _El.create('img');
       const a = _El.create('a');
@@ -73,7 +92,7 @@ describe('_EL', function() {
     const a = _El.create('a');
     div.appendChild(img);
     it('Check if it prepends a child node to a parent node', function() {
-      _El.prependTo(a, div);
+      _El.prepend(div, a);
       const expected = 'A';
       equal(div.childNodes[0].nodeName, expected);
     });
@@ -142,6 +161,16 @@ describe('_EL', function() {
       const classes = _El.getAttribute(div, 'class');
       const expected = 'red blue';
       equal(classes, expected);
+    });
+  });
+
+  describe('submit', () => {
+    const form = _El.create('form');
+    it('Check if it executes submit on an element', function(done) {
+      form.addEventListener('submit', e => {
+        done();
+      });
+      _El.submit(form);
     });
   });
 
@@ -260,4 +289,44 @@ describe('_EL', function() {
       equal(firstChild.nodeName, expected);
     });
   });
+
+  //remaining
+  // describe('on', () => {
+  //   const button = _El.create('button');
+  //   document.body.appendChild(button);
+  //   it('Checks if on fires correctly.', (done)=> {
+  //     button.addEventListener('click',e=>{
+  //       const cb=()=>{
+  //         console.log('Clicked fired');
+  //         done();
+  //       }
+  //       _El.on(e,cb)(button);
+  //     });
+  //     button.click();
+  //   });
+  // });
+
+  // remaining
+  // describe('bbox', () => {
+  //   const div0 = _El.create('div');
+  //   const div2 = _El.create('div');
+  //   div1.style.position='absolute';
+  //   div1.style.left='10px';
+  //   div1.style.right='10px';
+  //   div1.style.top='10px';
+  //   div1.style.bottom='10px';
+  //   div1.style.width='100px';
+  //   div1.style.height='100px';
+  //   div2.style.width='250px';
+  //   div2.style.height='150px';
+  //   div2.style.border='1px solid red'
+  //   document.body.appendChild(div1)
+  //   div2.appendChild(div1);
+  //   it('Checks if it gets the size of an element and its position relative to the viewport', function() {
+  //     const data=_El.bbox(div2);
+  //     console.log(data,'getboouou')
+  //     const expected={left:10,right:10,bottom:10,top:10,width:0};
+  //     deep(data,expected);
+  //   });
+  // });
 });
