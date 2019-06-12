@@ -1,3 +1,9 @@
+import * as _Func from './_Func';
+import * as _ from './_';
+import * as _Arr from './_Arr';
+import * as _El from './_El';
+import * as _Obj from './_Obj';
+
 export const documentElement = document.documentElement;
 export const body = document.body;
 export const innerWidth = global.innerWidth;
@@ -11,16 +17,40 @@ export const querySelectorAll = _Func.bind('querySelectorAll', document);
 export const getElementById = _Func.bind('getElementById', document);
 export const getComputedStyle = _Func.bind('getComputedStyle', global);
 export const EventConstructor = global.Event;
+var link;
+
+/**
+ * Says whether or not the passed argument is an Event
+ * @param {*} x
+ *
+ * @returns {Boolean}
+ */
 export const isEvent = x => _.is(x, EventConstructor);
+
+/**
+ * Resolves given string to an element.
+ * @param {string|Element} el
+ *
+ * @returns {Element}
+ */
 export const resolveElement = el => (_.isString(el) ? querySelector(el) : el);
 
-var link;
+/**
+ * Resolve relative url to an absolute url.
+ * @param {string} relativeUrl
+ *
+ * @returns {string}
+ */
 export function resolveUrl(relativeUrl) {
   link = _El.create('a');
   link.href = relativeUrl;
   return link.href;
 }
 
+/**
+ * Redirect page to the target url.
+ * @param {Object} data
+ */
 export function redirect(data) {
   if (!data.target && global !== global.parent) {
     return global.Razorpay.sendMessage({
@@ -31,6 +61,13 @@ export function redirect(data) {
   submitForm(data.url, data.content, data.method, data.target);
 }
 
+/**
+ * Submit a form to a url using the given method
+ * @param {string} action
+ * @param {Object} data
+ * @param {string} method
+ * @param {string} target
+ */
 export function submitForm(action, data, method, target) {
   if (method && method.toLowerCase() === 'get') {
     action = _.appendParamsToUrl(action, data);
@@ -54,6 +91,13 @@ export function submitForm(action, data, method, target) {
   }
 }
 
+/**
+ * Convert JSON object to HTML input html
+ * @param {Object} data
+ * @param {string} key
+ *
+ * @returns {string}
+ */
 export function obj2formhtml(data, key) {
   if (_.isNonNullObject(data)) {
     var str = '';
@@ -72,6 +116,12 @@ export function obj2formhtml(data, key) {
   return input.outerHTML;
 }
 
+/**
+ * Convert HTML form to JSON Object.
+ * @param {Element} form
+ *
+ * @returns {Object}
+ */
 export function form2obj(form) {
   return _Arr.reduce(
     form.querySelectorAll('[name]'),
@@ -83,6 +133,10 @@ export function form2obj(form) {
   );
 }
 
+/**
+ * Prevents default event from firing
+ * @param {Event} e
+ */
 export function preventEvent(e) {
   if (isEvent(e)) {
     e.preventDefault();
@@ -91,12 +145,21 @@ export function preventEvent(e) {
   return false;
 }
 
+/**
+ * Smoothly scroll to given point
+ * @param {number} y
+ */
 export function smoothScrollTo(y) {
   smoothScrollBy(y - pageYOffset);
 }
 
 var scrollTimeout;
 const π = Math.PI;
+
+/**
+ * Smoothly scroll by given point
+ * @param {number} y
+ */
 export function smoothScrollBy(y) {
   if (!global.requestAnimationFrame) {
     return scrollBy(0, y);

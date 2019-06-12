@@ -1,5 +1,6 @@
+import * as _ from './_';
+import * as _Arr from './_Arr';
 export const noop = _ => _;
-
 const funcProto = _.prototypeOf(Function);
 
 export const setPrototype = (constructor, proto) => {
