@@ -1,6 +1,9 @@
 import * as _Func from './_Func';
 import * as _ from './_';
 import * as _Arr from './_Arr';
+import * as _El from './_El';
+import * as _Obj from './_Obj';
+
 export const documentElement = document.documentElement;
 export const body = document.body;
 export const innerWidth = global.innerWidth;
@@ -14,8 +17,6 @@ export const querySelectorAll = _Func.bind('querySelectorAll', document);
 export const getElementById = _Func.bind('getElementById', document);
 export const getComputedStyle = _Func.bind('getComputedStyle', global);
 export const EventConstructor = global.Event;
-import * as _El from './_El';
-import * as _Obj from './_Obj';
 var link;
 
 export const isEvent = x => _.is(x, EventConstructor);
