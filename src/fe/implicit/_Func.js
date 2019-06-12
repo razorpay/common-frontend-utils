@@ -11,6 +11,7 @@ export const setPrototype = (constructor, proto) => {
 
 // facilitate this.func, if func is passed as string
 // getMethod('close', window) → window.close
+
 const propToFunction = func =>
   function(prop, context) {
     let args = arguments;
@@ -51,10 +52,8 @@ export const invoke = function(func) {
 
 export const debounce = (func, wait) => {
   var timerId, args, context, timerFn, result;
-
   var later = function() {
     var last = timerFn();
-
     if (last < wait && last >= 0) {
       timerId = _.timeout(later, wait - last);
     } else {

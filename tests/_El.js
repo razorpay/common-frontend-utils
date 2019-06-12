@@ -8,7 +8,7 @@ const {
   equal,
 } = assert;
 
-describe('_EL', function() {
+describe('_El', function() {
   describe('create', () => {
     it('creates an element with a valid tagname', function() {
       const img = _El.create('img');
