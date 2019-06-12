@@ -76,24 +76,51 @@ describe('_Obj', () => {
     });
   });
 
+  describe('hasOwnProp', () => {
+    it('Check if it correctly checks it has own prop', () => {
+      const obj = { a: 1 };
+      const hasOwnProp = _Obj.hasOwnProp(obj, 'a');
+      isTrue(hasOwnProp);
+    });
+
+    it('Check if it correctly checks it does not have own prop', () => {
+      const obj = { a: 1 };
+      const hasOwnProp = _Obj.hasOwnProp(obj, 'b');
+      isFalse(hasOwnProp);
+    });
+  });
+
+  describe('getOwnProp', () => {
+    it('Check if it gets its own prop', () => {
+      const obj = { a: 1 };
+      const ownProp = _Obj.getOwnProp(obj, 'a');
+      const expected = 1;
+      isTrue(ownProp === expected);
+    });
+
+    it('Check if it correctly checks it does not have own prop', () => {
+      const obj = { a: 1 };
+      const hasOwnProp = _Obj.hasOwnProp(obj, 'b');
+      isFalse(hasOwnProp);
+    });
+  });
+
+  describe('setPropOf', () => {
+    it('Check if it correctly sets the prop', () => {
+      const obj = { a: 1 };
+      const obj2 = { b: 1 };
+      const expected = { b: 1, c: { a: 1 } };
+      _Obj.setPropOf(obj, obj2, 'c');
+      deepEqual(obj2, expected);
+    });
+  });
+
   describe('setProp', () => {
     it('Check if it sets the property on the object', () => {
       const obj = { a: 1 };
       _Obj.setProp(obj, 'b', 2);
       const expected = { a: 1, b: 2 };
       deepEqual(obj, expected);
-    });
-  });
-
-  describe('loop', () => {
-    it('Check if it loops on the object', () => {
-      const obj = { a: 1, b: 1, c: 4 };
-      const arr = [];
-      _Obj.loop(obj, k => {
-        arr.push(k);
-      });
-      const expected = [1, 1, 4];
-      deepEqual(expected, arr);
     });
   });
 
@@ -124,6 +151,18 @@ describe('_Obj', () => {
       const obj = { a: 1, b: 1 };
       _Obj.deleteProp(obj, 'b');
       equal(obj.a, 1);
+    });
+  });
+
+  describe('loop', () => {
+    it('Check if it loops on the object', () => {
+      const obj = { a: 1, b: 1, c: 4 };
+      const arr = [];
+      _Obj.loop(obj, k => {
+        arr.push(k);
+      });
+      const expected = [1, 1, 4];
+      deepEqual(expected, arr);
     });
   });
 
@@ -230,55 +269,11 @@ describe('_Obj', () => {
     });
   });
 
-  describe('hasOwnProp', () => {
-    it('Check if it correctly checks it has own prop', () => {
-      const obj = { a: 1 };
-      const hasOwnProp = _Obj.hasOwnProp(obj, 'a');
-      isTrue(hasOwnProp);
-    });
-
-    it('Check if it correctly checks it does not have own prop', () => {
-      const obj = { a: 1 };
-      const hasOwnProp = _Obj.hasOwnProp(obj, 'b');
-      isFalse(hasOwnProp);
-    });
-  });
-
-  describe('getOwnProp', () => {
-    it('Check if it gets its own prop', () => {
-      const obj = { a: 1 };
-      const ownProp = _Obj.getOwnProp(obj, 'a');
-      const expected = 1;
-      isTrue(ownProp === expected);
-    });
-
-    it('Check if it correctly checks it does not have own prop', () => {
-      const obj = { a: 1 };
-      const hasOwnProp = _Obj.hasOwnProp(obj, 'b');
-      isFalse(hasOwnProp);
-    });
-  });
-
-  describe('hasProp', () => {
-    it('Check if it correctly checks it has prop', () => {
-      const obj = { a: 1 };
-      const hasProp = _Obj.hasProp(obj, 'a');
-      isTrue(hasProp);
-    });
-
-    it('Check if it correctly checks it does not have prop', () => {
-      const obj = { a: 1 };
-      const hasProp = _Obj.hasProp(obj, 'b');
-      isFalse(hasProp);
-    });
-  });
-
-  describe('setPropOf', () => {
-    it('Check if it correctly sets the prop', () => {
-      const obj = { a: 1 };
-      const obj2 = { b: 1 };
-      const expected = { b: 1, c: { a: 1 } };
-      _Obj.setPropOf(obj, obj2, 'c');
+  describe('unflattens', () => {
+    it('Check if it correctly unflattens an object', () => {
+      const obj = { 'a.b': 1 };
+      const obj2 = _Obj.unflatten(obj);
+      const expected = { a: { b: 1 } };
       deepEqual(obj2, expected);
     });
   });
@@ -288,15 +283,6 @@ describe('_Obj', () => {
       const obj = { a: { b: 1 } };
       const obj2 = _Obj.flatten(obj);
       const expected = { 'a.b': 1 };
-      deepEqual(obj2, expected);
-    });
-  });
-
-  describe('unflattens', () => {
-    it('Check if it correctly unflattens an object', () => {
-      const obj = { 'a.b': 1 };
-      const obj2 = _Obj.unflatten(obj);
-      const expected = { a: { b: 1 } };
       deepEqual(obj2, expected);
     });
   });

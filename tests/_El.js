@@ -1,5 +1,6 @@
 import * as _El from '../src/fe/implicit/_El';
 import { assert } from 'chai';
+
 const {
   isTrue,
   isFalse,
@@ -16,7 +17,7 @@ describe('_EL', function() {
       equal(img.nodeName, expected);
     });
 
-    it('creates an element with an invalid tagname', function() {
+    it('creates a div when passed an invalid tagname', function() {
       const img = _El.create('');
       const expected = 'DIV';
       equal(img.nodeName, expected);
@@ -113,6 +114,22 @@ describe('_EL', function() {
     });
   });
 
+  describe('submit', () => {
+    // Mock the submit function
+    window.HTMLFormElement.prototype.submit = function() {
+      const event = new Event('submit');
+      this.dispatchEvent(event);
+    };
+
+    const form = _El.create('form');
+    it('Check if it executes submit on an element', function(done) {
+      form.addEventListener('submit', e => {
+        done();
+      });
+      _El.submit(form);
+    });
+  });
+
   describe('hasClass', () => {
     const div = _El.create('div');
     div.setAttribute('class', 'red');
@@ -135,6 +152,7 @@ describe('_EL', function() {
       _El.addClass(div, 'blue');
       const hasClass = _El.hasClass(div, 'red');
       isTrue(hasClass);
+      isTrue(_El.hasClass(div, 'blue'));
     });
   });
 
@@ -164,22 +182,6 @@ describe('_EL', function() {
     });
   });
 
-  describe('submit', () => {
-    // Mock the submit function
-    window.HTMLFormElement.prototype.submit = function() {
-      const event = new Event('submit');
-      this.dispatchEvent(event);
-    };
-
-    const form = _El.create('form');
-    it('Check if it executes submit on an element', function(done) {
-      form.addEventListener('submit', e => {
-        done();
-      });
-      _El.submit(form);
-    });
-  });
-
   describe('setAttribute', () => {
     const div = _El.create('div');
     _El.setAttribute(div, 'name', 'test');
@@ -189,6 +191,7 @@ describe('_EL', function() {
       equal(attr, expected);
     });
   });
+
   describe('setStyle', () => {
     const div = _El.create('div');
     _El.setStyle(div, 'color', 'red');
@@ -269,6 +272,17 @@ describe('_EL', function() {
     });
   });
 
+  describe('firstChild', () => {
+    const div = _El.create('div');
+    const img = _El.create('img');
+    div.appendChild(img);
+    it('Checks if it gives the first child on the given element.', function() {
+      const firstChild = _El.firstChild(div);
+      const expected = 'IMG';
+      equal(firstChild.nodeName, expected);
+    });
+  });
+
   describe('matches', () => {
     const div = _El.create('div');
     div.setAttribute('id', 'testdiv');
@@ -282,17 +296,6 @@ describe('_EL', function() {
     it('Checks if the given element and the selector does not match.', function() {
       const isMatching = _El.matches(div, '#testdiv2');
       isFalse(isMatching);
-    });
-  });
-
-  describe('firstChild', () => {
-    const div = _El.create('div');
-    const img = _El.create('img');
-    div.appendChild(img);
-    it('Checks if it gives the first child on the given element.', function() {
-      const firstChild = _El.firstChild(div);
-      const expected = 'IMG';
-      equal(firstChild.nodeName, expected);
     });
   });
 
