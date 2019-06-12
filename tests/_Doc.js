@@ -10,6 +10,29 @@ const {
 } = assert;
 
 describe('_Doc', function() {
+  describe('isEvent', () => {
+    it('detects Event properly', () => {
+      const event = new Event('MyEvent');
+      const is = _Doc.isEvent(event);
+
+      isTrue(is);
+    });
+
+    it('detects CustomEvent properly', () => {
+      const event = new CustomEvent('MyCustomEvent');
+      const is = _Doc.isEvent(event);
+
+      isTrue(is);
+    });
+
+    it('detects that Array is not an Event', () => {
+      const array = new Array();
+      const is = _Doc.isEvent(array);
+
+      isFalse(is);
+    });
+  });
+
   describe('obj2formhtml', () => {
     it('Check if it converts an object to HTML form if key is not passed', function() {
       const obj = {
