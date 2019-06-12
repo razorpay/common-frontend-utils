@@ -122,6 +122,14 @@ export const detach =
 
 export const selectionStart = _.prop('selectionStart') |> element1;
 export const selectionEnd = _.prop('selectionEnd') |> element1;
+
+/**
+ * Moves caret for an element between the given positions
+ * @param {Element} el
+ * @param {number} position
+ *
+ * @returns {Object}
+ */
 export const moveCaret =
   ((el, position) => {
     el.selectionStart = el.selectionEnd = position;

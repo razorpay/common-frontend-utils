@@ -291,6 +291,18 @@ describe('_EL', function() {
   });
 
   //remaining
+  // describe('moveCaret', () => {
+  //   const div = _El.create('div');
+  //   const img = _El.create('img');
+  //   div.appendChild(img);
+  //   it('Checks if it gives the first child on the given element.', function() {
+  //     const firstChild = _El.firstChild(div);
+  //     const expected = 'IMG';
+  //     equal(firstChild.nodeName, expected);
+  //   });
+  // });
+
+  //remaining
   // describe('on', () => {
   //   const button = _El.create('button');
   //   document.body.appendChild(button);
