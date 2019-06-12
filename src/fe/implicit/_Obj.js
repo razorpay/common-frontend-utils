@@ -108,7 +108,7 @@ export const deleteProp = _.curry2((o, key) => {
 /**
  * Loops through the object
  * @param {Object} o
- * @param {function (value: *, key: string, o: Object): void}
+ * @param {function (value: *, key: string, o: Object): void} iteratee
  *
  * @returns {Object}
  */
@@ -120,7 +120,7 @@ export const loop = _.curry2((o, iteratee) => {
 /**
  * Loops through the object and maps new value according to the iteratee function
  * @param {Object} o
- * @param {function (value: *, key: string, o: Object): void}
+ * @param {function (value: *, key: string, o: Object): void} iteratee
  * @example
  * {a: 2, b: 3} → map(x => 2*x) → {a: 4, b: 6}
  *
