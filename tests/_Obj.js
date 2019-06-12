@@ -1,13 +1,13 @@
 import { assert } from 'chai';
 import * as _Obj from '../src/fe/implicit/_Obj';
-import { deepEqual } from 'assert';
 
 const {
   isTrue,
   isFalse,
-  deepEqual: deep,
+  deepEqual,
   notDeepEqual: notDeep,
   equal,
+  throws,
 } = assert;
 
 describe('_Obj', () => {
@@ -160,15 +160,15 @@ describe('_Obj', () => {
     });
 
     it('Check if it throws an exception on circular object', () => {
-      let isError = false;
-      try {
-        const test = { a: 1 };
-        test.b = test;
-        const obj = _Obj.parse(_Obj.stringify(test));
-      } catch (er) {
-        isError = true;
-      }
-      isTrue(isError);
+      throws(
+        () => {
+          const test = { a: 1 };
+          test.b = test;
+          const stringified = _Obj.stringify(test);
+        },
+        TypeError,
+        'Converting circular structure to JSON'
+      );
     });
   });
 
@@ -180,7 +180,7 @@ describe('_Obj', () => {
     });
 
     it('Check if it throws error for invalid JSON', () => {
-      const obj = _Obj.parse(undefined);
+      const obj = _Obj.parse('{something');
       equal(typeof obj, 'undefined');
     });
   });
@@ -202,6 +202,22 @@ describe('_Obj', () => {
       const obj = undefined;
       const obj2 = _Obj.clone(obj);
       equal(typeof obj2, 'undefined');
+    });
+
+    it('throws TypeError if the object to clone is circular', () => {
+      throws(() => {
+        const x = {
+          foo: 'bar',
+        };
+
+        const circular = {
+          x: x,
+        };
+
+        x.circular = circular;
+
+        const cloned = _Obj.clone(circular);
+      }, TypeError);
     });
   });
 
