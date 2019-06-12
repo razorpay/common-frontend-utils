@@ -108,7 +108,7 @@ export const deleteProp = _.curry2((o, key) => {
 /**
  * Loops through the object
  * @param {Object} o
- * @param {function (value: *, key: string, o: Object): void}
+ * @param {function (value: *, key: string, o: Object): void} iteratee
  *
  * @returns {Object}
  */
@@ -120,7 +120,7 @@ export const loop = _.curry2((o, iteratee) => {
 /**
  * Loops through the object and maps new value according to the iteratee function
  * @param {Object} o
- * @param {function (value: *, key: string, o: Object): void}
+ * @param {function (value: *, key: string, o: Object): void} iteratee
  * @example
  * {a: 2, b: 3} → map(x => 2*x) → {a: 4, b: 6}
  *
@@ -153,7 +153,7 @@ export const reduce = _.curry3((o, reducer, initialValue) =>
 
 /**
  * Stringify an object
- * @throws exception when a circular reference is found.
+ * @throws {TypeError} exception when a circular reference is found.
  * @param {Object} o
  *
  * @returns {string}
@@ -162,7 +162,6 @@ export const stringify = JSON.stringify;
 
 /**
  * Parse a string into JSON
- * @throws Will throw an exception if the string to parse is not valid JSON.
  * @param {string} string
  *
  * @returns {Object}
@@ -178,7 +177,7 @@ export const parse = string => {
 /**
  * Clone an object from the previous object
  * @param {Obect} o
- * @throws Will throw an exception if the object to clone is not valid JSON.
+ * @throws {TypeError} Will throw an exception if the object to clone is circular.
  *
  * @returns {Object}
  */

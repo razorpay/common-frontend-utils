@@ -165,6 +165,12 @@ describe('_El', function() {
   });
 
   describe('submit', () => {
+    // Mock the submit function
+    window.HTMLFormElement.prototype.submit = function() {
+      const event = new Event('submit');
+      this.dispatchEvent(event);
+    };
+
     const form = _El.create('form');
     it('Check if it executes submit on an element', function(done) {
       form.addEventListener('submit', e => {
