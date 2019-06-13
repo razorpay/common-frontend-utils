@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import * as _ from '../src/fe/implicit/_';
-import * as _El from '../src/fe/implicit/_El';
+import * as _ from '../../../src/fe/implicit/_.js';
+import * as _El from '../../../src/fe/implicit/_El.js';
 
 const {
   isTrue,
