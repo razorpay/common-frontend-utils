@@ -23,7 +23,7 @@ var link;
  * Says whether or not the passed argument is an Event
  * @param {*} x
  *
- * @returns {Boolean}
+ * @returns {boolean}
  */
 export const isEvent = x => _.is(x, EventConstructor);
 

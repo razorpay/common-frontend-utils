@@ -3,6 +3,7 @@ const EXPOSED_MODULES = {
   _Obj,
   _Doc,
   _El,
+  _Func,
 };
 
 Object.keys(EXPOSED_MODULES).forEach(key => {

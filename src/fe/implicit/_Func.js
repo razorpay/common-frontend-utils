@@ -1,17 +1,39 @@
 import * as _ from './_';
 import * as _Arr from './_Arr';
+
+/**
+ * Returns whatever is passed to it,
+ * without doing anything at all.
+ * @param {*} _
+ *
+ * @returns {*} _
+ */
 export const noop = _ => _;
+
 const funcProto = _.prototypeOf(Function);
 
+/**
+ * Adds prototypes to the given constructor.
+ * @param {Function} constructor Constructor
+ * @param {Object} proto Prototype object
+ *
+ * @returns {Function} constructor
+ */
 export const setPrototype = (constructor, proto) => {
   proto.constructor = constructor;
   constructor.prototype = proto;
   return constructor;
 };
 
-// facilitate this.func, if func is passed as string
-// getMethod('close', window) → window.close
-const propToFunction = func =>
+/**
+ * Facilitate this.func, if func is passed as string.
+ * Returns `func(prop, context)` if `prop` is a function.
+ * Returns `func(context[prop], context)` if `props` is a string.
+ * @param {Function} func
+ *
+ * @returns {function (prop: (string|Function), context: Object): *} x
+ */
+export const propToFunction = func =>
   function(prop, context) {
     let args = arguments;
     if (_.isString(prop)) {
@@ -21,6 +43,12 @@ const propToFunction = func =>
     return func.apply(null, args);
   };
 
+/**
+ * Invokes `func` only if `subject` is a function.
+ * @param {Function} func
+ *
+ * @returns {function (subject: Function): *}
+ */
 export const ensureFunction = func =>
   function(subject) {
     if (_.isFunction(subject)) {
@@ -30,6 +58,14 @@ export const ensureFunction = func =>
     }
   };
 
+/**
+ * Binds the context of `this` to a function,
+ * and returns a new function with the bound context.
+ * @param {Function} func
+ * @param {*} context
+ *
+ * @returns {Function}
+ */
 export const bind =
   ((func, context) => {
     return func.bind(context);
@@ -38,6 +74,14 @@ export const bind =
   |> propToFunction
   |> _.curry2;
 
+/**
+ * Invokes a function with the given arguments.
+ * If `func` is a string, this[func] will be considered
+ * as the desired function.
+ * @param {Function|string} func
+ *
+ * @return {*}
+ */
 export const invoke = function(func) {
   try {
     if (_.isString(func)) {
@@ -49,6 +93,13 @@ export const invoke = function(func) {
   }
 };
 
+/**
+ * Creates and returns a debounced version of the function.
+ * @param {Function} func
+ * @param {number} wait
+ *
+ * @returns {Function}
+ */
 export const debounce = (func, wait) => {
   var timerId, args, context, timerFn, result;
 

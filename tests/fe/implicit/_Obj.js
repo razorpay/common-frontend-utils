@@ -8,6 +8,7 @@ const {
   notDeepEqual: notDeep,
   equal,
   throws,
+  isUndefined,
 } = assert;
 
 describe('_Obj', () => {
@@ -144,7 +145,7 @@ describe('_Obj', () => {
     it('Check if it deleted a property on the object', () => {
       const obj = { a: 1, b: 1 };
       _Obj.deleteProp(obj, 'b');
-      equal(typeof obj.b, 'undefined');
+      isUndefined(obj.b);
     });
 
     it('Check if it does not delete any other property on the object', () => {
@@ -220,7 +221,7 @@ describe('_Obj', () => {
 
     it('Check if it throws error for invalid JSON', () => {
       const obj = _Obj.parse('{something');
-      equal(typeof obj, 'undefined');
+      isUndefined(obj);
     });
   });
 
@@ -240,7 +241,7 @@ describe('_Obj', () => {
     it('Check if it throws error if passed invalid json', () => {
       const obj = undefined;
       const obj2 = _Obj.clone(obj);
-      equal(typeof obj2, 'undefined');
+      isUndefined(obj2);
     });
 
     it('throws TypeError if the object to clone is circular', () => {

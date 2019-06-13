@@ -34,9 +34,10 @@ Documentation can be found in the [docs](docs) directory.
 
 ### Tests
 
-- `npm run test` - Runs tests
-- `npm run coverage` - Runs tests and prints coverage
-- `npm run build-coverage` - Runs tests and generates HTML coverage in `coverage` directory
+- `npm run test:singular <path_to_file>` - Run tests for specified file/path
+- `npm run test` - Runs all tests
+- `npm run coverage` - Runs all tests and prints coverage
+- `npm run build-coverage` - Runs all tests and generates HTML coverage in `coverage` directory
 
 # Contents
 
