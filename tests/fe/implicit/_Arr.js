@@ -1,9 +1,13 @@
 import { assert } from 'chai';
-import * as _Arr from '../src/fe/implicit/_Arr';
+import * as _Arr from '../../../src/fe/implicit/_Arr';
 
-const { isTrue, deepEqual: deep, notDeepEqual: notDeep, equal } = assert;
-
-const isFalse = x => equal(x, false);
+const {
+  isTrue,
+  isFalse,
+  deepEqual: deep,
+  notDeepEqual: notDeep,
+  equal,
+} = assert;
 
 describe('_Arr', () => {
   describe('isSimilar', () => {

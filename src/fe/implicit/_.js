@@ -109,7 +109,7 @@ export const isBase64Image = src => /data:image\/[^;]+;base64/.test(src);
  * Turns { foo: ['a', 'b'] } into { 'foo[0]': 'a', 'foo[1]': 'b' }
  *
  * @param {Object} obj The source object
- * @param {String} prefix An optional prefix
+ * @param {string} prefix An optional prefix
  *
  * @return {Object}
  */
