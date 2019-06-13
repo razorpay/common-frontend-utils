@@ -76,7 +76,6 @@ describe('_Func', () => {
       const foo = 'foo';
       const ensurer = _Func.ensureFunction(() => foo);
       const ensured = ensurer(_Func.noop);
-
       equal(ensured, foo);
     });
   });

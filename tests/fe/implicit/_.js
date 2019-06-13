@@ -164,7 +164,6 @@ describe('_', () => {
       try {
         _.throwMessage('Error!');
       } catch (er) {
-        console.log('error messageee', er.message);
         errorMessage = er.message;
       }
       equal(errorMessage, expected);
@@ -236,7 +235,6 @@ describe('_', () => {
       const expected = { a: '1', b: '2' };
       const url = 'a=1&b=2';
       const obj = _.query2obj(url);
-      console.log(url, 'ururur');
       deep(obj, expected);
     });
   });
@@ -310,7 +308,6 @@ describe('_', () => {
     it('Check if it returns params object for URL string', () => {
       const url = '?a=1&b=2';
       const params = _.getQueryParams(url);
-      console.log(params, 'params');
       const expected = { a: '1', b: '2' };
       deep(params, expected);
     });
