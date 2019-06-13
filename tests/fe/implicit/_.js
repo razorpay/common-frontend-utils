@@ -12,13 +12,13 @@ const {
 
 describe('_', () => {
   describe('isType', () => {
-    it('Check if it returns true on passing a string and "string"', () => {
+    it('Check if it returns true on passing a string and "string" in the arguments', () => {
       const str = 'test';
       const expected = 'string';
       isTrue(_.isType(str, expected));
     });
 
-    it('Check if it returns false on passing an object and "string"', () => {
+    it('Check if it returns false on passing an object and "string" in the arguments', () => {
       const obj = {};
       const expected = 'string';
       isFalse(_.isType(obj, expected));
