@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import * as _Func from '../src/fe/implicit/_Func';
+import * as _Func from '../../../src/fe/implicit/_Func';
 
 const {
   isTrue,
