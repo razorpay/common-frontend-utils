@@ -8,7 +8,7 @@ Says whether or not the passed argument is an Event
 
 - `x` **any**
 
-Returns **[Boolean][1]**
+Returns **[boolean][1]**
 
 ## resolveElement
 
