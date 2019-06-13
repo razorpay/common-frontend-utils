@@ -11,18 +11,24 @@ const {
 } = assert;
 
 describe('_', () => {
-  //   describe('isType', () => {
-  //     it('Check if it works correctly', () => {
-  //       const obj={};
-  //       const type = typeof obj;
-  //       const expected='object';
-  //       console.log(_.isType(type,expected),'wirks',type)
-  //       isTrue(_.isType(type,expected));
-  //     });
-  // })
+  describe('isType', () => {
+    it('Check if it gives true on passing a string and "string"', () => {
+      const str = 'test';
+      const type = typeof str;
+      const expected = 'string';
+      isTrue(_.isType(type, expected));
+    });
+
+    it('Check if it gives false on passing a object and "string"', () => {
+      const str = {};
+      const type = typeof str;
+      const expected = 'string';
+      isFalse(_.isType(type, expected));
+    });
+  });
 
   describe('isElement', () => {
-    it('Check if it is return true element is an element or not', () => {
+    it('Check if it is return true if element is an element or not', () => {
       const div = _El.create('div');
       isTrue(_.isElement(div));
     });
