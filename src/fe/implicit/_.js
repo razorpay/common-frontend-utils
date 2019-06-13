@@ -2,7 +2,12 @@ export function logError() {
   console.error.apply(console, arguments);
 }
 
-// returns a partially applied function, awaiting for last parameter
+/**
+ * Returns a partially applied function, awaiting for last parameter
+ * @param {function} func
+ *
+ * @returns {*}
+ */
 export const curry2 = func =>
   function(arg1, arg2) {
     if (arguments.length < 2) {
@@ -35,7 +40,7 @@ export function validateArgs(...validators) {
 }
 
 /**
- * Checks the type of the given argument using typeof operators
+ * Matches the type of the first argument with the second argument using typeof operator and returns true or false
  * @param {*} x
  * @param {string} type
  *
@@ -50,20 +55,21 @@ export const isObject = isType('object');
 export const isArray = Array.isArray;
 
 /**
- * Checks if the given argument is a node or not
- * @param {Object} o
+ * Checks if the given argument is an element or not
+ * @param {Object | Element} o
  *
  * @returns {boolean}
  */
 export const isElement = o => isNonNullObject(o) && o.nodeType === 1;
 
 /**
- * Checks if the given argument truthy or not
- * @param {Object} o
+ * Checks if the given argument is truthy or not
+ * @param {*} o
  *
  * @returns {boolean}
  */
-export const isTruthy = o => o;
+export const isTruthy = o => Boolean(o);
+// need to check if the above is correct - remaining
 
 /**
  * Checks if the given argument is not a null object
@@ -74,7 +80,7 @@ export const isTruthy = o => o;
 export const isNonNullObject = o => o !== null && isObject(o);
 
 /**
- * Checks if the given argument(object) is empty or not
+ * Checks if the given object is empty or not
  * @param {Object} x
  *
  * @returns {boolean}
@@ -88,7 +94,7 @@ export const lengthOf = prop('length');
 export const prototypeOf = prop('prototype');
 
 /**
- * Checks if the constructor of first argument is same as second argument
+ * Checks if the constructor of first parameter is same as second parameter constructor
  * @param {function} x
  * @param {number} y
  *
@@ -97,7 +103,7 @@ export const prototypeOf = prop('prototype');
 export const isExact = curry2((x, y) => x && x.constructor === y);
 
 /**
- * Checks if the first argument is an instance of 2nd argument class
+ * Checks if the first parameter is an instance of second parameter class
  * @param {function} x
  * @param {number} y
  *
@@ -112,7 +118,7 @@ export const random = Math.random;
 export const floor = Math.floor;
 
 /**
- * Calls a function after a set time as the given delay
+ * Calls a function after a given time and returns a function to clear the timeout
  * @param {function} func
  * @param {number} delay
  *
@@ -141,7 +147,7 @@ export const timer = x => {
 };
 
 /**
- * Throws error with message consisting of description and field.
+ * Gives raw error object consisting of description and field.
  * @param {string} description
  * @param {string} field
  *
@@ -151,16 +157,14 @@ export function rawError(description, field) {
   var errorObj = {
     description: String(description),
   };
-
   if (field) {
     errorObj.field = field;
   }
-
   return errorObj;
 }
 
 /**
- * Throws error with message consisting of description and field.
+ * Gives error object consisting of description and field.
  * @param {string} description
  * @param {string} field
  *
@@ -181,7 +185,7 @@ export function throwMessage(message) {
 }
 
 /**
- * Checks if the given argument is Base64 Image or not
+ * Checks if the given argument is Base64 Image string or not
  * @param {string} src
  *
  * @returns {boolean}
@@ -189,13 +193,11 @@ export function throwMessage(message) {
 export const isBase64Image = src => /data:image\/[^;]+;base64/.test(src);
 
 /**
- * Makes a flattened object that can be used
- * to generate query strings.
- *
- * Turns { foo: ['a', 'b'] } into { 'foo[0]': 'a', 'foo[1]': 'b' }
- *
+ * Gives a flattened object that can be used to generate query strings.
  * @param {Object} obj The source object
  * @param {string} prefix An optional prefix
+ * @example
+ * { foo: ['a', 'b'] } into { 'foo[0]': 'a', 'foo[1]': 'b' }
  *
  * @return {Object}
  */
@@ -295,6 +297,11 @@ function hex2rgb(hex) {
   };
 }
 
+/**
+ * Returns keycode of the key pressed when the event was fired
+ * @param {Event} e
+ * @return {number}
+ */
 export const getKeyFromEvent = e =>
   is(e, global.Event) && (e.which || e.charCode || e.keyCode);
 
@@ -309,7 +316,7 @@ export const getCharFromEvent = e => {
 };
 
 /**
- * Gives you a list of query params
+ * Gives a list of query params
  * @return {Object} URL query params converted into an object.
  */
 export const getQueryParams = function(search = location.search) {
