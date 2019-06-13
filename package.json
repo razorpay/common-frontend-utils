@@ -5,9 +5,12 @@
   "scripts": {
     "build-coverage": "nyc --require @babel/register --reporter=html --reporter=text npm run test",
     "coverage": "nyc --require @babel/register npm run test",
+    "document": "node document.js",
     "lint-documentation": "documentation lint src --shallow",
     "start": "rollup -cw",
-    "test": "mocha --require @babel/register --require jsdom-global/register \"tests/**/*.js\"",
+    "test:base": "mocha --require @babel/register --require jsdom-global/register",
+    "test:singular": "npm run test:base",
+    "test": "npm run test:base \"tests/**/*.js\"",
     "play:implicit": "rollup -cw --config play/implicit/play.implicit.config.js"
   },
   "repository": {

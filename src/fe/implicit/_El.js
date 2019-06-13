@@ -1,7 +1,8 @@
-export const ElementConstructor = global.Element;
 import * as _ from './_';
 import * as _Str from './_Str';
 import * as _Obj from './_Obj';
+
+export const ElementConstructor = global.Element;
 
 /**
  * Creates an element using a tag name.

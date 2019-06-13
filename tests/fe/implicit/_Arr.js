@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import * as _Arr from '../src/fe/implicit/_Arr';
+import * as _Arr from '../../../src/fe/implicit/_Arr';
 
 const {
   isTrue,
@@ -7,6 +7,7 @@ const {
   deepEqual: deep,
   notDeepEqual: notDeep,
   equal,
+  isUndefined,
 } = assert;
 
 describe('_Arr', () => {
@@ -222,7 +223,7 @@ describe('_Arr', () => {
 
     it('does not find when item is absent', () => {
       const item = _Arr.find(array, finder(5));
-      equal(typeof item, 'undefined');
+      isUndefined(item);
     });
   });
 

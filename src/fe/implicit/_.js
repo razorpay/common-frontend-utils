@@ -16,6 +16,7 @@ export const curry2 = func =>
     return func.call(null, arg1, arg2);
   };
 
+// remaining
 export const curry3 = func =>
   function(arg1, arg2, arg3) {
     if (arguments.length < 3) {
@@ -24,6 +25,7 @@ export const curry3 = func =>
     return func.call(null, arg1, arg2, arg3);
   };
 
+// remaining
 export function validateArgs(...validators) {
   return func =>
     function() {
@@ -146,6 +148,7 @@ export const interval = (func, delay) => {
   return () => clearInterval(timerId);
 };
 
+// remaining
 export const timer = x => {
   var then = now();
   return x => now() - then;
