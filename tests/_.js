@@ -103,10 +103,16 @@ describe('_', () => {
   });
 
   describe('timeout', () => {
-    it('Check if it works on function and the given delay', done => {
+    it('Check if it works on function and delay of 100ms', done => {
       _.timeout(() => {
         done();
       }, 100);
+    });
+
+    it('Check if it works on function and null delay', done => {
+      _.timeout(() => {
+        done();
+      }, null);
     });
   });
 
@@ -120,11 +126,17 @@ describe('_', () => {
   });
 
   describe('interval', () => {
-    it('Check if it works on function and the given delay and clears interval after 100ms', done => {
+    it('Check if it works on function and the given delay of 100ms and clears interval', done => {
       const to = _.interval(() => {
         to();
         done();
       }, 100);
+    });
+    it('Check if it works on function and the given null delay and clears interval', done => {
+      const to = _.interval(() => {
+        to();
+        done();
+      }, null);
     });
   });
 
@@ -192,6 +204,103 @@ describe('_', () => {
       const expected = 'a=1&b%5Bc%5D=3';
       const url = _.obj2query(obj);
       equal(url, expected);
+    });
+
+    it('Check if it returns query string for a simple object', () => {
+      const obj = { a: 1, b: 2 };
+      const expected = 'a=1&b=2';
+      const url = _.obj2query(obj);
+      equal(url, expected);
+    });
+  });
+
+  describe('query2obj', () => {
+    it('Check if it returns empty object for empty string', () => {
+      const obj = '';
+      isTrue(_.isEmptyObject(_.query2obj(obj)));
+    });
+
+    it('Check if it returns query object for a simple string', () => {
+      const expected = { a: '1', b: '2' };
+      const url = 'a=1&b=2';
+      const obj = _.query2obj(url);
+      console.log(url, 'ururur');
+      deep(obj, expected);
+    });
+  });
+
+  describe('appendParamsToUrl', () => {
+    it('Check if it returns same url if blank object is passed', () => {
+      const url = 'www.google.com';
+      const obj = {};
+      const expected = 'www.google.com';
+      equal(_.appendParamsToUrl(url, obj), expected);
+    });
+
+    it('Check if it appends param to url', () => {
+      const url = 'www.google.com';
+      const obj = { c: 3, d: 4 };
+      const expected = 'www.google.com?c=3&d=4';
+      equal(_.appendParamsToUrl(url, obj), expected);
+    });
+  });
+
+  //   describe('getKeyFromEvent', () => {
+  //     it('Check if it gets key pressed from the Event.', (done) => {
+  //         const button=_El.create(button)
+  //         var event = document.createEvent('KeyboardEvent',{bubbles : true, cancelable : true, key : "Q", char : "Q", shiftKey : true});
+  //         button.dispatchEvent(event);
+
+  //         button.addEventListener('keypress',e=>{
+  //             const data=_.getKeyFromEvent(e);
+  //             console.log(data,'ftftft')
+  //             done
+  //         })
+  //     });
+
+  //     it('Check if it works on string and Object Class and gives false', () => {
+  //       const obj = 'test';
+  //       isFalse(_.is(obj, Object));
+  //     });
+  //   });
+
+  //   describe('hex2rgb', () => {
+  //     it('Check if it converts hex string to its RGB color object', () => {
+  //         const hex = '#1A3B4D';
+  //         const obj={c:3};
+  //         const expected={
+  //             red:'1A',
+  //             green:'3B',
+  //             blue:'4D',
+  //             alpha:1
+  //         }
+  //         const colorObj=_.hex2rgb(hex);
+  //         console.log(colorObj,'colorObj')
+  //         deep(colorObj,expected)
+  //         });
+  //   });
+
+  describe('getQueryParams', () => {
+    it('Check if it returns empty object for non string argument', () => {
+      const url = null;
+      const params = _.getQueryParams(url);
+      const expected = {};
+      deep(params, expected);
+    });
+
+    it('Check if it returns empty object for empty string', () => {
+      const url = '';
+      const params = _.getQueryParams(url);
+      const expected = {};
+      deep(params, expected);
+    });
+
+    it('Check if it returns params object for URL string', () => {
+      const url = '?a=1&b=2';
+      const params = _.getQueryParams(url);
+      console.log(params, 'params');
+      const expected = { a: '1', b: '2' };
+      deep(params, expected);
     });
   });
 });

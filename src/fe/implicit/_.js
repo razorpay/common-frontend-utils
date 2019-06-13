@@ -277,12 +277,6 @@ export function appendParamsToUrl(url, params) {
   return url;
 }
 
-/**
- * Returns rgba value for hex color code
- * @param {string} hex
- *
- * @returns {Object}
- */
 function hex2rgb(hex) {
   var colors = hex
     .slice(1)
