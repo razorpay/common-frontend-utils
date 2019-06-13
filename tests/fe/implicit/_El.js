@@ -1,4 +1,4 @@
-import * as _El from '../src/fe/implicit/_El';
+import * as _El from '../../../src/fe/implicit/_El';
 import { assert } from 'chai';
 
 const {

@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import * as _Arr from '../src/fe/implicit/_Arr';
+import * as _Arr from '../../../src/fe/implicit/_Arr';
 
 const {
   isTrue,

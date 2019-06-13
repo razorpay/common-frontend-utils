@@ -1,6 +1,7 @@
-import * as _Doc from '../src/fe/implicit/_Doc';
-import * as _El from '../src/fe/implicit/_El';
+import * as _Doc from '../../../src/fe/implicit/_Doc';
+import * as _El from '../../../src/fe/implicit/_El';
 import { assert } from 'chai';
+
 const {
   isTrue,
   isFalse,
