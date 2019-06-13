@@ -12,13 +12,13 @@ const {
 
 describe('_', () => {
   describe('isType', () => {
-    it('Check if it gives true on passing a string and "string"', () => {
+    it('Check if it returns true on passing a string and "string"', () => {
       const str = 'test';
       const expected = 'string';
       isTrue(_.isType(str, expected));
     });
 
-    it('Check if it gives false on passing an object and "string"', () => {
+    it('Check if it returns false on passing an object and "string"', () => {
       const obj = {};
       const expected = 'string';
       isFalse(_.isType(obj, expected));
@@ -59,48 +59,48 @@ describe('_', () => {
   });
 
   describe('isNonNullObject', () => {
-    it('Check if it works on null and gives false ', () => {
+    it('Check if it works on null and returns false ', () => {
       const obj = null;
       isFalse(_.isNonNullObject(obj));
     });
 
-    it('Check if it works on object and gives true ', () => {
+    it('Check if it works on object and returns true ', () => {
       const obj = {};
       isTrue(_.isNonNullObject(obj));
     });
   });
 
   describe('isEmptyObject', () => {
-    it('Check if it works on empty object and gives true ', () => {
+    it('Check if it works on empty object and returns true ', () => {
       const obj = {};
       isTrue(_.isEmptyObject(obj));
     });
 
-    it('Check if it works on non object and gives false ', () => {
+    it('Check if it works on non object and returns false ', () => {
       const obj = { test: 'test' };
       isFalse(_.isEmptyObject(obj));
     });
   });
 
   describe('isExact', () => {
-    it('Check if it works on string and String Constructor and gives true', () => {
+    it('Check if it works on string and String Constructor and returns true', () => {
       const obj = 'test';
       isTrue(_.isExact(obj, String));
     });
 
-    it('Check if it works on string and Object Constructor and gives false', () => {
+    it('Check if it works on string and Object Constructor and returns false', () => {
       const obj = 'test';
       isFalse(_.isExact(obj, Object));
     });
   });
 
   describe('is', () => {
-    it('Check if it works on string and String Class and gives true', () => {
+    it('Check if it works on string and String Class and returns true', () => {
       const obj = new String('test');
       isTrue(_.is(obj, String));
     });
 
-    it('Check if it works on string and Object Class and gives false', () => {
+    it('Check if it works on string and Object Class and returns false', () => {
       const obj = 'test';
       isFalse(_.is(obj, Object));
     });
@@ -145,7 +145,7 @@ describe('_', () => {
   });
 
   describe('rawError', () => {
-    it('Check if it gives a raw error object with description and field inside an error key', () => {
+    it('Check if it returns a raw error object with description and field inside an error key', () => {
       const error = _.rzpError('Error Desc', 'Error Field');
       const expected = {
         error: {
@@ -172,12 +172,12 @@ describe('_', () => {
   });
 
   describe('isBase64Image', () => {
-    it('Check if it gives true for a base64 image string', () => {
+    it('Check if it returns true for a base64 image string', () => {
       const image = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
       isTrue(_.isBase64Image(image));
     });
 
-    it('Check if it gives false for a non base64 image string', () => {
+    it('Check if it returns false for a non base64 image string', () => {
       const image = 'testing!';
       isFalse(_.isBase64Image(image));
     });
@@ -270,7 +270,7 @@ describe('_', () => {
   //         })
   //     });
 
-  //     it('Check if it works on string and Object Class and gives false', () => {
+  //     it('Check if it works on string and Object Class and returns false', () => {
   //       const obj = 'test';
   //       isFalse(_.is(obj, Object));
   //     });

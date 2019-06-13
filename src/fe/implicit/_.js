@@ -86,7 +86,13 @@ export const isNonNullObject = o => o !== null && isObject(o);
  */
 export const isEmptyObject = x => !lengthOf(Object.keys(x));
 
-// create getProperty function based on keys
+/**
+ * Create getProperty function based on keys
+ * @param {object} obj
+ * @param {string} key
+ *
+ * @returns {*}
+ */
 export const prop = curry2((obj, key) => obj && obj[key]);
 
 export const lengthOf = prop('length');
