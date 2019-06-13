@@ -14,16 +14,14 @@ describe('_', () => {
   describe('isType', () => {
     it('Check if it gives true on passing a string and "string"', () => {
       const str = 'test';
-      const type = typeof str;
       const expected = 'string';
-      isTrue(_.isType(type, expected));
+      isTrue(_.isType(str, expected));
     });
 
-    it('Check if it gives false on passing a object and "string"', () => {
-      const str = {};
-      const type = typeof str;
+    it('Check if it gives false on passing an object and "string"', () => {
+      const obj = {};
       const expected = 'string';
-      isFalse(_.isType(type, expected));
+      isFalse(_.isType(obj, expected));
     });
   });
 
@@ -195,6 +193,14 @@ describe('_', () => {
       const obj = { a: 1, b: { c: 3 } };
       const query = _.makeQueryObject(obj);
       const expected = { a: 1, 'b[c]': 3 };
+      deep(query, expected);
+    });
+
+    it('Check if it works correctly for an object and a prefix', () => {
+      const obj = { a: 1 };
+      const prefix = 'www.google.com';
+      const query = _.makeQueryObject(obj, prefix);
+      const expected = { 'www.google.com[a]': 1 };
       deep(query, expected);
     });
   });

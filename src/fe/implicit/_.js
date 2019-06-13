@@ -69,7 +69,6 @@ export const isElement = o => isNonNullObject(o) && o.nodeType === 1;
  * @returns {boolean}
  */
 export const isTruthy = o => Boolean(o);
-// need to check if the above is correct - remaining
 
 /**
  * Checks if the given argument is not a null object
@@ -243,7 +242,7 @@ export function obj2query(obj) {
 }
 
 /**
- * Returns url with query params added to the url
+ * Returns an object converted from URL's query params
  * @param {string} url
  * @param {Object} params
  *
@@ -260,7 +259,7 @@ export function query2obj(string) {
 }
 
 /**
- * Returns rgba value for hex color code
+ * Appends params to the URL from an object
  * @param {string} url
  * @param {Object} params
  *
@@ -276,6 +275,13 @@ export function appendParamsToUrl(url, params) {
   }
   return url;
 }
+
+/**
+ * Returns rgba value for hex color code
+ * @param {string} hex
+ *
+ * @returns {Object}
+ */
 
 function hex2rgb(hex) {
   var colors = hex
@@ -311,6 +317,7 @@ export const getCharFromEvent = e => {
 
 /**
  * Gives a list of query params
+ * @param {string} search
  * @return {Object} URL query params converted into an object.
  */
 export const getQueryParams = function(search = location.search) {
