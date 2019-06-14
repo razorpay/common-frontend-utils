@@ -8,6 +8,7 @@ const {
   deepEqual: deep,
   notDeepEqual: notDeep,
   equal,
+  throws,
 } = assert;
 
 describe('_', () => {
@@ -22,6 +23,59 @@ describe('_', () => {
       const obj = {};
       const expected = 'string';
       isFalse(_.isType(obj, expected));
+    });
+  });
+
+  describe('isBoolean', () => {
+    it('determines properly argument is a boolean', () => {
+      isTrue(_.isBoolean(false));
+      isTrue(_.isBoolean(true));
+    });
+
+    it('determines that 0 is not a boolean', () => {
+      isFalse(_.isBoolean(0));
+    });
+  });
+
+  describe('isNumber', () => {
+    it('determines properly that argument is a number', () => {
+      isTrue(_.isNumber(1));
+    });
+
+    it('determines that false is not a number', () => {
+      isFalse(_.isNumber(false));
+    });
+  });
+
+  describe('isString', () => {
+    it('determines properly that argument is a string', () => {
+      isTrue(_.isString('Razorpay'));
+    });
+  });
+
+  describe('isFunction', () => {
+    it('determines properly that argument is a function', () => {
+      isTrue(_.isFunction(_ => _));
+    });
+  });
+
+  describe('isObject', () => {
+    it('determines that {} is an object', () => {
+      isTrue(_.isObject({}));
+    });
+
+    it('determines that [] is an object', () => {
+      isTrue(_.isObject([]));
+    });
+  });
+
+  describe('isArray', () => {
+    it('determines that [] is an array', () => {
+      isTrue(_.isArray([]));
+    });
+
+    it('determines that {} is an not an array', () => {
+      isFalse(_.isArray({}));
     });
   });
 
@@ -82,6 +136,42 @@ describe('_', () => {
     });
   });
 
+  describe('prop', () => {
+    it('returns the property of an object', () => {
+      const obj = {
+        foo: 'bar',
+      };
+      const returned = _.prop(obj, 'foo');
+
+      equal(returned, obj.foo);
+    });
+  });
+
+  describe('lengthOf', () => {
+    it('gives the length of an array', () => {
+      const array = [1, 2, 3];
+      const length = _.lengthOf(array);
+
+      equal(length, array.length);
+    });
+
+    it('gives the length of the string', () => {
+      const str = 'Razorpay';
+      const length = _.lengthOf(str);
+
+      equal(length, str.length);
+    });
+  });
+
+  describe('prototypeOf', () => {
+    it('returns the proper prototype', () => {
+      const arr = [];
+      const prototype = _.prototypeOf(arr);
+
+      equal(prototype, arr.prototype);
+    });
+  });
+
   describe('isExact', () => {
     it('Check if it works on string and String Constructor and returns true', () => {
       const obj = 'test';
@@ -118,24 +208,68 @@ describe('_', () => {
         done();
       }, null);
     });
-  });
 
-  describe('timeout', () => {
-    it('Check if it works on function and the given delay and clears timeout after 100ms', done => {
+    it('Check if clearing the timeout works', function(done) {
+      const wait = 100;
+
+      this.timeout(wait * 2);
+
+      let executed = false;
+
       const to = _.timeout(() => {
-        to();
+        executed = true;
+      }, wait);
+
+      to();
+
+      setTimeout(() => {
+        isFalse(executed);
         done();
-      }, 100);
+      }, wait + 10);
     });
   });
 
   describe('interval', () => {
-    it('Check if it works on function and the given delay of 100ms and clears interval', done => {
-      const to = _.interval(() => {
-        to();
+    it('executes intervals properly', function(done) {
+      const wait = 100;
+      const times = 2;
+
+      this.timeout(wait * (times + 1));
+
+      let counter = 0;
+
+      const clear = _.interval(() => {
+        counter++;
+      }, wait);
+
+      setTimeout(() => {
+        equal(counter, times);
+        clear();
         done();
-      }, 100);
+      }, wait * (times + 0.5));
     });
+
+    it('clears intervals properly', function(done) {
+      const wait = 100;
+      const times = 2;
+
+      this.timeout(wait * (times + 1));
+
+      let counter = 0;
+      const expected = 1;
+
+      const clear = _.interval(() => {
+        counter++;
+      }, wait);
+
+      setTimeout(clear, wait + 5);
+
+      setTimeout(() => {
+        equal(expected, counter);
+        done();
+      }, wait * (times + 0.5));
+    });
+
     it('Check if it works on function and the given null delay and clears interval', done => {
       const to = _.interval(() => {
         to();
@@ -145,6 +279,27 @@ describe('_', () => {
   });
 
   describe('rawError', () => {
+    it('creates the raw error without field', () => {
+      const err = _.rawError('Something went wrong');
+      const expected = {
+        description: 'Something went wrong',
+      };
+
+      deep(err, expected);
+    });
+
+    it('creates the raw error with field', () => {
+      const err = _.rawError('OTP should not be empty', 'otp');
+      const expected = {
+        description: 'OTP should not be empty',
+        field: 'otp',
+      };
+
+      deep(err, expected);
+    });
+  });
+
+  describe('rzpError', () => {
     it('Check if it returns a raw error object with description and field inside an error key', () => {
       const error = _.rzpError('Error Desc', 'Error Field');
       const expected = {
@@ -159,14 +314,13 @@ describe('_', () => {
 
   describe('throwMessage', () => {
     it('Check if it throws error as the given message', () => {
-      const expected = 'Error!';
-      let errorMessage;
-      try {
-        _.throwMessage('Error!');
-      } catch (er) {
-        errorMessage = er.message;
-      }
-      equal(errorMessage, expected);
+      throws(
+        () => {
+          _.throwMessage('Error!');
+        },
+        Error,
+        'Error!'
+      );
     });
   });
 
@@ -195,6 +349,36 @@ describe('_', () => {
       deep(query, expected);
     });
 
+    it('works properly for an array', () => {
+      const params = {
+        a: [1, 2],
+      };
+      const expected = {
+        'a[0]': 1,
+        'a[1]': 2,
+      };
+      const query = _.makeQueryObject(params);
+
+      deep(expected, query);
+    });
+
+    it('works properly for an array nested inside an object', () => {
+      const params = {
+        foo: 'bar',
+        baz: {
+          a: [1, 2],
+        },
+      };
+      const expected = {
+        foo: 'bar',
+        'baz[a][0]': 1,
+        'baz[a][1]': 2,
+      };
+      const query = _.makeQueryObject(params);
+
+      deep(query, expected);
+    });
+
     it('Check if it works correctly for an object and a prefix', () => {
       const obj = { a: 1 };
       const prefix = 'www.google.com';
@@ -217,11 +401,46 @@ describe('_', () => {
       equal(url, expected);
     });
 
+    it('works properly for an array', () => {
+      const params = {
+        a: [1, 2],
+      };
+      const expected = 'a%5B0%5D=1&a%5B1%5D=2';
+      const query = _.obj2query(params);
+
+      equal(expected, query);
+    });
+
+    it('works properly for an array nested inside an object', () => {
+      const params = {
+        foo: 'bar',
+        baz: {
+          a: [1, 2],
+        },
+      };
+      const expected = 'foo=bar&baz%5Ba%5D%5B0%5D=1&baz%5Ba%5D%5B1%5D=2';
+      const query = _.obj2query(params);
+
+      equal(query, expected);
+    });
+
     it('Check if it returns query string for a simple object', () => {
       const obj = { a: 1, b: 2 };
       const expected = 'a=1&b=2';
       const url = _.obj2query(obj);
       equal(url, expected);
+    });
+
+    it('handles existing ampersands and spaces properly', () => {
+      const params = {
+        url: 'www.razorpay.com/?foo=bar&bar=baz',
+        title: "Razorpay's Title",
+      };
+      const expected =
+        "url=www.razorpay.com%2F%3Ffoo%3Dbar%26bar%3Dbaz&title=Razorpay's%20Title";
+      const query = _.obj2query(params);
+
+      equal(expected, query);
     });
   });
 
@@ -252,6 +471,17 @@ describe('_', () => {
       const obj = { c: 3, d: 4 };
       const expected = 'www.google.com?c=3&d=4';
       equal(_.appendParamsToUrl(url, obj), expected);
+    });
+
+    it('appends parameters properly to a URL with existing params', () => {
+      const url = 'www.razorpay.com/?foo=bar';
+      const params = {
+        bar: 'baz',
+      };
+
+      const expected = url + '&bar=baz';
+      const appended = _.appendParamsToUrl(url, params);
+      equal(appended, expected);
     });
   });
 
