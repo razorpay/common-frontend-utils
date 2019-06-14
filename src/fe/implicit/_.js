@@ -304,18 +304,33 @@ export function appendParamsToUrl(url, params) {
  * @returns {Object}
  */
 
-function hex2rgb(hex) {
-  var colors = hex
-    .slice(1)
-    .match(/.{2}/g)
-    .map(match => (parseInt(match[1], 16) / 255).toFixed(1));
-
-  return {
-    red: colors[0],
-    green: colors[1],
-    blue: colors[2],
+export function hex2rgb(hex) {
+  const color = {
+    red: undefined,
+    green: undefined,
+    blue: undefined,
     alpha: 1,
   };
+  var colorsString = hex.slice(1);
+  if (colorsString.length == 3) {
+    color.red = colorsString.slice(0, 1);
+    color.red += color.red;
+
+    color.green = colorsString.slice(1, 2);
+    color.green += color.green;
+
+    color.blue = colorsString.slice(2, 3);
+    color.blue += color.blue;
+  }
+  if (colorsString.length == 6) {
+    color.red = colorsString.slice(0, 2);
+
+    color.green = colorsString.slice(2, 4);
+
+    color.blue = colorsString.slice(3, 6);
+  }
+
+  return color;
 }
 
 /**

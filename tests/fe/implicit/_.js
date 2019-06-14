@@ -504,21 +504,21 @@ describe('_', () => {
   //     });
   //   });
 
-  //   describe('hex2rgb', () => {
-  //     it('Check if it converts hex string to its RGB color object', () => {
-  //         const hex = '#1A3B4D';
-  //         const obj={c:3};
-  //         const expected={
-  //             red:'1A',
-  //             green:'3B',
-  //             blue:'4D',
-  //             alpha:1
-  //         }
-  //         const colorObj=_.hex2rgb(hex);
-  //         console.log(colorObj,'colorObj')
-  //         deep(colorObj,expected)
-  //         });
-  //   });
+  describe('hex2rgb', () => {
+    it('Check if it converts hex string to its RGB color object', () => {
+      const hex = '#1A3B4D';
+      const obj = { c: 3 };
+      const expected = {
+        red: '1A',
+        green: '3B',
+        blue: '4D',
+        alpha: 1,
+      };
+      const colorObj = _.hex2rgb(hex);
+      console.log(colorObj, 'colorObj');
+      deep(colorObj, expected);
+    });
+  });
 
   describe('getQueryParams', () => {
     it('Check if it returns empty object for non string argument', () => {
