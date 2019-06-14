@@ -84,19 +84,23 @@ describe('_', () => {
   });
 
   describe('validateArgs', () => {
+    const validators = {
+      string: x => typeof x === 'string',
+      object: x => typeof x === 'object',
+    };
+
+    const dummy = (x, y) => 'foo';
+    const dummyWithValidation = _.validateArgs(
+      validators.string,
+      validators.object
+    )(dummy);
+
     it('validates without throwing any error', () => {
-      const validators = {
-        string: x => typeof x === 'string',
-        object: x => typeof x === 'object',
-      };
-
-      const dummy = (x, y) => 'foo';
-      const dummyWithValidation = _.validateArgs(
-        validators.string,
-        validators.object
-      )(dummy);
-
       equal(dummyWithValidation('bar', {}), 'foo');
+    });
+
+    it('returns the first arg when validation fails', () => {
+      equal(dummyWithValidation('x', 1), 'x');
     });
   });
 
