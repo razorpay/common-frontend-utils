@@ -257,6 +257,8 @@ export function obj2query(obj) {
  * @returns {string}
  */
 export function query2obj(string) {
+  // TODO: Support objects and nested objects.
+
   var obj = {};
   string.split(/=|&/).forEach((param, index, array) => {
     if (index % 2) {
@@ -329,6 +331,8 @@ export const getCharFromEvent = e => {
  * @return {Object} URL query params converted into an object.
  */
 export const getQueryParams = function(search = location.search) {
+  // TODO: Support objects and nested objects.
+
   if (isString(search)) {
     return search.slice(1) |> query2obj;
   }
