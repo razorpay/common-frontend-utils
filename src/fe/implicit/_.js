@@ -102,8 +102,8 @@ export const prototypeOf = prop('prototype');
 
 /**
  * Checks if the constructor of first parameter is same as second parameter constructor
- * @param {function} x
- * @param {number} y
+ * @param {*} x
+ * @param {function} y
  *
  * @returns {boolean}
  */
@@ -111,8 +111,8 @@ export const isExact = curry2((x, y) => x && x.constructor === y);
 
 /**
  * Checks if the first parameter is an instance of second parameter class
- * @param {function} x
- * @param {number} y
+ * @param {*} x
+ * @param {class} y
  *
  * @returns {boolean}
  */
