@@ -90,7 +90,7 @@ export const isEmptyObject = x => !lengthOf(Object.keys(x));
 
 /**
  * Create getProperty function based on keys
- * @param {object} obj
+ * @param {Object} obj
  * @param {string} key
  *
  * @returns {*}
@@ -252,8 +252,7 @@ export function obj2query(obj) {
 
 /**
  * Returns an object converted from URL's query params
- * @param {string} url
- * @param {Object} params
+ * @param {string} string
  *
  * @returns {string}
  */
