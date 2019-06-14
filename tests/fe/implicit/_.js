@@ -9,9 +9,97 @@ const {
   notDeepEqual: notDeep,
   equal,
   throws,
+  isFunction,
 } = assert;
 
 describe('_', () => {
+  describe('curry2', () => {
+    describe('curries a function with two arguments properly', () => {
+      const myFunc = (a, b) => ({ a, b });
+
+      const curriedMyFunc = _.curry2(myFunc);
+
+      it('returns a function', () => {
+        isFunction(curriedMyFunc);
+      });
+
+      const afterFirstArg = curriedMyFunc('world');
+
+      it('returns a function after first argument is passed', () => {
+        isFunction(afterFirstArg);
+      });
+
+      const afterSecondArg = afterFirstArg('hello');
+
+      const expected = {
+        a: 'hello',
+        b: 'world',
+      };
+
+      it('returns the return value after invoked again with only the second argument', () => {
+        deep(expected, afterSecondArg);
+      });
+
+      it('returns the return value if curried function is called directly with both args', () => {
+        const returned = curriedMyFunc('hello', 'world');
+
+        deep(returned, expected);
+      });
+    });
+  });
+
+  describe('curry3', () => {
+    describe('curries a function with three arguments properly', () => {
+      const myFunc = (a, b, c) => ({ a, b, c });
+
+      const curriedMyFunc = _.curry3(myFunc);
+
+      it('returns a function', () => {
+        isFunction(curriedMyFunc);
+      });
+
+      const afterFirstArg = curriedMyFunc('world', '!');
+
+      it('returns a function after first and second arguments are passed', () => {
+        isFunction(afterFirstArg);
+      });
+
+      const afterSecondArg = afterFirstArg('hello');
+      const expected = {
+        a: 'hello',
+        b: 'world',
+        c: '!',
+      };
+
+      it('returns the return value after invoked again with only the third argument', () => {
+        deep(expected, afterSecondArg);
+      });
+
+      it('returns the return value if curried function is called directly with all three args', () => {
+        const returned = curriedMyFunc('hello', 'world', '!');
+
+        deep(returned, expected);
+      });
+    });
+  });
+
+  describe('validateArgs', () => {
+    it('validates without throwing any error', () => {
+      const validators = {
+        string: x => typeof x === 'string',
+        object: x => typeof x === 'object',
+      };
+
+      const dummy = (x, y) => 'foo';
+      const dummyWithValidation = _.validateArgs(
+        validators.string,
+        validators.object
+      )(dummy);
+
+      equal(dummyWithValidation('bar', {}), 'foo');
+    });
+  });
+
   describe('isType', () => {
     it('Check if it returns true on passing a string and "string" in the arguments', () => {
       const str = 'test';
