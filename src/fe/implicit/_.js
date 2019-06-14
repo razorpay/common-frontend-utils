@@ -320,7 +320,7 @@ export function obj2query(obj) {
  * Returns an object converted from the provided query string
  * @param {string} string
  *
- * @returns {string}
+ * @returns {Object}
  */
 export function query2obj(string) {
   // TODO: Support objects and nested objects.
@@ -394,7 +394,8 @@ export const getCharFromEvent = e => {
  * Gives a list of query params
  * @param {string} search
  *
- * @return {Object} URL query params converted into an object.
+ *
+ * @returns {Object} URL query params converted into an object.
  */
 export const getQueryParams = function(search = location.search) {
   // TODO: Support objects and nested objects.
