@@ -515,7 +515,6 @@ describe('_', () => {
         alpha: 1,
       };
       const colorObj = _.hex2rgb(hex);
-      console.log(colorObj, 'colorObj');
       deep(colorObj, expected);
     });
   });

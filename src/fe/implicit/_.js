@@ -303,15 +303,19 @@ export function appendParamsToUrl(url, params) {
  *
  * @returns {Object}
  */
-
 export function hex2rgb(hex) {
+  let colorsString = hex;
+  if (hex[0] == '#') {
+    colorsString = hex.slice(1);
+  }
+
   const color = {
     red: undefined,
     green: undefined,
     blue: undefined,
     alpha: 1,
   };
-  var colorsString = hex.slice(1);
+
   if (colorsString.length == 3) {
     color.red = colorsString.slice(0, 1);
     color.red += color.red;
@@ -327,9 +331,8 @@ export function hex2rgb(hex) {
 
     color.green = colorsString.slice(2, 4);
 
-    color.blue = colorsString.slice(3, 6);
+    color.blue = colorsString.slice(4, 6);
   }
-
   return color;
 }
 
