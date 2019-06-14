@@ -4,9 +4,9 @@ export function logError() {
 
 /**
  * Returns the curried version of a function with two arguments
- * @param {function} func
+ * @param {Function} func
  *
- * @returns {function}
+ * @returns {Function}
  */
 export const curry2 = func =>
   function(arg1, arg2) {
@@ -18,9 +18,9 @@ export const curry2 = func =>
 
 /**
  * Returns the curried version of a function with three arguments
- * @param {function} func
+ * @param {Function} func
  *
- * @returns {function}
+ * @returns {Function}
  */
 export const curry3 = func =>
   function(arg1, arg2, arg3) {
@@ -54,11 +54,53 @@ export function validateArgs(...validators) {
  * @returns {boolean}
  */
 export const isType = ((x, type) => typeof x === type) |> curry2;
+
+/**
+ * Returns true or false if the argument passed is boolean or not
+ * @param {*} x
+ *
+ * @returns {boolean}
+ */
 export const isBoolean = isType('boolean');
+
+/**
+ * Returns true or false if the argument passed is number or not
+ * @param {*} x
+ *
+ * @returns {boolean}
+ */
 export const isNumber = isType('number');
+
+/**
+ * Returns true or false if the argument passed is string or not
+ * @param {*} x
+ *
+ * @returns {boolean}
+ */
 export const isString = isType('string');
+
+/**
+ * Returns true or false if the argument passed is function or not
+ * @param {*} x
+ *
+ * @returns {boolean}
+ */
 export const isFunction = isType('function');
+
+/**
+ * Returns true or false if the argument passed is object or not
+ * @param {*} x
+ *
+ * @returns {boolean}
+ */
 export const isObject = isType('object');
+
+/**
+ * Returns true or false if the argument passed is array or not
+ * @param {*} x
+ *
+ * @returns {boolean}
+ */
 export const isArray = Array.isArray;
 
 /**
@@ -94,7 +136,7 @@ export const isNonNullObject = o => o !== null && isObject(o);
 export const isEmptyObject = x => !lengthOf(Object.keys(x));
 
 /**
- * Create getProperty function based on keys
+ * Returns the given property of the provided object
  * @param {Object} obj
  * @param {string} key
  *
@@ -102,7 +144,20 @@ export const isEmptyObject = x => !lengthOf(Object.keys(x));
  */
 export const prop = curry2((obj, key) => obj && obj[key]);
 
+/**
+ * Returns the length property of the given argument
+ * @param {array | string} x
+ *
+ * @returns {Object}
+ */
 export const lengthOf = prop('length');
+
+/**
+ * Returns the prototype property of the given argument
+ * @param {x} x
+ *
+ * @returns {Object}
+ */
 export const prototypeOf = prop('prototype');
 
 /**
@@ -131,10 +186,10 @@ export const floor = Math.floor;
 
 /**
  * Calls a function after a given time and returns a function to clear the timeout
- * @param {function} func
+ * @param {Function} func
  * @param {number} delay
  *
- * @returns {function}
+ * @returns {Function}
  */
 export const timeout = (func, delay) => {
   var timerId = setTimeout(func, delay || 0);
@@ -143,10 +198,10 @@ export const timeout = (func, delay) => {
 
 /**
  * Calls a function at a set interval of time and returns a function to clear the interval.
- * @param {function} func
+ * @param {Function} func
  * @param {number} delay
  *
- * @returns {function}
+ * @returns {Function}
  */
 export const interval = (func, delay) => {
   var timerId = setInterval(func, delay || 0);
@@ -303,37 +358,17 @@ export function appendParamsToUrl(url, params) {
  *
  * @returns {Object}
  */
+
 export function hex2rgb(hex) {
-  let colorsString = hex;
-  if (hex[0] == '#') {
-    colorsString = hex.slice(1);
-  }
-
-  const color = {
-    red: undefined,
-    green: undefined,
-    blue: undefined,
-    alpha: 1,
-  };
-
-  if (colorsString.length == 3) {
-    color.red = colorsString.slice(0, 1);
-    color.red += color.red;
-
-    color.green = colorsString.slice(1, 2);
-    color.green += color.green;
-
-    color.blue = colorsString.slice(2, 3);
-    color.blue += color.blue;
-  }
-  if (colorsString.length == 6) {
-    color.red = colorsString.slice(0, 2);
-
-    color.green = colorsString.slice(2, 4);
-
-    color.blue = colorsString.slice(4, 6);
-  }
-  return color;
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        red: parseInt(result[1], 16),
+        green: parseInt(result[2], 16),
+        blue: parseInt(result[3], 16),
+        alpha: 1,
+      }
+    : null;
 }
 
 /**
@@ -363,7 +398,6 @@ export const getCharFromEvent = e => {
  */
 export const getQueryParams = function(search = location.search) {
   // TODO: Support objects and nested objects.
-
   if (isString(search)) {
     return search.slice(1) |> query2obj;
   }

@@ -485,33 +485,25 @@ describe('_', () => {
     });
   });
 
-  //   describe('getKeyFromEvent', () => {
-  //     it('Check if it gets key pressed from the Event.', (done) => {
-  //         const button=_El.create(button)
-  //         var event = document.createEvent('KeyboardEvent',{bubbles : true, cancelable : true, key : "Q", char : "Q", shiftKey : true});
-  //         button.dispatchEvent(event);
-
-  //         button.addEventListener('keypress',e=>{
-  //             const data=_.getKeyFromEvent(e);
-  //             console.log(data,'ftftft')
-  //             done
-  //         })
-  //     });
-
-  //     it('Check if it works on string and Object Class and returns false', () => {
-  //       const obj = 'test';
-  //       isFalse(_.is(obj, Object));
-  //     });
-  //   });
-
   describe('hex2rgb', () => {
-    it('Check if it converts hex string to its RGB color object', () => {
-      const hex = '#1A3B4D';
-      const obj = { c: 3 };
+    it('Check if it converts hex string(#FFFFFF) to RGB color object', () => {
+      const hex = '#FFFFFF';
       const expected = {
-        red: '1A',
-        green: '3B',
-        blue: '4D',
+        red: 255,
+        green: 255,
+        blue: 255,
+        alpha: 1,
+      };
+      const colorObj = _.hex2rgb(hex);
+      deep(colorObj, expected);
+    });
+
+    it('Check if it converts hex string(#1A2B1C) to RGB color object', () => {
+      const hex = '#1A2B1C';
+      const expected = {
+        red: 26,
+        green: 43,
+        blue: 28,
         alpha: 1,
       };
       const colorObj = _.hex2rgb(hex);
