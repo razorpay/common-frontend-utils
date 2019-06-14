@@ -30,7 +30,14 @@ export const curry3 = func =>
     return func.call(null, arg1, arg2, arg3);
   };
 
-// remaining
+/**
+ * Validates the arguments with the given validators
+ * before invoking the function.
+ * i-th argument is validated using the i-th validator.
+ * @param  {...(function (arg: *): boolean)} validators
+ *
+ * @returns {*}
+ */
 export function validateArgs(...validators) {
   return func =>
     function() {
