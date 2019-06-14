@@ -3,10 +3,10 @@ export function logError() {
 }
 
 /**
- * Returns a partially applied function, awaiting for last parameter
+ * Returns the curried version of a function with two arguments
  * @param {function} func
  *
- * @returns {*}
+ * @returns {function}
  */
 export const curry2 = func =>
   function(arg1, arg2) {
@@ -16,7 +16,12 @@ export const curry2 = func =>
     return func.call(null, arg1, arg2);
   };
 
-// remaining
+/**
+ * Returns the curried version of a function with three arguments
+ * @param {function} func
+ *
+ * @returns {function}
+ */
 export const curry3 = func =>
   function(arg1, arg2, arg3) {
     if (arguments.length < 3) {
@@ -58,7 +63,7 @@ export const isArray = Array.isArray;
 
 /**
  * Checks if the given argument is an element or not
- * @param {Object | Element} o
+ * @param {Object|Element} o
  *
  * @returns {boolean}
  */
@@ -103,7 +108,7 @@ export const prototypeOf = prop('prototype');
 /**
  * Checks if the constructor of first parameter is same as second parameter constructor
  * @param {*} x
- * @param {function} y
+ * @param {class} y
  *
  * @returns {boolean}
  */
@@ -148,7 +153,13 @@ export const interval = (func, delay) => {
   return () => clearInterval(timerId);
 };
 
-// remaining
+/**
+ * Returns a function that returns the time
+ * that has passed since this function was
+ * invoked.
+ *
+ * @returns {function (): number}
+ */
 export const timer = x => {
   var then = now();
   return x => now() - then;
@@ -186,7 +197,7 @@ export function rzpError(description, field) {
  * Throws error with message as given in the argument
  * @param {string} message
  *
- * @returns {Object}
+ * @throws {Error}
  */
 export function throwMessage(message) {
   throw new Error(message);
@@ -237,7 +248,7 @@ export function makeQueryObject(obj, prefix) {
 }
 
 /**
- * Returns url with query params added to the url from the object
+ * Returns query string generated from the provided object.
  * @param {Object} obj
  *
  * @returns {string}
@@ -251,7 +262,7 @@ export function obj2query(obj) {
 }
 
 /**
- * Returns an object converted from URL's query params
+ * Returns an object converted from the provided query string
  * @param {string} string
  *
  * @returns {string}
@@ -308,7 +319,8 @@ function hex2rgb(hex) {
 /**
  * Returns keycode of the key pressed when the event was fired
  * @param {Event} e
- * @return {number}
+ *
+ * @returns {number}
  */
 export const getKeyFromEvent = e =>
   is(e, global.Event) && (e.which || e.charCode || e.keyCode);
@@ -326,6 +338,7 @@ export const getCharFromEvent = e => {
 /**
  * Gives a list of query params
  * @param {string} search
+ *
  * @return {Object} URL query params converted into an object.
  */
 export const getQueryParams = function(search = location.search) {
