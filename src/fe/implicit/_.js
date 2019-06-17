@@ -146,7 +146,7 @@ export const prop = curry2((obj, key) => obj && obj[key]);
 
 /**
  * Returns the length property of the given argument
- * @param {array | string} x
+ * @param {Array | string} x
  *
  * @returns {Object}
  */
@@ -320,7 +320,7 @@ export function obj2query(obj) {
  * Returns an object converted from the provided query string
  * @param {string} string
  *
- * @returns {string}
+ * @returns {Object}
  */
 export function query2obj(string) {
   // TODO: Support objects and nested objects.
