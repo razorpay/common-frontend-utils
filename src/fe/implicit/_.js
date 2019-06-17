@@ -30,7 +30,14 @@ export const curry3 = func =>
     return func.call(null, arg1, arg2, arg3);
   };
 
-// remaining
+/**
+ * Validates the arguments with the given validators
+ * before invoking the function.
+ * i-th argument is validated using the i-th validator.
+ * @param  {...(function (arg: *): boolean)} validators
+ *
+ * @returns {*}
+ */
 export function validateArgs(...validators) {
   return func =>
     function() {
@@ -394,7 +401,8 @@ export const getCharFromEvent = e => {
  * Gives a list of query params
  * @param {string} search
  *
- * @return {Object} URL query params converted into an object.
+ *
+ * @returns {Object} URL query params converted into an object.
  */
 export const getQueryParams = function(search = location.search) {
   // TODO: Support objects and nested objects.
