@@ -207,7 +207,7 @@ export const unflatten = o => {
 
   loop(o, (val, key) => {
     // Remove square brackets and replace them with delimiter.
-    key.replace(/\[([^[\]]+)\]/g, `${delimiter}$1`);
+    key = key.replace(/\[([^[\]]+)\]/g, `${delimiter}$1`);
 
     const keys = key.split(delimiter);
     let _r = result;
