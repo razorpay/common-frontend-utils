@@ -2,6 +2,8 @@ const sessionIdHeader = 'X-Razorpay-SessionId';
 const Xhr = XMLHttpRequest;
 import * as _ from './_';
 import * as _Func from './_Func';
+import * as _El from './_El';
+import * as _Doc from './_Doc';
 import * as _Obj from './_Obj';
 const networkError = _.rzpError('Network error');
 let jsonp_cb = 0;
@@ -189,7 +191,7 @@ function jsonp(options) {
         this |> _El.detach;
       }
     };
-    // console.log(global.Razorpay,'global.Razorpay')
+    // console.log(callbackName,'callbackNamecallbackName')
     let req = (global.Razorpay[callbackName] = function(data) {
       _Obj.deleteProp(data, 'http_status_code');
       cb(data);

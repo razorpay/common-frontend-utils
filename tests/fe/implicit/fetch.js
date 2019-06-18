@@ -12,14 +12,16 @@ const {
 describe('fetch', () => {
   describe('post', () => {
     it('Check if it sends post request and gets a response for correct URL', done => {
+      const body = {
+        name: 'morpheus',
+        job: 'leader',
+      };
       const f = fetch.post({
-        body: {
-          name: 'morpheus',
-          job: 'leader',
-        },
+        data: body,
         url: 'https://reqres.in/api/users',
         callback: a => {
-          const hasValidFields = a.id && a.createdAt;
+          const hasValidFields =
+            a.id && a.createdAt && a.name === 'morpheus' && a.job === 'leader';
           if (hasValidFields) {
             done();
           } else {
@@ -49,12 +51,14 @@ describe('fetch', () => {
     });
   });
 
-  describe('jsonp', () => {
-    it('Check if it sends jsonp request and gets a response for correct URL', done => {
-      fetch.jsonp({
-        url: 'https://jsonview.com/example.json',
-        callback: response => console.log('papapap'),
-      });
-    });
-  });
+  // remaining
+  //   describe('jsonp', () => {
+  //       global.Razorpay={};
+  //     it('Check if it sends jsonp request and gets a response for correct URL', done => {
+  //       fetch.jsonp({
+  //         url: 'https://jsonview.com/example.json',
+  //         callback:response => console.log(response,'p1111'),
+  //       });
+  //     });
+  //   });
 });
