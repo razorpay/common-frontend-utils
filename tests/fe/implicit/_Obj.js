@@ -271,10 +271,22 @@ describe('_Obj', () => {
   });
 
   describe('unflattens', () => {
+    it('correctly flattens an empty object', () => {
+      const obj = {};
+      const obj2 = _Obj.unflatten(obj);
+      const expected = {};
+      deepEqual(obj2, expected);
+    });
     it('Check if it correctly unflattens an object', () => {
       const obj = { 'a.b': 1 };
       const obj2 = _Obj.unflatten(obj);
       const expected = { a: { b: 1 } };
+      deepEqual(obj2, expected);
+    });
+    it('Check if it correctly unflattens an object with parenthesized subkeys', () => {
+      const obj = { 'a[b][c]': 1 };
+      const obj2 = _Obj.unflatten(obj);
+      const expected = { a: { b: { c: 1 } } };
       deepEqual(obj2, expected);
     });
   });
