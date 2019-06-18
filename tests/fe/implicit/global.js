@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import * as GLOBAL from '../../../src/fe/implicit/global.js';
+import * as global from '../../../src/fe/implicit/global';
 
 const {
   isTrue,
@@ -9,16 +9,36 @@ const {
   equal,
 } = assert;
 
-describe('1', () => {
-  describe('1', () => {
-    it('Check if it returns object as truthy', () => {
-      const obj = {};
-      isTrue(GLOBAL.Boolean(obj));
-    });
-
-    it('Check if it returns true as truthy and false as falsy', () => {
-      isTrue(GLOBAL.Boolean(true));
-      isFalse(GLOBAL.Boolean(false));
-    });
+describe('global', () => {
+  it('Check if everything was exported', () => {
+    const arr = Object.keys(global);
+    const expected = [
+      'global',
+      'document',
+      'Boolean',
+      'Array',
+      'Object',
+      'String',
+      'Number',
+      'Date',
+      'Math',
+      'setTimeout',
+      'setInterval',
+      'clearTimeout',
+      'clearInterval',
+      'parseInt',
+      'encodeURIComponent',
+      'decodeURIComponent',
+      'btoa',
+      'unescape',
+      'TypeError',
+      'navigator',
+      'location',
+      'XMLHttpRequest',
+      'NodeList',
+      'FormData',
+      'ArrayBuffer',
+    ];
+    deep(arr, expected);
   });
 });
