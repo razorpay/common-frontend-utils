@@ -30,35 +30,40 @@ describe('fetch', () => {
         },
       });
     });
-
-    it('Check if it sends post request and gets error for incorrect URL', done => {
-      const f = fetch.post({
-        body: {
-          name: 'morpheus',
-          job: 'leader',
-        },
-        url: 'https://reqres-wrong.in/api',
-        callback: a => {
-          const hasValidFields =
-            a.error.description == 'Network error' && a.xhr.status == 0;
-          if (hasValidFields) {
-            done();
-          } else {
-            done(new Error());
-          }
-        },
-      });
-    });
   });
-
   // remaining
-  //   describe('jsonp', () => {
-  //       global.Razorpay={};
-  //     it('Check if it sends jsonp request and gets a response for correct URL', done => {
-  //       fetch.jsonp({
-  //         url: 'https://jsonview.com/example.json',
-  //         callback:response => console.log(response,'p1111'),
-  //       });
+  // describe('jsonp', () => {
+  //   it('Check if it sends jsonp request and gets a response for correct URL', function(done) {
+  //     global.Razorpay={};
+  //     fetch.jsonp({
+  //       url: 'https://api.razorpay.com/v1/preferences?key_id=rzp_test_1DP5mmOlF5G5ag',
+  //       callback: response => {
+  //           const hasValidFields=response.http_status_code&&response.features.google_pay&&response.mode==='test';
+  //           if(hasValidFields){
+  //               done();
+  //           }
+  //           else{
+  //               done(new Error());
+  //           }
+  //       },
   //     });
   //   });
+
+  //   it('Check if it sends jsonp request and gets a response for incorrect URL', function(done) {
+  //       global.Razorpay={};
+  //       fetch.jsonp({
+  //         url: 'https://api.razorpay.com/v1/preferences-wrong?key_id=rzp_test_1DP5mmOlF5G5ag',
+  //         callback: response => {
+  //             const hasValidFields=response.error.description==="Network error";
+  //             if(hasValidFields)
+  //             {
+  //                 done();
+  //             }
+  //             else{
+  //                 done(new Error());
+  //             }
+  //         },
+  //       });
+  //     });
+  // });
 });
