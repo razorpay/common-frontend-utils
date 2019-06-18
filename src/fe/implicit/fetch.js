@@ -1,13 +1,28 @@
 const sessionIdHeader = 'X-Razorpay-SessionId';
 const Xhr = XMLHttpRequest;
+import * as _ from './_';
+import * as _Func from './_Func';
+import * as _Obj from './_Obj';
 const networkError = _.rzpError('Network error');
 let jsonp_cb = 0;
 let sessionId;
 
+/**
+ * Sets the session ID.
+ * @param {string} id
+ *
+ * @returns {void}
+ */
 function setSessionId(id) {
   sessionId = id;
 }
 
+/**
+ * Sends a fetch request with the given options
+ * @param {Object} options
+ *
+ * @returns {Object}
+ */
 export default function fetch(options) {
   if (!_.is(this, fetch)) {
     return new fetch(options);
@@ -126,6 +141,12 @@ function normalizeOptions(options) {
   return options;
 }
 
+/**
+ * Sends post request with the given options.
+ * @param {Object} opts
+ *
+ * @returns {Object}
+ */
 function post(opts) {
   opts.method = 'post';
   if (!opts.headers) {
@@ -138,6 +159,12 @@ function post(opts) {
   return fetch(opts);
 }
 
+/**
+ * Sends jsonp request with the given options.
+ * @param {Object} options
+ *
+ * @returns {Object}
+ */
 function jsonp(options) {
   if (!options.data) {
     options.data = {};
@@ -150,7 +177,6 @@ function jsonp(options) {
 
   request.call = function(cb = options.callback) {
     let done = false;
-
     const onload = function() {
       if (
         !done &&
@@ -163,7 +189,7 @@ function jsonp(options) {
         this |> _El.detach;
       }
     };
-
+    // console.log(global.Razorpay,'global.Razorpay')
     let req = (global.Razorpay[callbackName] = function(data) {
       _Obj.deleteProp(data, 'http_status_code');
       cb(data);
