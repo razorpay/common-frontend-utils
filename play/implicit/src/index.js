@@ -6,6 +6,7 @@ const EXPOSED_MODULES = {
   _,
   _Func,
   fetch,
+  global: global,
 };
 
 Object.keys(EXPOSED_MODULES).forEach(key => {

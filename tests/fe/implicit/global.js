@@ -17,7 +17,7 @@ describe('global', () => {
       'document',
       'Boolean',
       'Array',
-      'Object',
+      // 'Object',
       'String',
       'Number',
       'Date',
