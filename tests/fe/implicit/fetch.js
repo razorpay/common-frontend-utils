@@ -30,6 +30,26 @@ describe('fetch', () => {
         },
       });
     });
+    it('Check if it sends post request and gets a response for incorrect URL', done => {
+      const body = {
+        name: 'morpheus',
+        job: 'leader',
+      };
+      const f = fetch.post({
+        data: body,
+        url: 'https://reqres-wrong.in/api/users',
+        callback: a => {
+          console.log('error aya', a);
+          const hasValidFields =
+            a.error.description === 'Network error' && a.xhr.status === 0;
+          if (hasValidFields) {
+            done();
+          } else {
+            done(new Error());
+          }
+        },
+      });
+    });
   });
   // remaining
   // describe('jsonp', () => {
