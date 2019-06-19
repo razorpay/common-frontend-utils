@@ -191,7 +191,6 @@ function jsonp(options) {
         this |> _El.detach;
       }
     };
-    // console.log(callbackName,'callbackNamecallbackName')
     let req = (global.Razorpay[callbackName] = function(data) {
       _Obj.deleteProp(data, 'http_status_code');
       cb(data);
