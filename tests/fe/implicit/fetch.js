@@ -39,7 +39,6 @@ describe('fetch', () => {
         data: body,
         url: 'https://reqres-wrong.in/api/users',
         callback: a => {
-          console.log('error aya', a);
           const hasValidFields =
             a.error.description === 'Network error' && a.xhr.status === 0;
           if (hasValidFields) {
