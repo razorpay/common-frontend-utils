@@ -102,10 +102,8 @@ export const invoke = function(func) {
  */
 export const debounce = (func, wait) => {
   var timerId, args, context, timerFn, result;
-
   var later = function() {
     var last = timerFn();
-
     if (last < wait && last >= 0) {
       timerId = _.timeout(later, wait - last);
     } else {
