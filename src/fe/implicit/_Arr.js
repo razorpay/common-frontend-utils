@@ -187,17 +187,9 @@ export const append = _.curry2((array, member) => {
  *
  * @returns {Array}
  */
-export const remove = _.curry2((array, member) => {
-  let memberIndex = indexOf(array, member);
-
-  if (memberIndex >= 0) {
-    return protoSlice
-      .call(array, 0, memberIndex)
-      .concat(protoSlice.call(array, memberIndex + 1));
-  } else {
-    return array;
-  }
-});
+export const remove = _.curry2((array, member) =>
+  filter(array, item => item !== member)
+);
 
 /**
  * Returns the first item of the array.
