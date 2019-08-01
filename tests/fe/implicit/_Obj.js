@@ -313,4 +313,46 @@ describe('_Obj', () => {
       deepEqual(entries, []);
     });
   });
+
+  describe('getSafely', () => {
+    const foo = {
+      bar: [
+        'a',
+        'b',
+        {
+          hello: 'world',
+        },
+      ],
+
+      get thrower() {
+        throw new Error('failed');
+      },
+    };
+
+    it('Returns the value if item exists', () => {
+      const expected = 'a';
+      const returned = _Obj.getSafely(foo, 'bar.0');
+
+      deepEqual(expected, returned);
+    });
+
+    it('Returns exact object reference at path', () => {
+      const expected = foo.bar[2];
+      const returned = _Obj.getSafely(foo, 'bar.2');
+
+      equal(expected, returned);
+    });
+
+    it("Returns undefined if item doesn't exist", () => {
+      const returned = _Obj.getSafely(foo, 'baz');
+
+      isUndefined(returned);
+    });
+
+    it('Fails gracefully', () => {
+      const returned = _Obj.getSafely(foo, 'thrower');
+
+      isUndefined(returned);
+    });
+  });
 });

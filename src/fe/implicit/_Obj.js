@@ -272,3 +272,30 @@ export const entries = o => {
 
   return list;
 };
+
+/**
+ * Returns the value at a path if value exists
+ * @param {Object} object
+ * @param {string} path
+ *
+ * @returns {*}
+ */
+export const getSafely = (object, path) => {
+  const points = path.split('.');
+  let anchor = object;
+
+  for (let i = 0; i < points.length; i++) {
+    try {
+      const item = anchor[points[i]];
+      if (!item) {
+        return item;
+      }
+
+      anchor = item;
+    } catch (err) {
+      return;
+    }
+  }
+
+  return anchor;
+};
