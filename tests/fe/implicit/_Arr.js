@@ -384,4 +384,46 @@ describe('_Arr', () => {
       deep(second, secondCopy);
     });
   });
+
+  describe('insertAt', () => {
+    const base = [1, 2, 3];
+    const first = [1, 4, 2, 3];
+    const second = [1, 2, 3, undefined, undefined, undefined, 4];
+    const third = [undefined, undefined, 4];
+    const fourth = [1, 2, 3, 4];
+    const fifth = [4, 1, 2, 3];
+
+    it('inserts within length', () => {
+      const returned = _Arr.insertAt(base, 4, 1);
+
+      deep(returned, first);
+      notDeep(returned, base);
+    });
+
+    it('inserts beyond length', () => {
+      const returned = _Arr.insertAt(base, 4, 6);
+
+      deep(returned, second);
+      notDeep(returned, base);
+    });
+
+    it('inserts in an empty array', () => {
+      const returned = _Arr.insertAt([], 4, 2);
+      deep(returned, third);
+    });
+
+    it('inserts at the length', () => {
+      const returned = _Arr.insertAt(base, 4, base.length);
+
+      deep(returned, fourth);
+      notDeep(returned, base);
+    });
+
+    it('inserts at the beginning', () => {
+      const returned = _Arr.insertAt(base, 4, 0);
+
+      deep(returned, fifth);
+      notDeep(returned, base);
+    });
+  });
 });

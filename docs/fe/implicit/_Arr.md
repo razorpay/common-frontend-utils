@@ -269,6 +269,19 @@ Result: [...array1, ...array2]
 
 Returns **[Array][2]**
 
+## insertAt
+
+Inserts (pushes) an element in the array
+at the given index.
+
+### Parameters
+
+- `array` **[Array][2]**
+- `item` **any**
+- `index` **[number][4]**
+
+Returns **[Array][2]**
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
