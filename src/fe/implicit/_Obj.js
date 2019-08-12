@@ -287,7 +287,9 @@ export const getSafely = (object, path) => {
   for (let i = 0; i < points.length; i++) {
     try {
       const item = anchor[points[i]];
-      if (!item) {
+
+      // Continue only if non-primitive or string
+      if (_.isPrimitive(item) && !_.isString(item)) {
         return item;
       }
 

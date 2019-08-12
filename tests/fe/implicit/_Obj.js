@@ -349,6 +349,29 @@ describe('_Obj', () => {
       isUndefined(returned);
     });
 
+    it('Returns the length of a string', () => {
+      const obj = {
+        foo: {
+          bar: 'razorpay',
+        },
+      };
+      const length = _Obj.getSafely(obj, 'foo.bar.length');
+
+      equal(length, obj.foo.bar.length);
+    });
+
+    it('Returns does not continue past primitive types', () => {
+      const primitive = {
+        foo: {
+          bar: 0,
+        },
+      };
+
+      const found = _Obj.getSafely(primitive, 'bar.baz');
+
+      isUndefined(found);
+    });
+
     it('Fails gracefully', () => {
       const returned = _Obj.getSafely(foo, 'thrower');
 
