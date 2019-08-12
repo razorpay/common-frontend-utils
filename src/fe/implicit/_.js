@@ -149,7 +149,7 @@ export const isElement = o => isNonNullObject(o) && o.nodeType === 1;
  *
  * @returns {boolean}
  */
-export const isTruthy = o => Boolean(o);
+export const isTruthy = Boolean;
 
 /**
  * Checks if the given argument is not a null object
