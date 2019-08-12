@@ -111,6 +111,31 @@ export const isObject = isType('object');
 export const isArray = Array.isArray;
 
 /**
+ * Tells whether something is undefined
+ * @param {*} x
+ *
+ * @returns {Boolean}
+ */
+export const isUndefined = isType('undefined');
+
+/**
+ * Tells whether something is null
+ * @param {*} x
+ *
+ * @returns {Boolean}
+ */
+export const isNull = x => x === null;
+
+/**
+ * Tells whether something is of a primitive type
+ * @param {*} x
+ *
+ * @returns {Boolean}
+ */
+export const isPrimitive = x =>
+  isString(x) || isNumber(x) || isBoolean(x) || isNull(x) || isUndefined(x);
+
+/**
  * Checks if the given argument is an element or not
  * @param {Object|Element} o
  *
@@ -132,7 +157,7 @@ export const isTruthy = o => Boolean(o);
  *
  * @returns {boolean}
  */
-export const isNonNullObject = o => o !== null && isObject(o);
+export const isNonNullObject = o => !isNull(o) && isObject(o);
 
 /**
  * Checks if the given object is empty or not
