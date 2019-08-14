@@ -290,7 +290,13 @@ export const getSafely = (object, path) => {
 
       // Continue only if non-primitive or string
       if (_.isPrimitive(item) && !_.isString(item)) {
-        return item;
+        const isLastInPath = i === points.length - 1;
+
+        if (isLastInPath) {
+          return item;
+        } else {
+          return;
+        }
       }
 
       anchor = item;
