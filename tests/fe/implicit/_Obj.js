@@ -360,14 +360,14 @@ describe('_Obj', () => {
       equal(length, obj.foo.bar.length);
     });
 
-    it('Returns does not continue past primitive types', () => {
+    it('does not continue past primitive types', () => {
       const primitive = {
         foo: {
           bar: 0,
         },
       };
 
-      const found = _Obj.getSafely(primitive, 'bar.baz');
+      const found = _Obj.getSafely(primitive, 'foo.bar.baz');
 
       isUndefined(found);
     });
