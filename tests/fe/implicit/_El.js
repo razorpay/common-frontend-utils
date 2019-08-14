@@ -172,6 +172,55 @@ describe('_El', function() {
     });
   });
 
+  describe('toggleClass', () => {
+    it('adds class if it does not exist', () => {
+      const div = _El.create('div');
+      isFalse(_El.hasClass(div, 'test'));
+      _El.toggleClass(div, 'test');
+      isTrue(_El.hasClass(div, 'test'));
+    });
+
+    it('removes class if it exists', () => {
+      const div = _El.create('div');
+      _El.addClass(div, 'test');
+      isTrue(_El.hasClass(div, 'test'));
+      _El.toggleClass(div, 'test');
+      isFalse(_El.hasClass(div, 'test'));
+    });
+  });
+
+  describe('keepClass', () => {
+    it('when keep=true, it adds class if it was absent', () => {
+      const div = _El.create('div');
+      isFalse(_El.hasClass(div, 'test'));
+      _El.keepClass(div, 'test', true);
+      isTrue(_El.hasClass(div, 'test'));
+    });
+
+    it('when keep=true, it does not remove the class if present', () => {
+      const div = _El.create('div');
+      _El.addClass(div, 'test');
+      isTrue(_El.hasClass(div, 'test'));
+      _El.keepClass(div, 'test', true);
+      isTrue(_El.hasClass(div, 'test'));
+    });
+
+    it('when keep=false, it removes class if it was present', () => {
+      const div = _El.create('div');
+      _El.addClass(div, 'test');
+      isTrue(_El.hasClass(div, 'test'));
+      _El.keepClass(div, 'test', false);
+      isFalse(_El.hasClass(div, 'test'));
+    });
+
+    it('when keep=false, it does not add the class if absent', () => {
+      const div = _El.create('div');
+      isFalse(_El.hasClass(div, 'test'));
+      _El.keepClass(div, 'test', false);
+      isFalse(_El.hasClass(div, 'test'));
+    });
+  });
+
   describe('getAttribute', () => {
     const div = _El.create('div');
     div.setAttribute('class', 'red blue');

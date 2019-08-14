@@ -206,6 +206,48 @@ export const removeClass =
   |> _.curry2;
 
 /**
+ * Removes the class if it is attached.
+ * Adds a class if it is not attached.
+ * @param {Element} el
+ * @param {string} className
+ *
+ * @returns {Element}
+ */
+export const toggleClass =
+  ((el, className) => {
+    if (hasClass(el, className)) {
+      removeClass(el, className);
+    } else {
+      addClass(el, className);
+    }
+
+    return el;
+  })
+  |> elementString
+  |> _.curry2;
+
+/**
+ * Adds or removes class based on `keep`
+ * @param {Element} el
+ * @param {string} className
+ * @param {boolean} keep
+ *
+ * @returns {Element}
+ */
+export const keepClass =
+  ((el, className, keep) => {
+    if (keep) {
+      addClass(el, className);
+    } else {
+      removeClass(el, className);
+    }
+
+    return el;
+  })
+  |> elementString
+  |> _.curry3;
+
+/**
  * Gets attribute of the given element.
  * @param {Element} el
  * @param {string} attr
