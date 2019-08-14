@@ -94,7 +94,7 @@ Moves caret for an element between the given positions
 - `el` **[Element][2]**
 - `position` **[number][3]**
 
-Returns **[Object][4]**
+Returns **[Element][2]**
 
 ## submit
 
@@ -104,7 +104,7 @@ Call submit method on the given element.
 
 - `el` **[Element][2]**
 
-Returns **[Object][4]**
+Returns **[Element][2]**
 
 ## hasClass
 
@@ -112,10 +112,10 @@ Checks if the given element has the given class.
 
 ### Parameters
 
-- `el` **[Object][4]**
+- `el` **[Element][2]**
 - `className` **[string][1]**
 
-Returns **[boolean][5]**
+Returns **[boolean][4]**
 
 ## addClass
 
@@ -123,10 +123,10 @@ Adds a class to the given element.
 
 ### Parameters
 
-- `el` **[Object][4]**
+- `el` **[Element][2]**
 - `className` **[string][1]**
 
-Returns **[Object][4]**
+Returns **[Element][2]**
 
 ## removeClass
 
@@ -134,10 +134,34 @@ Removes a class from the given element.
 
 ### Parameters
 
-- `el` **[Object][4]**
+- `el` **[Element][2]**
 - `className` **[string][1]**
 
-Returns **[Object][4]**
+Returns **[Element][2]**
+
+## toggleClass
+
+Removes the class if it is attached.
+Adds a class if it is not attached.
+
+### Parameters
+
+- `el` **[Element][2]**
+- `className` **[string][1]**
+
+Returns **[Element][2]**
+
+## keepClass
+
+Adds or removes class based on `keep`
+
+### Parameters
+
+- `el` **[Element][2]**
+- `className` **[string][1]**
+- `keep` **[boolean][4]**
+
+Returns **[Element][2]**
 
 ## getAttribute
 
@@ -160,7 +184,7 @@ Sets attribute of the given element.
 - `attr` **[string][1]**
 - `value` **[string][1]**
 
-Returns **[Object][4]**
+Returns **[Object][5]**
 
 ## setStyle
 
@@ -172,7 +196,7 @@ Sets style of the given element.
 - `cssProp` **[string][1]**
 - `value` **[string][1]**
 
-Returns **[Object][4]**
+Returns **[Object][5]**
 
 ## setAttributes
 
@@ -181,9 +205,9 @@ Sets multiple attibutes of the given element.
 ### Parameters
 
 - `el` **[Element][2]**
-- `attributes` **[Object][4]**
+- `attributes` **[Object][5]**
 
-Returns **[Object][4]**
+Returns **[Object][5]**
 
 ## setStyles
 
@@ -192,9 +216,9 @@ Sets multiple styles of the given element.
 ### Parameters
 
 - `el` **[Element][2]**
-- `styles` **[Object][4]**
+- `styles` **[Object][5]**
 
-Returns **[Object][4]**
+Returns **[Object][5]**
 
 ## setContents
 
@@ -205,7 +229,7 @@ Sets contents of the given element.
 - `el` **[Element][2]**
 - `html` **[string][1]**
 
-Returns **[Object][4]**
+Returns **[Object][5]**
 
 ## setDisplay
 
@@ -216,7 +240,7 @@ Sets the display style of the given element.
 - `el` **[Element][2]**
 - `value` **[string][1]**
 
-Returns **[Object][4]**
+Returns **[Object][5]**
 
 ## bbox
 
@@ -226,7 +250,7 @@ Gets the size of an element and its position relative to the viewport
 
 - `el` **[Element][2]**
 
-Returns **[Object][4]**
+Returns **[Object][5]**
 
 ## firstChild
 
@@ -236,7 +260,7 @@ Gets the first Child of the given element.
 
 - `el` **[Element][2]**
 
-Returns **[Object][4]**
+Returns **[Object][5]**
 
 ## matches
 
@@ -247,10 +271,10 @@ Checks if the given element and the selector matches.
 - `el` **[Element][2]**
 - `selector` **[string][1]**
 
-Returns **[Object][4]**
+Returns **[Object][5]**
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 [2]: https://developer.mozilla.org/docs/Web/API/Element
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
-[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
-[5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
