@@ -129,7 +129,7 @@ export const selectionEnd = _.prop('selectionEnd') |> element1;
  * @param {Element} el
  * @param {number} position
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const moveCaret =
   ((el, position) => {
@@ -143,7 +143,7 @@ export const moveCaret =
  * Call submit method on the given element.
  * @param {Element} el
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const submit =
   (el => {
@@ -153,7 +153,7 @@ export const submit =
 
 /**
  * Checks if the given element has the given class.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} className
  *
  * @returns {boolean}
@@ -167,10 +167,10 @@ export const hasClass =
 
 /**
  * Adds a class to the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} className
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const addClass =
   ((el, className) => {
@@ -186,10 +186,10 @@ export const addClass =
 
 /**
  * Removes a class from the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} className
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const removeClass =
   ((el, className) => {
