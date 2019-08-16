@@ -272,3 +272,46 @@ export const entries = o => {
 
   return list;
 };
+
+/**
+ * Returns the value at a path if value exists
+ * @param {Object} object
+ * @param {string} path
+ *
+ * @returns {*}
+ */
+export const getSafely = (object, path) => {
+  const points = path.split('.');
+  let anchor = object;
+
+  for (let i = 0; i < points.length; i++) {
+    try {
+      const item = anchor[points[i]];
+
+      // Continue only if non-primitive or string
+      if (_.isPrimitive(item) && !_.isString(item)) {
+        const isLastInPath = i === points.length - 1;
+
+        /**
+         * If the item is the last item in the path,
+         * this is what the user is looking for.
+         * If it's not the last item in the path,
+         * we need to proceed. But because we're
+         * looking at a primitive data-type, we can't
+         * proceed. So, we return undefined.
+         */
+        if (isLastInPath) {
+          return item;
+        } else {
+          return;
+        }
+      }
+
+      anchor = item;
+    } catch (err) {
+      return;
+    }
+  }
+
+  return anchor;
+};

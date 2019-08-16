@@ -171,6 +171,64 @@ describe('_', () => {
     });
   });
 
+  describe('isUndefined', () => {
+    it('determines undefined element correctly', () => {
+      isTrue(_.isUndefined(undefined));
+    });
+
+    it('determines no-params as undefined', () => {
+      isTrue(_.isUndefined());
+    });
+
+    it('determines non-undefined properly', () => {
+      isFalse(_.isUndefined([]));
+    });
+  });
+
+  describe('isNull', () => {
+    it('determines null element correctly', () => {
+      isTrue(_.isNull(null));
+    });
+
+    it('determines non-null properly', () => {
+      isFalse(_.isNull([]));
+    });
+  });
+
+  describe('isPrimitive', () => {
+    it('determines string as primitive', () => {
+      isTrue(_.isPrimitive('razorpay'));
+    });
+
+    it('determines number as primitive', () => {
+      isTrue(_.isPrimitive(42));
+    });
+
+    it('determines boolean as primitive', () => {
+      isTrue(_.isPrimitive(true));
+    });
+
+    it('determines null as primitive', () => {
+      isTrue(_.isPrimitive(null));
+    });
+
+    it('determines undefined as primitive', () => {
+      isTrue(_.isPrimitive(undefined));
+    });
+
+    it('determines function as non-primitive', () => {
+      isFalse(_.isPrimitive(() => {}));
+    });
+
+    it('determines objects as non-primitive', () => {
+      isFalse(_.isPrimitive({}));
+    });
+
+    it('determines arrays as non-primitive', () => {
+      isFalse(_.isPrimitive([]));
+    });
+  });
+
   describe('isElement', () => {
     it('Check if it is return true if element is an element or not', () => {
       const div = _El.create('div');
