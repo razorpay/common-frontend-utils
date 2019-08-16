@@ -129,7 +129,7 @@ export const selectionEnd = _.prop('selectionEnd') |> element1;
  * @param {Element} el
  * @param {number} position
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const moveCaret =
   ((el, position) => {
@@ -143,7 +143,7 @@ export const moveCaret =
  * Call submit method on the given element.
  * @param {Element} el
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const submit =
   (el => {
@@ -153,7 +153,7 @@ export const submit =
 
 /**
  * Checks if the given element has the given class.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} className
  *
  * @returns {boolean}
@@ -167,10 +167,10 @@ export const hasClass =
 
 /**
  * Adds a class to the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} className
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const addClass =
   ((el, className) => {
@@ -186,10 +186,10 @@ export const addClass =
 
 /**
  * Removes a class from the given element.
- * @param {Object} el
+ * @param {Element} el
  * @param {string} className
  *
- * @returns {Object}
+ * @returns {Element}
  */
 export const removeClass =
   ((el, className) => {
@@ -204,6 +204,48 @@ export const removeClass =
   })
   |> elementString
   |> _.curry2;
+
+/**
+ * Removes the class if it is attached.
+ * Adds a class if it is not attached.
+ * @param {Element} el
+ * @param {string} className
+ *
+ * @returns {Element}
+ */
+export const toggleClass =
+  ((el, className) => {
+    if (hasClass(el, className)) {
+      removeClass(el, className);
+    } else {
+      addClass(el, className);
+    }
+
+    return el;
+  })
+  |> elementString
+  |> _.curry2;
+
+/**
+ * Adds or removes class based on `keep`
+ * @param {Element} el
+ * @param {string} className
+ * @param {boolean} keep
+ *
+ * @returns {Element}
+ */
+export const keepClass =
+  ((el, className, keep) => {
+    if (keep) {
+      addClass(el, className);
+    } else {
+      removeClass(el, className);
+    }
+
+    return el;
+  })
+  |> elementString
+  |> _.curry3;
 
 /**
  * Gets attribute of the given element.
