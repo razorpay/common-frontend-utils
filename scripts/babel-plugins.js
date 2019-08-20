@@ -1,26 +1,29 @@
 const babel = require('rollup-plugin-babel');
 
 const plugins = [
-  ['module:fast-async', { useRuntimeModule: false }],
-  '@babel/transform-arrow-functions',
-  '@babel/transform-block-scoped-functions',
-  '@babel/transform-block-scoping',
-  ['@babel/transform-classes', { loose: true }],
-  ['@babel/transform-computed-properties', { loose: true }],
-  '@babel/transform-destructuring',
+  [require('fast-async'), { useRuntimeModule: false }],
+  require('@babel/plugin-transform-arrow-functions'),
+  require('@babel/plugin-transform-block-scoped-functions'),
+  require('@babel/plugin-transform-block-scoping'),
+  [require('@babel/plugin-transform-classes'), { loose: true }],
+  [require('@babel/plugin-transform-computed-properties'), { loose: true }],
+  require('@babel/plugin-transform-destructuring'),
 
   // loose mode: parameters with default values
   // will be counted into the arity of the function
-  ['@babel/transform-parameters', { loose: true }],
+  [require('@babel/plugin-transform-parameters'), { loose: true }],
 
-  '@babel/transform-shorthand-properties',
-  ['@babel/transform-template-literals', { loose: true }],
+  require('@babel/plugin-transform-shorthand-properties'),
+  [require('@babel/plugin-transform-template-literals'), { loose: true }],
 
-  ['@babel/proposal-pipeline-operator', { proposal: 'minimal' }],
+  [
+    require('@babel/plugin-proposal-pipeline-operator'),
+    { proposal: 'minimal' },
+  ],
 ];
 
 module.exports = babel({
-  extensions: ['.js', '.svelte'],
+  extensions: ['.js', '.svelte', '.mjs'],
   plugins,
 });
 

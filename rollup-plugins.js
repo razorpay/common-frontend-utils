@@ -21,7 +21,11 @@ const getPlugins = ({
   if (!Array.isArray(src)) {
     src = [src];
   }
-  const paths = src.concat(commonFeDir);
+  const paths = src.concat(
+    commonFeDir,
+    'node_modules',
+    'node_modules/fe/node_modules'
+  );
 
   if (lint) {
     eslint.lint(isWatching)(paths);
@@ -31,7 +35,10 @@ const getPlugins = ({
   // svelte needs to be before babel so that by the time
   // babel is run, svelte has become JS
   return [
-    include({ paths }),
+    include({
+      paths,
+      extensions: ['.mjs', '.js'],
+    }),
 
     svelte({
       extensions: '.svelte',
