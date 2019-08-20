@@ -61,7 +61,7 @@ Documentation can be found in the [docs](docs) directory.
 
 ### Scripts ([`scripts`](scripts))
 
-- `babel-plugins` - List and config of babel plugins
+- `babel-options` - babel config (plugins, presets)
 - `eslint` - ESLint helpers and config
 - `eslint-compat`
 - `estlinrc` - ESLint rules

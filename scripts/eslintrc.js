@@ -13,7 +13,7 @@ const blacklistVars = globals.map(g => `VariableDeclarator[id.name=${g}]`);
 module.exports = {
   baseConfig: eslintRecommended,
   useEslintrc: false,
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
   globals,
   rules: {
     // fixable by prettier

@@ -1,7 +1,9 @@
 const argv = require('yargs-parser')(process.argv.slice(2));
 const globals = require('./scripts/rollup-injects');
 const include = require('rollup-plugin-includepaths');
-const babelPlugins = require('./scripts/babel-plugins');
+const babelOptions = require('./scripts/babel-options');
+const babelPlugin = require('rollup-plugin-babel');
+const babel = require('@babel/core');
 const stylus = require('./scripts/rollup-plugin-stylus');
 const svelte = require('rollup-plugin-svelte');
 const inject = require('rollup-plugin-inject');
@@ -31,6 +33,9 @@ const getPlugins = ({
     eslint.lint(isWatching)(paths);
   }
 
+  const svelteBabelOptions = { ...babelOptions };
+  delete svelteBabelOptions.extensions;
+
   // Order of plugins is important:
   // svelte needs to be before babel so that by the time
   // babel is run, svelte has become JS
@@ -44,9 +49,9 @@ const getPlugins = ({
       extensions: '.svelte',
       preprocess: {
         style: ({ content }) => stylus.stylusToCss(content),
-        script: ({ content, attrs, id }) => {
+        script: ({ content }) => {
           setTimeout(() => eslint.lintText(content));
-          return content;
+          return babel.transformAsync(content, svelteBabelOptions);
         },
       },
       dev: !isProd,
@@ -57,7 +62,7 @@ const getPlugins = ({
       },
     }),
 
-    babelPlugins,
+    babelPlugin(babelOptions),
 
     inject(globals),
   ];
