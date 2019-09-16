@@ -135,7 +135,7 @@ function normalizeOptions(options) {
   if (!callback) {
     options.callback = _Func.noop;
   }
-  if (_.isNonNullObject(data)) {
+  if (_.isNonNullObject(data) && !_.is(data, FormData)) {
     data = _.obj2query(data);
   }
   options.data = data;
