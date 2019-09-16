@@ -49,3 +49,14 @@ export const sliceFrom = _.curry2((str, from) => protoSlice.call(str, from));
  * @returns {boolean}
  */
 export const startsWith = _.curry2((str, substr) => str.indexOf(substr) === 0);
+
+/**
+ * Check if a string ends with a given string
+ * @param {string} str
+ * @param {string} substring
+ *
+ * @returns {boolean}
+ */
+export const endsWith = _.curry2(
+  (str, substr) => str.lastIndexOf(substr) === str.length - substr.length
+);

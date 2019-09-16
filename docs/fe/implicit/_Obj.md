@@ -243,6 +243,15 @@ Returns the value at a path if value exists
 
 Returns **any**
 
+## isLastInPath
+
+If the item is the last item in the path,
+this is what the user is looking for.
+If it's not the last item in the path,
+we need to proceed. But because we're
+looking at a primitive data-type, we can't
+proceed. So, we return undefined.
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
