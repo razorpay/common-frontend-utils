@@ -84,4 +84,20 @@ describe('_Str', () => {
       isFalse(isStarting);
     });
   });
+
+  describe('endsWith', () => {
+    it('Checks if a string ends with a given substring', () => {
+      const str = 'Razorpay';
+      const ends = _Str.endsWith(str, 'pay');
+
+      isTrue(ends);
+    });
+
+    it('Checks if a string does not end with a given string', () => {
+      const str = 'Razorpay';
+      const ends = _Str.endsWith(str, 'payments');
+
+      isFalse(ends);
+    });
+  });
 });

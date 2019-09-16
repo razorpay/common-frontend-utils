@@ -292,14 +292,12 @@ export const getSafely = (object, path) => {
       if (_.isPrimitive(item) && !_.isString(item)) {
         const isLastInPath = i === points.length - 1;
 
-        /**
-         * If the item is the last item in the path,
-         * this is what the user is looking for.
-         * If it's not the last item in the path,
-         * we need to proceed. But because we're
-         * looking at a primitive data-type, we can't
-         * proceed. So, we return undefined.
-         */
+        // If the item is the last item in the path,
+        // this is what the user is looking for.
+        // If it's not the last item in the path,
+        // we need to proceed. But because we're
+        // looking at a primitive data-type, we can't
+        // proceed. So, we return undefined.
         if (isLastInPath) {
           return item;
         } else {
