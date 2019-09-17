@@ -33,9 +33,6 @@ const getPlugins = ({
     eslint.lint(isWatching)(paths);
   }
 
-  const svelteBabelOptions = { ...babelOptions };
-  delete svelteBabelOptions.extensions;
-
   // Order of plugins is important:
   // svelte needs to be before babel so that by the time
   // babel is run, svelte has become JS
@@ -51,7 +48,7 @@ const getPlugins = ({
         style: ({ content }) => stylus.stylusToCss(content),
         script: ({ content }) => {
           setTimeout(() => eslint.lintText(content));
-          return babel.transformAsync(content, svelteBabelOptions);
+          return babel.transformAsync(content, babelOptions);
         },
       },
       dev: !isProd,
