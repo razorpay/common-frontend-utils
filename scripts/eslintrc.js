@@ -47,4 +47,11 @@ module.exports = {
       ...blacklistVars,
     ],
   },
+  overrides: [
+    {
+      files: ['**/*.svelte'],
+      processor: 'svelte3/svelte3',
+    },
+  ],
+  plugins: ['svelte3'],
 };

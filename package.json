@@ -29,6 +29,7 @@
     "chokidar": "^3.0.2",
     "ecstatic": "^4.1.2",
     "eslint": "^6.2.0",
+    "eslint-plugin-svelte3": "^2.7.3",
     "fast-async": "^7.0.6",
     "glob": "^7.1.4",
     "http-proxy": "^1.17.0",
