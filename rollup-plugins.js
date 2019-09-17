@@ -46,11 +46,11 @@ const getPlugins = ({
       extensions: '.svelte',
       preprocess: {
         style: ({ content }) => stylus.stylusToCss(content),
-        script: ({ content }) => {
-          setTimeout(() => eslint.lintText(content));
-          // return babel.transformAsync(content, babelOptions);
-          return content;
-        },
+        // script: ({ content }) => {
+        //   setTimeout(() => eslint.lintText(content));
+        //   // return babel.transformAsync(content, babelOptions);
+        //   return content;
+        // },
       },
       dev: !isProd,
       css: css => {
