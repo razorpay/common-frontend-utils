@@ -48,7 +48,8 @@ const getPlugins = ({
         style: ({ content }) => stylus.stylusToCss(content),
         script: ({ content }) => {
           setTimeout(() => eslint.lintText(content));
-          return babel.transformAsync(content, babelOptions);
+          // return babel.transformAsync(content, babelOptions);
+          return content;
         },
       },
       dev: !isProd,
