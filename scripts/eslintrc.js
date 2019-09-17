@@ -29,6 +29,7 @@ module.exports = {
     'no-caller': 2, // disable arguments.callee or caller usage
     'no-extend-native': 2, // disallow meddling with built-in object prototypes
     'no-proto': 2, // disable __proto__
+    'no-prototype-builtins': 0,
 
     'linebreak-style': [2, 'unix'],
 
