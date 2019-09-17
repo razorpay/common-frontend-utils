@@ -2,6 +2,7 @@ const EXPOSED_MODULES = {
   _Arr,
   _Obj,
   _Doc,
+  _Str,
   _El,
   _,
   _Func,

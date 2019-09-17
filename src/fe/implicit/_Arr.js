@@ -271,3 +271,27 @@ export const merge = _.curry2((arr1, arr2) => {
 export const mergeWith = _.curry2((arr1, arr2) => {
   return merge(arr2, arr1);
 });
+
+/**
+ * Inserts (pushes) an element in the array
+ * at the given index.
+ * @param {Array} array
+ * @param {*} item
+ * @param {number} index
+ *
+ * @returns {Array}
+ */
+export const insertAt = _.curry3((array, item, index) => {
+  if (index > array.length - 1) {
+    const inserted = sliceFrom(array, 0);
+    inserted[index] = item;
+
+    return inserted;
+  } else {
+    const first = slice(array, 0, index);
+    const middle = [item];
+    const end = sliceFrom(array, index);
+
+    return first |> mergeWith(middle) |> mergeWith(end);
+  }
+});

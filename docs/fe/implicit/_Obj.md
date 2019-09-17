@@ -232,6 +232,17 @@ Returns an array with subarrays consisting of key and value pairs
 
 Returns **[Array][2]**
 
+## getSafely
+
+Returns the value at a path if value exists
+
+### Parameters
+
+- `object` **[Object][1]**
+- `path` **[string][4]**
+
+Returns **any**
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean

@@ -55,6 +55,17 @@ Check if a string starts with a given string
 
 Returns **[boolean][2]**
 
+## endsWith
+
+Check if a string ends with a given string
+
+### Parameters
+
+- `str` **[string][1]**
+- `substring` **[string][1]**
+
+Returns **[boolean][2]**
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
