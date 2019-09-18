@@ -58,6 +58,7 @@ const getPlugins = ({
           css.write(`${svelteCssPath}/svelte.styl`);
         }
       },
+      accessors: true,
     }),
 
     babelPlugin(babelOptions),
