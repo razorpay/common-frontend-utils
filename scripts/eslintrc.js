@@ -19,6 +19,10 @@ module.exports = {
         processor: 'svelte3/svelte3',
       },
     ],
+
+    settings: {
+      'svelte3/ignore-styles': _ => true,
+    },
   },
   useEslintrc: false,
   parser: require.resolve('babel-eslint'),
