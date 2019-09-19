@@ -9,10 +9,41 @@ const svelte = require('rollup-plugin-svelte');
 const inject = require('rollup-plugin-inject');
 const eslint = require('./scripts/eslint');
 const isProd = require('./prod');
+const { readFile } = require('fs');
 
 const isWatching = argv.w || argv.watch;
 
 const commonFeDir = 'node_modules/fe/src';
+
+const resolveSrc = (importerFile, srcPath) =>
+  resolve(dirname(importerFile), srcPath);
+
+const getSrcContent = file =>
+  new Promise((resolve, reject) => {
+    readFile(file, (error, data) => {
+      if (error) reject(error);
+      else resolve(data.toString());
+    });
+  });
+
+const parseFile = async ({ attributes, filename, content }) => {
+  const dependencies = [];
+  if (attributes.src) {
+    /** Ignore remote files */
+    if (!attributes.src.match(/^(https?)?:?\/\/.*$/)) {
+      const file = resolveSrc(filename, attributes.src);
+      content = await getSrcContent(file);
+      dependencies.push(file);
+    }
+  }
+
+  return {
+    filename,
+    attributes,
+    content,
+    dependencies,
+  };
+};
 
 const getPlugins = ({
   watch = isWatching,
@@ -43,14 +74,19 @@ const getPlugins = ({
     }),
 
     svelte({
-      extensions: '.svelte',
+      extensions: ['.svelte'],
       preprocess: {
         style: ({ content }) => stylus.stylusToCss(content),
-        // script: ({ content }) => {
-        //   setTimeout(() => eslint.lintText(content));
-        //   // return babel.transformAsync(content, babelOptions);
-        //   return content;
-        // },
+        script: async svelteFile => {
+          setTimeout(() => eslint.lint(false)([svelteFile.filename]));
+
+          const { content, dependencies } = await parseFile(svelteFile);
+
+          return {
+            code: content,
+            dependencies,
+          };
+        },
       },
       dev: !isProd,
       css: css => {
