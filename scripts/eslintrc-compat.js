@@ -9,6 +9,7 @@ module.exports = {
     'no-empty': 0,
     'no-console': 0,
     'no-iterator': 2,
+    'no-prototype-builtins': 0,
   },
   globals: ['window', 'console'],
 };
