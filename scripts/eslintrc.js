@@ -11,7 +11,15 @@ const blacklistVars = globals.map(g => `VariableDeclarator[id.name=${g}]`);
 // 2 - error
 
 module.exports = {
-  baseConfig: eslintRecommended,
+  baseConfig: {
+    ...eslintRecommended,
+    overrides: [
+      {
+        files: ['**/*.svelte'],
+        processor: 'svelte3/svelte3',
+      },
+    ],
+  },
   useEslintrc: false,
   parser: require.resolve('babel-eslint'),
   globals,
@@ -29,7 +37,7 @@ module.exports = {
     'no-caller': 2, // disable arguments.callee or caller usage
     'no-extend-native': 2, // disallow meddling with built-in object prototypes
     'no-proto': 2, // disable __proto__
-    'no-prototype-builtins': 0,
+    'no-prototype-builtins': 0, // Access Object.prototype method 'hasOwnProperty' from target object
 
     'linebreak-style': [2, 'unix'],
 
@@ -48,11 +56,5 @@ module.exports = {
       ...blacklistVars,
     ],
   },
-  overrides: [
-    {
-      files: ['**/*.svelte'],
-      processor: 'svelte3/svelte3',
-    },
-  ],
   plugins: ['svelte3'],
 };
