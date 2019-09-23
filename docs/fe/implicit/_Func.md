@@ -79,7 +79,19 @@ Creates and returns a debounced version of the function.
 
 Returns **[Function][1]**
 
+## negate
+
+Returns a negated version of a function, i.e. if the original function
+returned true, the negated function returns false.
+
+### Parameters
+
+- `fn` {function(\*): any}
+
+Returns **function (any): [boolean][5]**
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 [4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean

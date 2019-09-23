@@ -121,3 +121,16 @@ export const debounce = (func, wait) => {
     return result;
   };
 };
+
+/**
+ * Returns a negated version of a function, i.e. if the original function
+ * returned true, the negated function returns false.
+ *
+ * @param fn {function(*): any}
+ * @return {function(*): boolean}
+ */
+export const negate = fn => {
+  return function negated() {
+    return !fn.apply(this, arguments);
+  };
+};
