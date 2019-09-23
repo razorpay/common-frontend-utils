@@ -178,4 +178,40 @@ describe('_Func', () => {
       }, wait * 1.5);
     });
   });
+
+  describe('negate', () => {
+    function predicate(x) {
+      return x;
+    }
+
+    const negatedPredicate = _Func.negate(predicate);
+
+    it('returns false when the original function returns true', function() {
+      const expected = false;
+      const actual = negatedPredicate(true);
+
+      equal(actual, expected);
+    });
+
+    it('returns true when the original function returns false', function() {
+      const expected = true;
+      const actual = negatedPredicate(false);
+
+      equal(actual, expected);
+    });
+
+    it('returns false when the original function returns a truthy value', function() {
+      const expected = false;
+      const actual = negatedPredicate({});
+
+      equal(actual, expected);
+    });
+
+    it('returns true when the original function returns a falsy value', function() {
+      const expected = true;
+      const actual = negatedPredicate('');
+
+      equal(actual, expected);
+    });
+  });
 });
