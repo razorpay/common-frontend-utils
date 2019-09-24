@@ -283,7 +283,7 @@ export const entries = o => {
  *
  * @returns {*}
  */
-export const getSafely = (object, path, defaultValue) => {
+export const getSafely = (object, path, defaultValue = undefined) => {
   const points = path.split('.');
   let anchor = object;
 
