@@ -234,14 +234,14 @@ Returns **[Array][2]**
 
 ## getSafely
 
-Returns the value at a path if value exists, otherwise returns the default
-value
+Returns the value at a path if value exists and is not undefined,
+otherwise returns the default value
 
 ### Parameters
 
 - `object` **[Object][1]**
 - `path` **[string][4]**
-- `defaultValue` **any**
+- `defaultValue` **any** (optional, default `undefined`)
 
 Returns **any**
 

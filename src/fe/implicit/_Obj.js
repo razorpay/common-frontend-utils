@@ -274,8 +274,8 @@ export const entries = o => {
 };
 
 /**
- * Returns the value at a path if value exists, otherwise returns the default
- * value
+ * Returns the value at a path if value exists and is not undefined,
+ * otherwise returns the default value
  *
  * @param {Object} object
  * @param {string} path
