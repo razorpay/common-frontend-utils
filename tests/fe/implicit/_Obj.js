@@ -378,4 +378,69 @@ describe('_Obj', () => {
       isUndefined(returned);
     });
   });
+
+  describe('getSafely with default value', () => {
+    const foo = {
+      bar: [
+        'a',
+        'b',
+        {
+          hello: 'world',
+        },
+      ],
+
+      get thrower() {
+        throw new Error('failed');
+      },
+    };
+
+    it('Returns the value if item exists', () => {
+      const expected = 'a';
+      const returned = _Obj.getSafely(foo, 'bar.0', 0);
+
+      deepEqual(expected, returned);
+    });
+
+    it('Returns exact object reference at path', () => {
+      const expected = foo.bar[2];
+      const returned = _Obj.getSafely(foo, 'bar.2', 0);
+
+      equal(expected, returned);
+    });
+
+    it("Returns default value if item doesn't exist", () => {
+      const returned = _Obj.getSafely(foo, 'baz', 0);
+
+      equal(0, returned);
+    });
+
+    it('Returns the length of a string', () => {
+      const obj = {
+        foo: {
+          bar: 'razorpay',
+        },
+      };
+      const length = _Obj.getSafely(obj, 'foo.bar.length', 0);
+
+      equal(length, obj.foo.bar.length);
+    });
+
+    it('does not continue past primitive types', () => {
+      const primitive = {
+        foo: {
+          bar: 0,
+        },
+      };
+
+      const found = _Obj.getSafely(primitive, 'foo.bar.baz', 0);
+
+      equal(0, found);
+    });
+
+    it('Returns default value if the getter for a property fails', () => {
+      const returned = _Obj.getSafely(foo, 'thrower', 0);
+
+      equal(0, returned);
+    });
+  });
 });
