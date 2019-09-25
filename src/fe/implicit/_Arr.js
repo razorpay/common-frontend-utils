@@ -295,3 +295,23 @@ export const insertAt = _.curry3((array, item, index) => {
     return first |> mergeWith(middle) |> mergeWith(end);
   }
 });
+
+/**
+ * Returns a new array with duplicates removed. Uses equality comparison to
+ * check for duplicates.
+ *
+ * @param {Array} array
+ *
+ * @returns {Array}
+ */
+export const removeDuplicates = array =>
+  reduce(
+    array,
+    (result, item) => {
+      if (!contains(result, item)) {
+        result.push(item);
+      }
+      return result;
+    },
+    []
+  );
