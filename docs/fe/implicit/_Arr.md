@@ -282,6 +282,17 @@ at the given index.
 
 Returns **[Array][2]**
 
+## removeDuplicates
+
+Returns a new array with duplicates removed. Uses equality comparison to
+check for duplicates.
+
+### Parameters
+
+- `array` **[Array][2]**
+
+Returns **[Array][2]**
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function

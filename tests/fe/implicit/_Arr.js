@@ -426,4 +426,52 @@ describe('_Arr', () => {
       notDeep(returned, base);
     });
   });
+
+  describe('removeDuplicates', function() {
+    it('returns an empty array if an empty array was passed', function() {
+      const returned = _Arr.removeDuplicates([]);
+      deep(returned, []);
+    });
+
+    it('works for an array with one element', function() {
+      const returned = _Arr.removeDuplicates([1]);
+      deep(returned, [1]);
+    });
+
+    it('works for an array with two same elements', function() {
+      const returned = _Arr.removeDuplicates([1, 1]);
+      deep(returned, [1]);
+    });
+
+    it('removes duplicate numbers correctly', function() {
+      const returned = _Arr.removeDuplicates([1, 1, 2]);
+      deep(returned, [1, 2]);
+    });
+
+    it('removes duplicate strings correctly', function() {
+      const returned = _Arr.removeDuplicates(['1', '1']);
+      deep(returned, ['1']);
+    });
+
+    it('removes duplicate objects correctly', function() {
+      const obj = { a: 1 };
+      const returned = _Arr.removeDuplicates([obj, obj]);
+      deep(returned, [obj]);
+    });
+
+    it('does not consider two different objects with same keys and values as duplicates', function() {
+      const returned = _Arr.removeDuplicates([{ a: 1 }, { a: 1 }]);
+      deep(returned, [{ a: 1 }, { a: 1 }]);
+    });
+
+    it('works with mixed object and primitive types', function() {
+      const returned = _Arr.removeDuplicates([1, 1, { a: 1 }, { a: 1 }]);
+      deep(returned, [1, { a: 1 }, { a: 1 }]);
+    });
+
+    it('does not consider a number and string with same value duplicates', function() {
+      const returned = _Arr.removeDuplicates([1, '1']);
+      deep(returned, [1, '1']);
+    });
+  });
 });

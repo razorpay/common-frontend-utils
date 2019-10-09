@@ -274,13 +274,16 @@ export const entries = o => {
 };
 
 /**
- * Returns the value at a path if value exists
+ * Returns the value at a path if value exists and is not undefined,
+ * otherwise returns the default value
+ *
  * @param {Object} object
  * @param {string} path
+ * @param {*} defaultValue
  *
  * @returns {*}
  */
-export const getSafely = (object, path) => {
+export const getSafely = (object, path, defaultValue = undefined) => {
   const points = path.split('.');
   let anchor = object;
 
@@ -297,17 +300,21 @@ export const getSafely = (object, path) => {
         // If it's not the last item in the path,
         // we need to proceed. But because we're
         // looking at a primitive data-type, we can't
-        // proceed. So, we return undefined.
+        // proceed. So, we return the default value.
         if (isLastInPath) {
+          // Return default value if item was undefined.
+          if (typeof item === 'undefined') {
+            return defaultValue;
+          }
           return item;
         } else {
-          return;
+          return defaultValue;
         }
       }
 
       anchor = item;
     } catch (err) {
-      return;
+      return defaultValue;
     }
   }
 
