@@ -97,7 +97,10 @@ const getPlugins = ({
       accessors: true,
     }),
 
-    babelPlugin(babelOptions),
+    babelPlugin({
+      ...babelOptions,
+      extensions: ['.js', '.mjs', '.svelte'],
+    }),
 
     inject(globals),
   ];

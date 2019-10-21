@@ -7,7 +7,6 @@ const plugins = [
 ];
 
 module.exports = {
-  extensions: ['.js', '.mjs', '.svelte'],
   plugins,
   presets: [
     [
