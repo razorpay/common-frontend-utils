@@ -187,4 +187,9 @@ const PromiseRuntime =
     globalPromise) ||
   Promise;
 
+// Add finally to runtime if it doesn't exist.
+if (!_.isFunction(PromiseRuntime.prototype.finally)) {
+  PromiseRuntime.prototype.finally = Promise.prototype.finally;
+}
+
 export default PromiseRuntime;
