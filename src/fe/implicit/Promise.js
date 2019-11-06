@@ -138,8 +138,8 @@ Promise.prototype
 
     finally: function(callback) {
       return this.then(
-        value => Promise.resolve(callback().then(() => value)),
-        reason => Promise.resolve(callback().then(() => Promise.reject(reason)))
+        value => Promise.resolve(callback()).then(() => value),
+        reason => Promise.resolve(callback()).then(() => Promise.reject(reason))
       );
     },
   });
