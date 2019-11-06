@@ -138,8 +138,8 @@ Promise.prototype
 
     finally: function(callback) {
       return this.then(
-        value => Promise.resolve(callback().then(() => value)),
-        reason => Promise.resolve(callback().then(() => Promise.reject(reason)))
+        value => Promise.resolve(callback()).then(() => value),
+        reason => Promise.resolve(callback()).then(() => Promise.reject(reason))
       );
     },
   });
@@ -186,5 +186,10 @@ const PromiseRuntime =
     _.isFunction(_.prototypeOf(globalPromise).then) &&
     globalPromise) ||
   Promise;
+
+// Add finally to runtime if it doesn't exist.
+if (!_.isFunction(PromiseRuntime.prototype.finally)) {
+  PromiseRuntime.prototype.finally = Promise.prototype.finally;
+}
 
 export default PromiseRuntime;
