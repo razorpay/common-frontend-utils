@@ -66,6 +66,17 @@ Check if a string ends with a given string
 
 Returns **[boolean][2]**
 
+## toTitleCase
+
+Turns A Sentence To Title Case
+also known as "capital case"
+
+### Parameters
+
+- `sentence` **[string][1]**
+
+Returns **[string][1]**
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
