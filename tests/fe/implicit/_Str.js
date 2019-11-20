@@ -100,4 +100,62 @@ describe('_Str', () => {
       isFalse(ends);
     });
   });
+
+  describe('toTitleCase', () => {
+    it('Converts a completely lowercase word to title case', () => {
+      const word = 'razorpay';
+      const expected = 'Razorpay';
+
+      equal(expected, _Str.toTitleCase(word));
+    });
+
+    it('Converts a completely uppercase word to title case', () => {
+      const word = 'RAZORPAY';
+      const expected = 'Razorpay';
+
+      equal(expected, _Str.toTitleCase(word));
+    });
+
+    it('Keeps a title case word as-is', () => {
+      const word = 'Razorpay';
+      const expected = 'Razorpay';
+
+      equal(expected, _Str.toTitleCase(word));
+    });
+
+    it('Converts a completely lowercase sentence to title case', () => {
+      const word = 'i am a test';
+      const expected = 'I Am A Test';
+
+      equal(expected, _Str.toTitleCase(word));
+    });
+
+    it('Converts a completely uppercase sentence to title case', () => {
+      const word = 'I AM A TEST';
+      const expected = 'I Am A Test';
+
+      equal(expected, _Str.toTitleCase(word));
+    });
+
+    it('Keeps a title case sentence as-is', () => {
+      const word = 'I Am A Test';
+      const expected = 'I Am A Test';
+
+      equal(expected, _Str.toTitleCase(word));
+    });
+
+    it('does not do anything to an empty string', () => {
+      const emptyString = '';
+
+      equal(emptyString, _Str.toTitleCase(emptyString));
+    });
+
+    it('handles strings with multiple consecutive spaces', () => {
+      const stringWithMulitpleSpaces =
+        'this  is    a string WITH multiple Spaces';
+      const expected = 'This  Is    A String With Multiple Spaces';
+
+      equal(expected, _Str.toTitleCase(stringWithMulitpleSpaces));
+    });
+  });
 });

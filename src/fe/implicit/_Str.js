@@ -1,4 +1,6 @@
 import * as _ from './_';
+import * as _Arr from './_Arr';
+
 // https://vocajs.com/
 const proto = _.prototypeOf(String);
 const protoSlice = proto.slice;
@@ -60,3 +62,18 @@ export const startsWith = _.curry2((str, substr) => str.indexOf(substr) === 0);
 export const endsWith = _.curry2(
   (str, substr) => str.lastIndexOf(substr) === str.length - substr.length
 );
+
+/**
+ * Turns A Sentence To Title Case
+ * also known as "capital case"
+ * @param {string} sentence
+ *
+ * @returns {string}
+ */
+export function toTitleCase(sentence) {
+  const words = _Arr.map(sentence.split(' '), word => {
+    return `${word.slice(0, 1).toUpperCase()}${word.slice(1).toLowerCase()}`;
+  });
+
+  return _Arr.join(words, ' ');
+}
