@@ -1,4 +1,5 @@
 const sessionIdHeader = 'X-Razorpay-SessionId';
+const trackIdHeader = 'X-Razorpay-TrackId';
 const Xhr = XMLHttpRequest;
 import * as _ from './_';
 import * as _Func from './_Func';
@@ -7,7 +8,7 @@ import * as _Doc from './_Doc';
 import * as _Obj from './_Obj';
 const networkError = _.rzpError('Network error');
 let jsonp_cb = 0;
-let sessionId;
+let sessionId, trackId;
 
 /**
  * Sets the session ID.
@@ -17,6 +18,16 @@ let sessionId;
  */
 function setSessionId(id) {
   sessionId = id;
+}
+
+/**
+ * Sets the track ID.
+ * @param {string} id
+ *
+ * @returns {void}
+ */
+function setTrackId(id) {
+  trackId = id;
 }
 
 /**
@@ -112,6 +123,7 @@ _Func.setPrototype(fetch, {
 
     headers
       |> _Obj.setTruthyProp(sessionIdHeader, sessionId)
+      |> _Obj.setTruthyProp(trackIdHeader, trackId)
       |> _Obj.loop((v, k) => xhr.setRequestHeader(k, v));
 
     xhr.send(data);
@@ -214,4 +226,5 @@ function jsonp(options) {
 
 fetch.post = post;
 fetch.setSessionId = setSessionId;
+fetch.setTrackId = setTrackId;
 fetch.jsonp = jsonp;
