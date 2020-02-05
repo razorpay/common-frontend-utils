@@ -422,3 +422,25 @@ export const on = (event, callback, delegate, useCapture) => {
     return () => el.removeEventListener(event, attachedCallback, useCapture);
   };
 };
+
+/**
+ * Returns the closest parent element
+ * that matches the given selector
+ * @param {Element} node
+ * @param {string} selector
+ *
+ * @returns {Element}
+ */
+export const closest = _.curry2((node, selector) => {
+  let current = node;
+
+  while (_.isElement(current)) {
+    if (matches(current, selector)) {
+      return current;
+    }
+
+    current = parent(current);
+  }
+
+  return null;
+});
