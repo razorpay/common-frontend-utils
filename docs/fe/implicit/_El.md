@@ -273,6 +273,18 @@ Checks if the given element and the selector matches.
 
 Returns **[Object][5]**
 
+## closest
+
+Returns the closest parent element
+that matches the given selector
+
+### Parameters
+
+- `node` **[Element][2]**
+- `selector` **[string][1]**
+
+Returns **[Element][2]**
+
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 [2]: https://developer.mozilla.org/docs/Web/API/Element
 [3]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number

@@ -4,6 +4,7 @@ import { assert } from 'chai';
 const {
   isTrue,
   isFalse,
+  isNull,
   deepEqual: deep,
   notDeepEqual: notDeep,
   equal,
@@ -345,6 +346,37 @@ describe('_El', function() {
     it('Checks if the given element and the selector does not match.', function() {
       const isMatching = _El.matches(div, '#testdiv2');
       isFalse(isMatching);
+    });
+  });
+
+  describe('closest', () => {
+    const parentOne = _El.create('div');
+    parentOne.className = 'one';
+
+    const parentTwo = _El.create('div');
+    parentOne.appendChild(parentTwo);
+
+    const img = _El.create('img');
+    parentTwo.appendChild(img);
+
+    it('Gets the closest grandparent element', function() {
+      const closest = _El.closest(img, '.one');
+      equal(closest, parentOne);
+    });
+
+    it('Gets the closest parent element', function() {
+      const closest = _El.closest(img, 'div');
+      equal(closest, parentTwo);
+    });
+
+    it('Fails to get the closest element', function() {
+      const closest = _El.closest(img, '.something');
+      isNull(closest);
+    });
+
+    it('Returns itself', function() {
+      const closest = _El.closest(img, 'img');
+      equal(closest, img);
     });
   });
 
