@@ -7,6 +7,21 @@ const eslint = new CLIEngine(lintRules);
 const eslintFormatter = eslint.getFormatter('stylish');
 const lintCompat = new CLIEngine(require('./eslintrc-compat'));
 
+/**
+ * Fixes ESLint issues
+ * @param {Array<string>} paths
+ */
+const lintFix = paths => {
+  const fixer = new CLIEngine({
+    ...lintRules,
+    fix: true,
+  });
+
+  const report = fixer.executeOnFiles(paths);
+
+  CLIEngine.outputFixes(report);
+};
+
 const lintPaths = paths => {
   if (!Array.isArray(paths)) {
     if (!paths.endsWith('.js')) {
@@ -43,7 +58,8 @@ const lintText = (text, id) => lintLog(eslint.executeOnText(text, id));
 
 module.exports = {
   lint,
+  lintCompat,
+  lintFix,
   lintLog,
   lintText,
-  lintCompat,
 };

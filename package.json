@@ -62,6 +62,7 @@
     }
   },
   "bin": {
+    "lintFix": "scripts/lintFix.js",
     "lintOutput": "scripts/lintOutput.js",
     "$": "bin/$",
     "serve": "bin/serve"
