@@ -65,6 +65,7 @@ Documentation can be found in the [docs](docs) directory.
 - `eslint` - ESLint helpers and config
 - `eslint-compat`
 - `estlinrc` - ESLint rules
+- `lintFix` - Fixes a file using ESLint and writes it to disk
 - `lintOutput` - Helpers to lint generated builds
 - `rollup-injects` - Implicit injects for rollup
 - `rollup-plugins` - Utils for rollup
