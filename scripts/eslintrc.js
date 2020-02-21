@@ -42,7 +42,7 @@ module.exports = {
     'no-extend-native': 2, // disallow meddling with built-in object prototypes
     'no-proto': 2, // disable __proto__
     'no-prototype-builtins': 0, // Access Object.prototype method 'hasOwnProperty' from target object
-
+    curly: 2, // Require curly braces
     'linebreak-style': [2, 'unix'],
 
     // disable getters and setters
