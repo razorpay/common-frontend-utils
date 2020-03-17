@@ -66,6 +66,17 @@ export const every = arrayCall('every');
 export const map = arrayCall('map');
 
 /**
+ * Maps each element using a mapping function and flattens the
+ * result into a new array.
+ * @param {Array} arr
+ * @param {function (item: *): Array} mapper
+ * @returns {Array}
+ */
+export const flatMap = (arr, mapper) => {
+  return arr |> map(mapper) |> reduce(mergeWith, []);
+};
+
+/**
  * Returns a new array consisting of elements
  * from the orignal array that pass
  * the filter.
