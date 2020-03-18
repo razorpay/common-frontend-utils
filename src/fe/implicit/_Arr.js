@@ -72,9 +72,9 @@ export const map = arrayCall('map');
  * @param {function (item: *): Array} mapper
  * @returns {Array}
  */
-export const flatMap = (arr, mapper) => {
+export const flatMap = _.curry2((arr, mapper) => {
   return arr |> map(mapper) |> reduce(mergeWith, []);
-};
+});
 
 /**
  * Returns a new array consisting of elements
