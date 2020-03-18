@@ -106,6 +106,21 @@ describe('_Arr', () => {
     });
   });
 
+  describe('flatMap', () => {
+    const array = [1, 2, 3];
+    const arrayCopy = [1, 2, 3];
+    const expected = [1, 2, 2, 4, 3, 6];
+    const flatMapped = _Arr.flatMap(array, x => [x, x * 2]);
+
+    it('flatMaps properly', () => {
+      deep(flatMapped, expected);
+    });
+
+    it('does not modify the original array', () => {
+      deep(array, arrayCopy);
+    });
+  });
+
   describe('filter', () => {
     const array = [1, 2, 3];
     const arrayCopy = [1, 2, 3];

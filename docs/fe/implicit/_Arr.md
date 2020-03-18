@@ -69,6 +69,18 @@ element of the array into a new element.
 
 Returns **[Array][2]**
 
+## flatMap
+
+Maps each element using a mapping function and flattens the
+result into a new array.
+
+### Parameters
+
+- `arr` **[Array][2]**
+- `mapper` **function (item: any): [Array][2]**
+
+Returns **[Array][2]**
+
 ## filter
 
 Returns a new array consisting of elements
