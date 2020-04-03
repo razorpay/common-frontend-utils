@@ -274,6 +274,24 @@ export const entries = o => {
 };
 
 /**
+ * Returns an array with the values of the object
+ * @param {Object} o
+ *
+ * @returns {Array}
+ */
+export const values = o => {
+  const list = [];
+
+  if (!_.isNonNullObject(o)) {
+    return list;
+  }
+
+  loop(o, val => list.push(val));
+
+  return list;
+};
+
+/**
  * Returns the value at a path if value exists and is not undefined,
  * otherwise returns the default value
  *
