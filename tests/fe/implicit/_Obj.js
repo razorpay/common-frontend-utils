@@ -37,16 +37,16 @@ describe('_Obj', () => {
         a: 1,
         b: 2,
       };
-      const keys = _Obj.values(obj);
+      const values = _Obj.values(obj);
       const expected = [1, 2];
-      deepEqual(keys, expected);
+      deepEqual(values, expected);
     });
 
     it('Get values of a blank object', () => {
       const obj = {};
-      const keys = _Obj.values(obj);
+      const values = _Obj.values(obj);
       const expected = [];
-      deepEqual(keys, expected);
+      deepEqual(values, expected);
     });
   });
 
