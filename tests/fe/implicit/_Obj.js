@@ -31,6 +31,25 @@ describe('_Obj', () => {
     });
   });
 
+  describe('values', () => {
+    it('Get values of the object', () => {
+      const obj = {
+        a: 1,
+        b: 2,
+      };
+      const keys = _Obj.values(obj);
+      const expected = [1, 2];
+      deepEqual(keys, expected);
+    });
+
+    it('Get values of a blank object', () => {
+      const obj = {};
+      const keys = _Obj.values(obj);
+      const expected = [];
+      deepEqual(keys, expected);
+    });
+  });
+
   describe('create', () => {
     it('Check if it creates new object with no props as argument', () => {
       const obj = {
