@@ -91,6 +91,22 @@ describe('_Arr', () => {
     });
   });
 
+  describe('none', () => {
+    const array = [1, 2, 3];
+
+    it('returns false if fn evaluates to true', () => {
+      const any = _Arr.none(array, x => x < 2);
+
+      isFalse(any);
+    });
+
+    it('returns true if fn evaluates to false', () => {
+      const any = _Arr.none(array, x => x > 3);
+
+      isTrue(any);
+    });
+  });
+
   describe('map', () => {
     const array = [1, 2, 3];
     const arrayCopy = [1, 2, 3];
