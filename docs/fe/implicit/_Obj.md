@@ -10,16 +10,6 @@ Get keys of an object in an array.
 
 Returns **[Array][2]**
 
-## values
-
-Get values of an object in an array.
-
-### Parameters
-
-- `o` **[Object][1]**
-
-Returns **[Array][1]**
-
 ## create
 
 Create a new object using an object and the given props.
@@ -235,6 +225,16 @@ Returns **[Object][1]**
 ## entries
 
 Returns an array with subarrays consisting of key and value pairs
+
+### Parameters
+
+- `o` **[Object][1]**
+
+Returns **[Array][2]**
+
+## values
+
+Returns an array with the values of the object
 
 ### Parameters
 

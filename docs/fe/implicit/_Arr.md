@@ -57,6 +57,19 @@ Array.prototype.every
 
 Returns **[boolean][1]**
 
+## none
+
+Says whether `fn` evaluates to false
+for every element of `array`.
+Array.prototype.some
+
+### Parameters
+
+- `array` **[Array][2]**
+- `fn` **function (item: any): [boolean][1]**
+
+Returns **[boolean][1]**
+
 ## map
 
 Returns a new function by mapping every
