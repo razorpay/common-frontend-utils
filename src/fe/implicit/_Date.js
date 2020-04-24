@@ -28,12 +28,40 @@ export const addDays = addTimeInUnits('day');
  * @param {Date} date Date to which hours are to be added
  * @param {Number} units hours to be added
  *
- * @returns {Date}
+ * @returns {Date} updated Date object
  */
 export const addHours = addTimeInUnits('hour');
+
+/**
+ * @description Add minutes to a date
+ *
+ * @param {Date} date Date to which minutes are to be added
+ * @param {Number} units minutes to be added
+ *
+ * @returns {Date} updated Date  object
+ */
 export const addMinutes = addTimeInUnits('minute');
+
+/**
+ * @description Add seconds to a date
+ *
+ * @param {Date} date Date to which seconds are to be added
+ * @param {Number} units seconds to be added
+ *
+ * @returns {Date} updated Date object
+ */
 export const addSeconds = addTimeInUnits('second');
 
+/**
+ * @description Formates date object to target string format
+ *
+ * @param {Date} date Date which is to be formatted
+ * @param {String} format String format in which the data is needed
+ *
+ * @example format(new Date(), 'DD/MM/YYYY') -> '24/04/2019'
+ *
+ * @returns {String} formatted date string
+ */
 export const format = _.curry2((date, format) => {
   const monthsFull = [
     'January',
