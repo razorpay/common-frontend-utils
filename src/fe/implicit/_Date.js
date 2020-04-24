@@ -56,7 +56,7 @@ export const format = _.curry2((date, format) => {
 
   let dateInMonth = date.getDate();
   if (dateInMonth < 10) {
-    dateInMonth += '0';
+    dateInMonth = '0' + dateInMonth;
   }
   const month = date.getMonth();
   const year = date.getFullYear();

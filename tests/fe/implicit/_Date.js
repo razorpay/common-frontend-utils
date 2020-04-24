@@ -15,13 +15,15 @@ describe('_Date', () => {
     it('formats correctly', () => {
       equal(_Date.format(new Date(2099, 1, 10), 'DD-MM-YYYY'), '10-01-2099');
       equal(_Date.format(new Date(2099, 1, 10), 'M/D/YYYY'), '1/10/2099');
+      equal(_Date.format(new Date(2099, 1, 10), 'MM/D/YYYY'), '01/10/2099');
+      equal(_Date.format(new Date(2099, 1, 1), 'MM/DD/YYYY'), '01/01/2099');
     });
   });
   describe('addDays', () => {
     it('adds days correctly', () => {
       equal(
-        _Date.format(_Date.addDays(new Date(2099, 1, 10), 10), 'M/D/YYYY'),
-        '1/20/2099'
+        _Date.format(_Date.addDays(new Date(2099, 1, 1), 10), 'M/D/YYYY'),
+        '1/11/2099'
       );
     });
   });
