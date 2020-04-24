@@ -56,6 +56,17 @@ export const any = arrayCall('some');
 export const every = arrayCall('every');
 
 /**
+ * Says whether `fn` evaluates to false
+ * for every element of `array`.
+ * Array.prototype.some
+ * @param {Array} array
+ * @param {function (item: *): boolean} fn
+ *
+ * @returns {boolean}
+ */
+export const none = _.curry2((arr, evalutor) => !any(arr, evalutor));
+
+/**
  * Returns a new function by mapping every
  * element of the array into a new element.
  * @param {Array} array
