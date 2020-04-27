@@ -5,6 +5,7 @@ const plugins = [
     { proposal: 'minimal' },
   ],
   [require('@babel/plugin-proposal-optional-chaining'), { loose: true }],
+  [require('@babel/plugin-transform-spread'), { loose: false }],
 ];
 
 module.exports = {
