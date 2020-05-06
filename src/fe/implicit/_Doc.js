@@ -154,7 +154,7 @@ export function smoothScrollTo(y) {
 }
 
 var scrollTimeout;
-const π = Math.PI;
+const pi = Math.PI;
 
 /**
  * Smoothly scroll by given point
@@ -179,7 +179,7 @@ export function smoothScrollBy(y) {
       if (scrollCount >= 1) {
         return scrollTo(0, target);
       }
-      var sin = Math.sin((π * scrollCount) / 2);
+      var sin = Math.sin((pi * scrollCount) / 2);
       scrollTo(0, y0 + Math.round(y * sin));
       oldTimestamp = newTimestamp;
       requestAnimationFrame(step);
