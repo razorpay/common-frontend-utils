@@ -6,6 +6,7 @@ const EXPOSED_MODULES = {
   _El,
   _,
   _Func,
+  _Date,
   fetch,
   global: global,
 };
