@@ -90,6 +90,7 @@ export const invoke = function(func) {
     return func.apply(this, arguments |> _Arr.sliceFrom(1));
   } catch (e) {
     _.logError(e);
+    throw e;
   }
 };
 

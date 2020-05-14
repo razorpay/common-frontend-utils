@@ -95,12 +95,14 @@ describe('_', () => {
       validators.object
     )(dummy);
 
-    it('validates without throwing any error', () => {
+    it('validates properly', () => {
       equal(dummyWithValidation('bar', {}), 'foo');
     });
 
-    it('returns the first arg when validation fails', () => {
-      equal(dummyWithValidation('x', 1), 'x');
+    it('throws an error when validation fails', () => {
+      throws(() => {
+        dummyWithValidation('x', 1);
+      });
     });
   });
 

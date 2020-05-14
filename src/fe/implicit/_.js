@@ -43,13 +43,21 @@ export function validateArgs(...validators) {
     function() {
       let args = arguments;
       if (
-        validators.every(
-          (v, i) => v(args[i]) || logError(`wrong ${i}th argtype`, args[i])
-        )
+        validators.every((v, i) => {
+          const valid = v(args[i]);
+
+          if (!valid) {
+            const _error = `wrong ${i}th argtype: ${args[i]}`;
+
+            logError(_error);
+            throw _error;
+          }
+
+          return valid;
+        })
       ) {
         return func.apply(null, args);
       }
-      return args[0];
     };
 }
 

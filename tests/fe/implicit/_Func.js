@@ -124,8 +124,9 @@ describe('_Func', () => {
       equal(said, expected);
     });
 
-    it('does not invoke in case a function is not provided', () => {
+    it('throws an error when a function is not provided', () => {
       let invoked = false;
+      let returned;
 
       function fn() {
         invoked = true;
@@ -133,7 +134,9 @@ describe('_Func', () => {
         return invoked;
       }
 
-      const returned = _Func.invoke(1);
+      throws(() => {
+        returned = _Func.invoke(1);
+      });
 
       isFalse(invoked);
       isUndefined(returned);
