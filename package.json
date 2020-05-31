@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.2.2",
+    "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
     "@babel/plugin-transform-arrow-functions": "^7.2.0",
     "@babel/plugin-transform-block-scoped-functions": "^7.2.0",
