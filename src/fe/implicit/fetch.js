@@ -183,14 +183,24 @@ function jsonp(options) {
   if (!options.data) {
     options.data = {};
   }
-  let callbackName = 'jsonp' + jsonp_cb++;
-  options.data.callback = 'Razorpay.' + callbackName;
+
+  // callbackIndex is the nth fetch.jsonp call
+  const callbackIndex = jsonp_cb++;
+
+  // We need to use attempt numbers to generate unique URLs
+  let attemptNumber = 0;
 
   let request = new fetch(options);
   options = request.options;
 
   request.call = function(cb = options.callback) {
+    // This is the same fetch.jsonp instance. Incrememt the attempt number.
+    attemptNumber++;
+
+    const callbackName = `jsonp${callbackIndex}_${attemptNumber}`;
+
     let done = false;
+
     const onload = function() {
       if (
         !done &&
@@ -203,16 +213,24 @@ function jsonp(options) {
         this |> _El.detach;
       }
     };
+
     let req = (global.Razorpay[callbackName] = function(data) {
       _Obj.deleteProp(data, 'http_status_code');
       cb(data);
       _Obj.deleteProp(global.Razorpay, callbackName);
     });
+
     this.setReq('jsonp', req);
+
+    // Set the callback name in the request.
+    const payload = _Obj.extend(
+      { callback: `Razorpay.${callbackName}` },
+      options.data
+    );
 
     _El.create('script')
       |> _Obj.extend({
-        src: _.appendParamsToUrl(options.url, options.data),
+        src: _.appendParamsToUrl(options.url, payload),
         async: true,
         onerror: e => options.callback(networkError),
         onload,
