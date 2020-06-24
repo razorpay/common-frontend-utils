@@ -222,15 +222,20 @@ function jsonp(options) {
 
     this.setReq('jsonp', req);
 
-    // Set the callback name in the request.
-    const payload = _Obj.extend(
-      { callback: `Razorpay.${callbackName}` },
-      options.data
+    // Make the source URL
+    let src = _.appendParamsToUrl(options.url, options.data);
+
+    // Add callback name to the source URL
+    src = _.appendParamsToUrl(
+      src,
+      _.obj2query({
+        callback: `Razorpay.${callbackName}`,
+      })
     );
 
     _El.create('script')
       |> _Obj.extend({
-        src: _.appendParamsToUrl(options.url, payload),
+        src,
         async: true,
         onerror: e => options.callback(networkError),
         onload,
