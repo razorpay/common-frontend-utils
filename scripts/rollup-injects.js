@@ -22,6 +22,7 @@ let injects = {
   _Obj: ['fe/implicit/_Obj', '*'],
   _El: ['fe/implicit/_El', '*'],
   _Doc: ['fe/implicit/_Doc', '*'],
+  _Date: ['fe/implicit/_Date', '*'],
 };
 
 globalInjects.forEach(g => {
