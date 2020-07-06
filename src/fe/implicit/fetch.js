@@ -53,13 +53,16 @@ _Func.setPrototype(fetch, {
     return this;
   },
 
-  till: function(continueUntilFn) {
+  till: function(continueUntilFn, retryLimit = 0) {
     return this.setReq(
       'timeout',
       setTimeout(() => {
         this.call(response => {
-          if (continueUntilFn(response)) {
-            this.till(continueUntilFn);
+          // If there is an error, retry again until retry limit.
+          if (response.error && retryLimit > 0) {
+            this.till(continueUntilFn, retryLimit - 1);
+          } else if (continueUntilFn(response)) {
+            this.till(continueUntilFn, retryLimit);
           } else {
             this.options.callback(response);
           }
