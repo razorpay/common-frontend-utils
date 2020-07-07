@@ -240,7 +240,7 @@ function jsonp(options) {
       |> _Obj.extend({
         src,
         async: true,
-        onerror: e => options.callback(networkError),
+        onerror: e => cb(networkError),
         onload,
         onreadystatechange: onload,
       })
