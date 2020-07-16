@@ -83,4 +83,35 @@ describe('fetch', () => {
       });
     });
   });
+
+  describe('till', () => {
+    it('Keeps making requests until till returns true', function(done) {
+      this.timeout(12000);
+
+      let attempts = 0;
+
+      fetch({
+        url:
+          'https://api.razorpay.com/v1/payments/pay_FF48gKluIcsuNv/status?key_id=rzp_test_1DP5mmOlF5G5ag',
+        callback: response => {
+          if (
+            response.error.description ===
+              'The payment has already been processed' &&
+            attempts === 3
+          ) {
+            done();
+          } else {
+            done(new Error('fetch.till did not get the data it expected'));
+          }
+        },
+      }).till(response => {
+        attempts++;
+
+        return (
+          response.error.description ===
+            'The payment has already been processed' && attempts !== 3
+        );
+      });
+    });
+  });
 });
