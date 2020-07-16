@@ -35,7 +35,7 @@
     "@babel/register": "^7.4.4",
     "autoprefixer-stylus": "^0.14.0",
     "babel-eslint": "^10.0.2",
-    "chokidar": "^2.1.0",
+    "chokidar": "^3.4.1",
     "ecstatic": "^3.3.0",
     "eslint": "^5.13.0",
     "fast-async": "^7.0.6",
