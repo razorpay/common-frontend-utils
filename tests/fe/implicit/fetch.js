@@ -64,13 +64,12 @@ describe('fetch', () => {
       global.window.Razorpay = global.Razorpay;
 
       fetch.jsonp({
-        url:
-          'https://api.razorpay.com/v1/payments/pay_FF48gKluIcsuNv/status?key_id=rzp_test_1DP5mmOlF5G5ag',
+        url: 'https://api.razorpay.com/v1/preferences',
+        data: {
+          key_id: 'rzp_test_1DP5mmOlF5G5ag',
+        },
         callback: response => {
-          if (
-            response.http_status_code !== 'undefined' &&
-            response.payment_id !== 'undefined'
-          ) {
+          if (response.mode === 'test') {
             done();
           } else {
             done(
