@@ -113,6 +113,22 @@ _Func.setPrototype(fetch, {
             text: xhr.responseText,
           };
         }
+
+        if (json.error) {
+          global.dispatchEvent(
+            _.CustomEvent('rzp_network_error', {
+              detail: {
+                method,
+                url,
+                baseUrl: url.split('?')[0],
+                status: xhr.status,
+                xhrErrored: false,
+                response: json,
+              },
+            })
+          );
+        }
+
         callback(json);
       }
     };
@@ -121,6 +137,20 @@ _Func.setPrototype(fetch, {
       resp.xhr = {
         status: 0,
       };
+
+      global.dispatchEvent(
+        _.CustomEvent('rzp_network_error', {
+          detail: {
+            method,
+            url,
+            baseUrl: url.split('?')[0],
+            status: 0,
+            xhrErrored: true,
+            response: resp,
+          },
+        })
+      );
+
       callback(resp);
     };
 
