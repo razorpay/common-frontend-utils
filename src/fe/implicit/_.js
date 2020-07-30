@@ -43,9 +43,18 @@ export function validateArgs(...validators) {
     function() {
       let args = arguments;
       if (
-        validators.every(
-          (v, i) => v(args[i]) || logError(`wrong ${i}th argtype`, args[i])
-        )
+        validators.every((v, i) => {
+          if (v(args[i])) {
+            return true;
+          } else {
+            logError(`wrong ${i}th argtype`, args[i]);
+            global.dispatchEvent(
+              CustomEvent('rzp_error', {
+                detail: new Error(`wrong ${i}th argtype ${args[i]}`),
+              })
+            );
+          }
+        })
       ) {
         return func.apply(null, args);
       }
@@ -437,3 +446,21 @@ export const getQueryParams = function(search = location.search) {
 
   return {};
 };
+
+/**
+ * Creates an IE-compatible Custom Event
+ * Source: https://stackoverflow.com/a/26596324/4176188
+ * @param {string} event
+ * @param {Object} params
+ *
+ * @returns {Event}
+ */
+export function CustomEvent(event, params) {
+  params = params || { bubbles: false, cancelable: false, detail: undefined };
+
+  const evt = document.createEvent('CustomEvent');
+
+  evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+
+  return evt;
+}
