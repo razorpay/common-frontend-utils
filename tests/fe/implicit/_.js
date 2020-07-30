@@ -683,4 +683,20 @@ describe('_', () => {
       deep(params, expected);
     });
   });
+
+  describe('CustomEvent', () => {
+    it('Creates a CustomEvent', () => {
+      const event = _.CustomEvent('myevent', {
+        detail: {
+          foo: 'bar',
+        },
+      });
+
+      equal(event.type, 'myevent');
+
+      deep(event.detail, {
+        foo: 'bar',
+      });
+    });
+  });
 });
