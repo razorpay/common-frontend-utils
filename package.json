@@ -51,7 +51,7 @@
     "stylus": "^0.54.7",
     "svelte": "2.16.1",
     "uglify-js": "^3.4.9",
-    "yargs-parser": "^13.1.1"
+    "yargs-parser": "^19.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
