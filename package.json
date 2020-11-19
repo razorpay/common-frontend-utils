@@ -39,7 +39,7 @@
     "ecstatic": "^3.3.0",
     "eslint": "^5.13.0",
     "fast-async": "^7.0.6",
-    "glob": "^7.1.3",
+    "glob": "^7.1.6",
     "http-proxy": "^1.18.1",
     "nodent-compiler": "^3.2.13",
     "rollup": "^1.21.2",
