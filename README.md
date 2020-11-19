@@ -20,7 +20,7 @@ Documentation can be found in the [docs](docs) directory.
 
 ## Commands
 
-- Used with Node v9.3.0
+- Used with Node v10.18.0
 - `npm i` to install all dependencies
 
 ### Development/Playground
