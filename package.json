@@ -44,7 +44,7 @@
     "nodent-compiler": "^3.2.13",
     "rollup": "^1.21.2",
     "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-includepaths": "^0.2.3",
+    "rollup-plugin-includepaths": "^0.2.4",
     "rollup-plugin-inject": "^2.2.0",
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-svelte": "^5.0.1",
