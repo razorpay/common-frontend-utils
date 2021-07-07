@@ -18,6 +18,7 @@ const getPlugins = ({
   lint = true,
   src,
   svelteCssPath,
+  plugins = babelPlugins,
 }) => {
   if (!Array.isArray(src)) {
     src = [src];
@@ -55,10 +56,15 @@ const getPlugins = ({
       },
     }),
 
-    babelPlugins,
+    plugins,
 
     inject(globals),
   ];
+};
+
+const getPluginsEs6 = opts => {
+  opts.plugins = babelPlugins.es6;
+  return getPlugins(opts);
 };
 
 const rollupCommon = {
@@ -81,4 +87,5 @@ module.exports = {
   isWatching,
   rollupCommon,
   getPlugins,
+  getPluginsEs6,
 };
