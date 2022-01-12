@@ -34,7 +34,7 @@ jobs:
           exit 0
       - name: Failed
         id: failed
-        if: (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) && github.ref != 'refs/heads/semgrep_integration_1641900519'
+        if: (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) && github.ref != 'refs/heads/master'
         run: |
           echo 'Failing the workflow for github security status check.'
           curl -X POST -H "Content-Type: application/json" -H "Authorization: token ${{ github.token }}" \
