@@ -28,13 +28,13 @@ jobs:
     steps:
       - name: Set github commit id
         run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
+          if [ "${{ github.event_name }}" = "push" ] || "${{ github.event_name }}" = "schedule" ]; then
             echo "githubCommit=${{ github.sha }}" >> $GITHUB_ENV
           fi
           exit 0
       - name: Failed
         id: failed
-        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        if: (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) && github.ref != 'refs/heads/master'
         run: |
           echo 'Failing the workflow for github security status check.'
           curl -X POST -H "Content-Type: application/json" -H "Authorization: token ${{ github.token }}" \
