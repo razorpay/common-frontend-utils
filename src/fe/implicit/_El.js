@@ -328,7 +328,7 @@ export const setStyles =
  */
 export const setContents =
   ((el, html) => {
-    el.innerHTML = html;
+    el.innerHTML = html; // nosemgrep : insecure-innerhtml
     return el;
   })
   |> elementString
