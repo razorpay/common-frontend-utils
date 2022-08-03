@@ -53,4 +53,4 @@ const getHandler = () => {
   }
 }
 
-http.createServer(getHandler()).listen(argv.port || 8000);
+http.createServer(getHandler()).listen(argv.port || 8000);  #nosemgrep :problem-based-packs.insecure-transport.js-node.using-http-server.using-http-server
