@@ -50,7 +50,7 @@
     "rollup-plugin-svelte": "^5.0.1",
     "stylus": "^0.54.7",
     "svelte": "2.16.1",
-    "uglify-js": "^3.4.9",
+    "uglify-js": "^3.17.3",
     "yargs-parser": "^20.2.4"
   },
   "devDependencies": {
