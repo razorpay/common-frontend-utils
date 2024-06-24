@@ -153,6 +153,14 @@ export function smoothScrollTo(y) {
   smoothScrollBy(y - pageYOffset);
 }
 
+export function insertStyleSheet() {
+  return (
+    _El.create('style')
+    |> _El.append(document.createTextNode(''))
+    |> _El.appendTo(document.head)
+  );
+}
+
 var scrollTimeout;
 const pi = Math.PI;
 
